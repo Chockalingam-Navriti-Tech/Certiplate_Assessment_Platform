@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <!-- MDB icon -->
+    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Material Design Bootstrap -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .table-hover {
+        background-color: white;
+      }
+      .table-wrapper-scroll-y {
+        display: block;
+      }
+      .my-custom-scrollbar {
+        position: relative;
+        height: 500px;
+        overflow-y: auto;
+        border: 1px solid black;
+        line-height: 1em;
+      }
+      .my-custom-scrollbar::-webkit-scrollbar {
+        -webkit-appearance: none;
+      }
+      .my-custom-scrollbar::-webkit-scrollbar:vertical {
+        width: 11px;
+      }
+
+      .my-custom-scrollbar::-webkit-scrollbar-thumb {
+        border-radius: 8px;
+        border: 2px solid white;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+    </style>
+  </head>
+
+  <body>
+    <app-nav-bar></app-nav-bar>
+    <div
+      style="top: 10%; left: 40%; position: fixed"
+      class="animated heartBeat"
+    >
+      <h1>PRACTICAL INSTRUCTIONS</h1>
+    </div>
+    <div
+      class="table-wrapper-scroll-y my-custom-scrollbar shadow-lg"
+      style="top: 18%; left: 10%;width:85%; position: fixed"
+    >
+      <table id="tablecontent" class="table"></table>
+    </div>
+
+    <div style="top: 10%; left: 75%; position: absolute">
+      <select id="dropdown" style="size: 20px">
+        <option id="English">English</option>
+        <option style="display:none" id="Hindi">Hindi</option>
+        <option style="display:none" id="Tamil">Tamil</option>
+        <option style="display:none" id="Kannada">Kannada</option>
+        <option style="display:none" id="Telugu">Telugu</option>
+        <option style="display:none" id="Malayalam">Malayalam</option>
+        <option style="display:none" id="Gujarati">Gujarati</option>
+        <option style="display:none" id="Marati">Marati</option>
+        <option style="display:none" id="Bengali">Bengali</option>
+      </select>
+    </div>
+
+    <div class="form-check" style="top: 91%; left: 1%; position: fixed">
+      <input type="checkbox" class="form-check-input" id="materialchecked" />
+      <label class="form-check-label" for="materialUnchecked"
+        ><b>I have read and understood all of the above instructions</b></label
+      >
+    </div>
+    <div style="top: 88%; left: 91%; position: fixed">
+      <button
+        type="button"
+        mdbBtn
+        id="submit_button"
+        class="btn btn-secondary animated rubberBand"
+        mdbWavesEffect
+        data-toggle="modal"
+        data-target="#fullHeightModalRight"
+        disabled
+      >
+        Next
+      </button>
+    </div>
+    <!-- Full Height Modal Right -->
+    <div
+      class="modal fade right"
+      id="fullHeightModalRight"
+      style="background: black"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+    >
+      <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+      <div class="modal-dialog modal-half-height modal-right" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title w-100" id="myModalLabel">NOTIFICATION</h2>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div
+            class="modal-body"
+            style="position: relative; top: 35%; left: 15%"
+          >
+            <h2>You are entering Full Screen Mode</h2>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button type="button" mdbBtn gradient="aqua" data-dismiss="modal" (click)="clicked()">
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Full Height Modal Right -->
+    <!-- JQuery -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    ></script>
+    <!-- Bootstrap tooltips -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"
+    ></script>
+    <!-- Bootstrap core JavaScript -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"
+    ></script>
+    <!-- MDB core JavaScript -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"
+    ></script>
+  </body>
+  <app-footer></app-footer>
+</html>

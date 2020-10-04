@@ -1,0 +1,73 @@
+<app-nav-bar></app-nav-bar>
+<div class="text-center">
+  <h1
+    class="animated heartBeat"
+    style="font-size: 28px; position: fixed; top: 15%; left: 42%"
+  >
+    SUBMIT ASSESSMENT
+  </h1>
+  <div
+    class="card"
+    style="position: fixed; top: 20%; left: 26%; width: 50%; height: 45%"
+  >
+    <div
+      class="card-body align-items-center d-flex justify-content-center"
+      style="position: fixed; left: 35%; top: 38%"
+    >
+      <h2 class="card-title" style="margin: 3px; color: black">
+        <b>Response Data Upload:</b>
+      </h2>
+      <br />
+      <a id="submit" class="btn btn-primary" (click)="clicked()"
+        >Submit Response</a
+      >
+      <div
+        id="load"
+        style="display: none; size: 15px; position: fixed; left: 56%"
+        class="spinner-border text-primary"
+      ></div>
+      <i
+        id="done"
+        style="display: none; color: green; position: fixed; left: 57%"
+        class="fa fa-check fa-2x"
+      ></i>
+    </div>
+  </div>
+  <div style="position: fixed; top: 55%; left: 41%">
+    <a
+      id="btn"
+      class="btn aqua-gradient animated swing"
+      style="display: none"
+      (click)="assessment()"
+      >Back to Assessment Details Page</a
+    >
+    <a
+      id="success"
+      class="btn aqua-gradient animated swing"
+      style="display: none"
+      (click)="finished()"
+      >Successfully Completed</a
+    >
+  </div>
+  <div
+    id="div"
+    class="text-center justify-content-center"
+    style="
+      display: none;
+      background-color: red;
+      position: fixed;
+      top: 20%;
+      left: 26%;
+      width: 50%;
+      height: 4%;
+      font-size: 25px;
+      color: white;
+      size: 30px;
+    "
+  >
+    <h2 id="warning"></h2>
+  </div>
+</div>
+<form style="display: none" id="frmImages"></form>
+
+<app-footer></app-footer>

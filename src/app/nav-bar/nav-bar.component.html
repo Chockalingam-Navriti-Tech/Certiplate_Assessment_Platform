@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>LOGIN Page</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+    <!-- Font Awesome -->
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Material Design Bootstrap -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    .center {
+      left: 47%;
+      position: fixed;
+    }
+  </style>
+  <body>
+    <!--Navbar-->
+
+    <mdb-navbar
+      SideClass="navbar navbar-expand-lg navbar-dark bg-success navbar-fixed-top"
+      [containerInside]="false"
+    >
+      <ul
+        style="position: fixed; right: 3%"
+        class="navbar-nav ml-auto nav-flex-icons animated rubberBand"
+      >
+        <li class="nav-item">
+          <b
+            ><a
+              style="color: black; font-size: 18px;padding:15px"
+              id="full-screen"
+              (click)="clicked_fullscreen()"
+              ><i class="fas fa-expand"></i> </a
+          ></b>
+        </li>
+        <li class="nav-item">
+          <b
+            ><a
+              style="color: black; font-size: 18px"
+              id="exit-full-screen"
+              (click)="clicked_exitfullscreen()"
+              ><i class="fas fa-compress"></i> </a
+          ></b>
+        </li>
+      </ul>
+      <!-- Navbar brand -->
+
+      <mdb-navbar-brand 
+        ><a
+          class="navbar-brand animated rubberBand"
+          style="font-size: 20px; padding: 10px; color: black"
+          href="#"
+          ><i class="fas fa-sign-out-alt"></i><b>Logout</b></a
+        ></mdb-navbar-brand
+      >
+
+      <!--mdb-navbar-brand 
+        ><a
+          class="navbar-brand animated rollIn"
+          style="font-size: 20px;color:black"
+          (click)="clicked_back()"
+          ><i class="far fa-hand-point-left"></i><b>Back</b></a
+        ></mdb-navbar-brand
+      -->
+      <img
+        class="center animated flip"
+        style="position: fixed"
+        src="http://localhost/assets/images/logo.png"
+      />
+    </mdb-navbar>
+
+    <!--/.Navbar-->
+    <!-- JQuery -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    ></script>
+    <!-- Bootstrap tooltips -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"
+    ></script>
+    <!-- Bootstrap core JavaScript -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"
+    ></script>
+    <!-- MDB core JavaScript -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js"
+    ></script>
+    <!-- Your custom scripts (optional) -->
+  </body>
+</html>
+
+<!--Navbar-->
