@@ -41,11 +41,23 @@ var TheoryAssessmentComponent = /** @class */ (function () {
             },
             audio: false
         };
+        this.varNotifyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         this.detectedObjects = [];
         this.classifications = [];
+        this.LeftTime = JSON.parse(localStorage.getItem(localStorage.getItem('req_id') +
+            '_' +
+            localStorage.getItem('cand_id') +
+            '_' +
+            'data')).CandidateAssessmentData.TheoryAssessment.RemainingDurationSeconds;
+        this.time_array = [];
         this.Req = localStorage.getItem('req_id');
         this.Id = localStorage.getItem('cand_id');
         this.data = JSON.parse(localStorage.getItem(this.Req + '_' + this.Id + '_' + 'data'));
+        var left = this.LeftTime;
+        while (left >= 2) {
+            this.time_array.push(left - 1);
+            left -= 1;
+        }
     }
     /*async classifyImage(video:any) {
       const modelPromise = await cocoSsd.load();
@@ -135,12 +147,6 @@ var TheoryAssessmentComponent = /** @class */ (function () {
             if (varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
                 .AssessmentStartDateTime == '')
                 varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.AssessmentStartDateTime = moment().format('DD-MMM-YYYY h:mm:ss a');
-            if (parseInt(varCandidateAssessmentData.CandidateAssessmentData
-                .CandidateAttemptCount) > 1)
-                $('#resume').click();
-            else if (parseInt(varCandidateAssessmentData.CandidateAssessmentData
-                .CandidateAttemptCount) == 1)
-                $('#restart').click();
             $.each(varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
                 .Sections, function (index, value) {
                 $.each(varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
@@ -1267,7 +1273,22 @@ var TheoryAssessmentComponent = /** @class */ (function () {
             }
         }
     };
+    /*var var= GetNotifySecondArray(960);
+  
+    function GetNotifySecondArray(varSeconds)
+    {
+      var varNotifySecondArray = [];
+      for (var iCounter = RemainingSeconds; iCounter >= 0; i--)
+        varNotifySecondArray.push(i);
+      return varNotifySecondArray;
+    }*/
     TheoryAssessmentComponent.prototype.timeup = function (event) {
+        varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.RemainingDurationSeconds = event.left / 1000;
+        localStorage.setItem(localStorage.getItem('req_id') +
+            '_' +
+            localStorage.getItem('cand_id') +
+            '_' +
+            'data', JSON.stringify(varCandidateAssessmentData));
         if (event.action == 'done') {
             timer = true;
             $('#submit_reponse_btn').click();
@@ -1357,7 +1378,6 @@ var TheoryAssessmentComponent = /** @class */ (function () {
         localstream.getTracks()[0].stop();
         document.removeEventListener('fullscreenchange', this.full_screen);
         document.removeEventListener('visibilitychange', this.visibility);
-        $('#pause').click();
     };
     __decorate([
         core_1.ViewChild('cd_1')

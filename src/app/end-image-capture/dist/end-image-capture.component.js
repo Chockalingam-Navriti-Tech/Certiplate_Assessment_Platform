@@ -11,6 +11,7 @@ var environment_1 = require("./../../environments/environment");
 var core_1 = require("@angular/core");
 var rxjs_1 = require("rxjs");
 var moment = require("moment");
+var os = require("os");
 var EndImageCaptureComponent = /** @class */ (function () {
     function EndImageCaptureComponent(route) {
         this.route = route;
@@ -47,7 +48,7 @@ var EndImageCaptureComponent = /** @class */ (function () {
         if (localStorage.getItem('assessment') == 'theory') {
             data.CandidateAssessmentData.TheoryAssessment.EndImage.FileName =
                 'REG' + data.CandidateAssessmentData.RegistrationId + '_TheoryEnd.png';
-            data.CandidateAssessmentData.TheoryAssessment.EndImage.TimeStamp = moment().format("DD-MMM-YYYY h:mm:ss a");
+            data.CandidateAssessmentData.TheoryAssessment.EndImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
             data.CandidateAssessmentData.TheoryAssessment.EndImage.Latitude = lat;
             data.CandidateAssessmentData.TheoryAssessment.EndImage.Longitude = long;
             ImageArrayObj = {
@@ -60,11 +61,18 @@ var EndImageCaptureComponent = /** @class */ (function () {
             //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
             this.Uploadfiles(ImageArrayObj);
             data.CandidateAssessmentData.TheoryAssessment.AssessmentEvents.push({
-                DateTime: moment().format("DD-MMM-YYYY h:mm:ss a"),
+                DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
                 SubTypeId: 24,
                 Latitude: lat,
                 Longitude: long
             });
+            data.CandidateAssessmentData.TheoryAssessment.CandidateSystemInfo.SystemInfoDateTime = moment().format('DD-MMM-YYYY hh:mm:ss a');
+            data.CandidateAssessmentData.TheoryAssessment.CandidateSystemInfo.OperatingSystem = os.platform();
+            data.CandidateAssessmentData.TheoryAssessment.CandidateSystemInfo.SystemType = os.arch();
+            data.CandidateAssessmentData.TheoryAssessment.CandidateSystemInfo.SystemLocale =
+                window.navigator.language;
+            data.CandidateAssessmentData.TheoryAssessment.CandidateSystemInfo.Latitude = lat;
+            data.CandidateAssessmentData.TheoryAssessment.CandidateSystemInfo.Longitude = long;
             localStorage.setItem('Response_data', JSON.stringify(data));
             this.route.navigate(['feedback-theory']);
         }
@@ -73,7 +81,7 @@ var EndImageCaptureComponent = /** @class */ (function () {
                 'REG' +
                     data.CandidateAssessmentData.RegistrationId +
                     '_PracticalEnd.png';
-            data.CandidateAssessmentData.PracticalAssessment.EndImage.TimeStamp = moment().format("DD-MMM-YYYY h:mm:ss a");
+            data.CandidateAssessmentData.PracticalAssessment.EndImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
             data.CandidateAssessmentData.PracticalAssessment.EndImage.Latitude = lat;
             data.CandidateAssessmentData.PracticalAssessment.EndImage.Longitude = long;
             ImageArrayObj = {
@@ -86,18 +94,25 @@ var EndImageCaptureComponent = /** @class */ (function () {
             //ocalStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
             this.Uploadfiles(ImageArrayObj);
             data.CandidateAssessmentData.PracticalAssessment.AssessmentEvents.push({
-                DateTime: moment().format("DD-MMM-YYYY h:mm:ss a"),
+                DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
                 SubTypeId: 24,
                 Latitude: lat,
                 Longitude: long
             });
+            data.CandidateAssessmentData.PracticalAssessment.CandidateSystemInfo.SystemInfoDateTime = moment().format('DD-MMM-YYYY hh:mm:ss a');
+            data.CandidateAssessmentData.PracticalAssessment.CandidateSystemInfo.OperatingSystem = os.platform();
+            data.CandidateAssessmentData.PracticalAssessment.CandidateSystemInfo.SystemType = os.arch();
+            data.CandidateAssessmentData.PracticalAssessment.CandidateSystemInfo.SystemLocale =
+                window.navigator.language;
+            data.CandidateAssessmentData.PracticalAssessment.CandidateSystemInfo.Latitude = lat;
+            data.CandidateAssessmentData.PracticalAssessment.CandidateSystemInfo.Longitude = long;
             localStorage.setItem('Response_data', JSON.stringify(data));
             this.route.navigate(['feedback-practical']);
         }
         else if (localStorage.getItem('assessment') == 'viva') {
             data.CandidateAssessmentData.VivaAssessment.EndImage.FileName =
                 'REG' + data.CandidateAssessmentData.RegistrationId + '_VivaEnd.png';
-            data.CandidateAssessmentData.VivaAssessment.EndImage.TimeStamp = moment().format("DD-MMM-YYYY h:mm:ss a");
+            data.CandidateAssessmentData.VivaAssessment.EndImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
             data.CandidateAssessmentData.VivaAssessment.EndImage.Latitude = lat;
             data.CandidateAssessmentData.VivaAssessment.EndImage.Longitude = long;
             ImageArrayObj = {
@@ -108,11 +123,18 @@ var EndImageCaptureComponent = /** @class */ (function () {
             this.Uploadfiles(ImageArrayObj);
             //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
             data.CandidateAssessmentData.VivaAssessment.AssessmentEvents.push({
-                DateTime: moment().format("DD-MMM-YYYY h:mm:ss a"),
+                DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
                 SubTypeId: 24,
                 Latitude: lat,
                 Longitude: long
             });
+            data.CandidateAssessmentData.VivaAssessment.CandidateSystemInfo.SystemInfoDateTime = moment().format('DD-MMM-YYYY hh:mm:ss a');
+            data.CandidateAssessmentData.VivaAssessment.CandidateSystemInfo.OperatingSystem = os.platform();
+            data.CandidateAssessmentData.VivaAssessment.CandidateSystemInfo.SystemType = os.arch();
+            data.CandidateAssessmentData.VivaAssessment.CandidateSystemInfo.SystemLocale =
+                window.navigator.language;
+            data.CandidateAssessmentData.VivaAssessment.CandidateSystemInfo.Latitude = lat;
+            data.CandidateAssessmentData.VivaAssessment.CandidateSystemInfo.Longitude = long;
             localStorage.setItem('Response_data', JSON.stringify(data));
             this.route.navigate(['feedback-viva']);
         }

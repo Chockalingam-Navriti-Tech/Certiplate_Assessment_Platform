@@ -58,7 +58,10 @@
         <b>
           <countdown
             style="font-size: 27px; color: white"
-            [config]="{ leftTime: 3600 }"
+            [config]="{
+              leftTime: LeftTime,
+              notify: time_array
+            }"
             (event)="timeup($event)"
           ></countdown>
         </b>
@@ -132,7 +135,6 @@
         class="video-js vjs-default-skin"
         style="display: none"
       ></video-->
-
     </div>
     <form style="display: none" id="frmImages"></form>
     <video style="display: none" id="video" autoplay muted></video>

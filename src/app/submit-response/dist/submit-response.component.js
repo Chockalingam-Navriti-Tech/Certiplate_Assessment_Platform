@@ -22,6 +22,7 @@ var SubmitResponseComponent = /** @class */ (function () {
         $('#div').css('display', 'none');
         $('#submit').css('display', 'none');
         $('#load').css('display', 'block');
+        $('#progress').css('display', 'block');
         var response_object = JSON.parse(localStorage.getItem('Response_data'));
         var response_string = JSON.stringify(response_object.CandidateAssessmentData);
         var date = moment().format('YYYYMMDDhhmmss');
@@ -65,6 +66,7 @@ var SubmitResponseComponent = /** @class */ (function () {
                                 if (parseInt(reply.SubmitCandidateAssessmentData.TheoryResponse
                                     .TestSubmissionId) > 0) {
                                     $('#load').css('display', 'none');
+                                    $('#progress').css('display', 'none');
                                     $('#done').css('display', 'block');
                                     response_str.CandidateAssessmentData.TheoryAssessment.AssessmentStatus = 4;
                                     response_str.CandidateAssessmentData.TheoryAssessment.AssessmentEvents.push({
@@ -102,6 +104,7 @@ var SubmitResponseComponent = /** @class */ (function () {
                                 if (parseInt(reply.SubmitCandidateAssessmentData.PracticalResponse
                                     .TestSubmissionId) > 0) {
                                     $('#load').css('display', 'none');
+                                    $('#progress').css('display', 'none');
                                     $('#done').css('display', 'block');
                                     response_str.CandidateAssessmentData.PracticalAssessment.AssessmentStatus = 4;
                                     response_str.CandidateAssessmentData.PracticalAssessment.AssessmentEvents.push({
@@ -125,6 +128,7 @@ var SubmitResponseComponent = /** @class */ (function () {
                                 if (parseInt(reply.SubmitCandidateAssessmentData.VivaMcqResponse
                                     .TestSubmissionId) > 0) {
                                     $('#load').css('display', 'none');
+                                    $('#progress').css('display', 'none');
                                     $('#done').css('display', 'block');
                                     response_str.CandidateAssessmentData.VivaAssessment.AssessmentStatus = 4;
                                     response_str.CandidateAssessmentData.VivaAssessment.AssessmentEvents.push({
@@ -149,6 +153,7 @@ var SubmitResponseComponent = /** @class */ (function () {
                     },
                     error: function (e) {
                         $('#load').css('display', 'none');
+                        $('#progress').css('display', 'none');
                         $('#submit').css('display', 'block');
                         $('#div').css('display', 'block');
                         document.getElementById('warning').innerHTML =
@@ -184,6 +189,7 @@ var SubmitResponseComponent = /** @class */ (function () {
             },
             error: function (e) {
                 $('#load').css('display', 'none');
+                $('#progress').css('display', 'none');
                 $('#submit').css('display', 'block');
                 $('#div').css('display', 'block');
                 document.getElementById('warning').innerHTML =

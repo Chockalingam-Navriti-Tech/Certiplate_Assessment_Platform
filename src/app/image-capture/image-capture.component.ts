@@ -43,6 +43,8 @@ export class ImageCaptureComponent implements OnInit {
   }
 
   clicked() {
+    $('#move-in').css('display', 'block');
+    $('#submit_button').css('display', 'none');
     var data = JSON.parse(
       localStorage.getItem(this.Req + '_' + this.Id + '_' + 'data')
     );
@@ -52,13 +54,15 @@ export class ImageCaptureComponent implements OnInit {
     };
     let Req = this.Req;
     let Id = this.Id;
+    let route = this.route;
+    let lat, long;
     if (this.sub == 'theory') {
       data.CandidateAssessmentData.TheoryAssessment.StartImage.FileName =
         'REG' +
         data.CandidateAssessmentData.RegistrationId +
         '_TheoryStart.png';
       data.CandidateAssessmentData.TheoryAssessment.StartImage.TimeStamp = moment().format(
-        "DD-MMM-YYYY h:mm:ss a"
+        'DD-MMM-YYYY h:mm:ss a'
       );
 
       ImageArrayObj_start = {
@@ -73,7 +77,7 @@ export class ImageCaptureComponent implements OnInit {
       data.CandidateAssessmentData.TheoryAssessment.IdentityImage.FileName =
         'REG' + data.CandidateAssessmentData.RegistrationId + '_TheoryId.png';
       data.CandidateAssessmentData.TheoryAssessment.IdentityImage.TimeStamp = moment().format(
-        "DD-MMM-YYYY h:mm:ss a"
+        'DD-MMM-YYYY h:mm:ss a'
       );
 
       ImageArrayObj_Id = {
@@ -85,7 +89,6 @@ export class ImageCaptureComponent implements OnInit {
       this.Uploadfiles(ImageArrayObj_start);
       this.Uploadfiles(ImageArrayObj_Id);
       //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
-      let lat, long;
       navigator.geolocation.getCurrentPosition(function (position) {
         lat = position.coords.latitude;
         long = position.coords.longitude;
@@ -96,7 +99,7 @@ export class ImageCaptureComponent implements OnInit {
         localStorage.setItem('lat', lat as string);
         localStorage.setItem('long', long as string);
         data.CandidateAssessmentData.TheoryAssessment.AssessmentEvents.push({
-          DateTime: moment().format("DD-MMM-YYYY h:mm:ss a"),
+          DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
           SubTypeId: 24,
           Latitude: lat,
           Longitude: long,
@@ -105,16 +108,15 @@ export class ImageCaptureComponent implements OnInit {
           Req + '_' + Id + '_' + 'data',
           JSON.stringify(data)
         );
+        route.navigate(['theory-instructions']);
       });
-      
-      this.route.navigate(['theory-instructions']);
     } else if (this.sub == 'practical') {
       data.CandidateAssessmentData.PracticalAssessment.StartImage.FileName =
         'REG' +
         data.CandidateAssessmentData.RegistrationId +
         '_PracticalStart.png';
       data.CandidateAssessmentData.PracticalAssessment.StartImage.TimeStamp = moment().format(
-        "DD-MMM-YYYY h:mm:ss a"
+        'DD-MMM-YYYY h:mm:ss a'
       );
 
       ImageArrayObj_start = {
@@ -131,7 +133,7 @@ export class ImageCaptureComponent implements OnInit {
         data.CandidateAssessmentData.RegistrationId +
         '_PracticalId.png';
       data.CandidateAssessmentData.PracticalAssessment.IdentityImage.TimeStamp = moment().format(
-        "DD-MMM-YYYY h:mm:ss a"
+        'DD-MMM-YYYY h:mm:ss a'
       );
       ImageArrayObj_Id = {
         FileName:
@@ -144,7 +146,6 @@ export class ImageCaptureComponent implements OnInit {
       this.Uploadfiles(ImageArrayObj_start);
       this.Uploadfiles(ImageArrayObj_Id);
       //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
-      let lat, long;
 
       navigator.geolocation.getCurrentPosition(function (position) {
         lat = position.coords.latitude;
@@ -156,7 +157,7 @@ export class ImageCaptureComponent implements OnInit {
         localStorage.setItem('lat', lat as string);
         localStorage.setItem('long', long as string);
         data.CandidateAssessmentData.PracticalAssessment.AssessmentEvents.push({
-          DateTime: moment().format("DD-MMM-YYYY h:mm:ss a"),
+          DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
           SubTypeId: 24,
           Latitude: lat,
           Longitude: long,
@@ -165,14 +166,13 @@ export class ImageCaptureComponent implements OnInit {
           Req + '_' + Id + '_' + 'data',
           JSON.stringify(data)
         );
+        route.navigate(['practical-instructions']);
       });
-      
-      this.route.navigate(['practical-instructions']);
     } else if (this.sub == 'viva') {
       data.CandidateAssessmentData.VivaAssessment.StartImage.FileName =
         'REG' + data.CandidateAssessmentData.RegistrationId + '_VivaStart.png';
       data.CandidateAssessmentData.VivaAssessment.StartImage.TimeStamp = moment().format(
-        "DD-MMM-YYYY h:mm:ss a"
+        'DD-MMM-YYYY h:mm:ss a'
       );
 
       ImageArrayObj_start = {
@@ -187,7 +187,7 @@ export class ImageCaptureComponent implements OnInit {
       data.CandidateAssessmentData.VivaAssessment.IdentityImage.FileName =
         'REG' + data.CandidateAssessmentData.RegistrationId + '_VivaId.png';
       data.CandidateAssessmentData.VivaAssessment.IdentityImage.TimeStamp = moment().format(
-        "DD-MMM-YYYY h:mm:ss a"
+        'DD-MMM-YYYY h:mm:ss a'
       );
       ImageArrayObj_Id = {
         FileName:
@@ -198,7 +198,6 @@ export class ImageCaptureComponent implements OnInit {
       this.Uploadfiles(ImageArrayObj_start);
       this.Uploadfiles(ImageArrayObj_Id);
       //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
-      let lat, long;
       navigator.geolocation.getCurrentPosition(function (position) {
         lat = position.coords.latitude;
         long = position.coords.longitude;
@@ -209,7 +208,7 @@ export class ImageCaptureComponent implements OnInit {
         localStorage.setItem('lat', lat as string);
         localStorage.setItem('long', long as string);
         data.CandidateAssessmentData.VivaAssessment.AssessmentEvents.push({
-          DateTime: moment().format("DD-MMM-YYYY h:mm:ss a"),
+          DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
           SubTypeId: 24,
           Latitude: lat,
           Longitude: long,
@@ -218,8 +217,8 @@ export class ImageCaptureComponent implements OnInit {
           Req + '_' + Id + '_' + 'data',
           JSON.stringify(data)
         );
+        route.navigate(['viva-instructions']);
       });
-      this.route.navigate(['viva-instructions']);
     }
   }
 
@@ -236,8 +235,7 @@ export class ImageCaptureComponent implements OnInit {
     var varForm = <HTMLFormElement>document.getElementById('frmImages');
 
     $.ajax({
-      url:
-        environment.Upload_files_URL,
+      url: environment.Upload_files_URL,
       type: 'POST',
       data: new FormData(varForm),
       contentType: false,

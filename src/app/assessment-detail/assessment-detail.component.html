@@ -43,8 +43,8 @@
         height: 100%;
         background-color: black;
         z-index: 1001;
-        -moz-opacity: 1.0;
-        opacity: 1.0;
+        -moz-opacity: 1;
+        opacity: 1;
         filter: alpha(opacity=1.0);
       }
 
@@ -209,27 +209,19 @@
 
     <div id="light">
       <a class="boxclose" id="boxclose" (click)="close()"></a>
-      <video style="display:none" id="example1" width="600" controls>
-        <source
-          src=""
-          type="video/mp4"
-        />
+      <video style="display: none" id="example1" width="600" controls>
+        <source src="" type="video/mp4" />
       </video>
-      <video style="display:none" id="example2" width="600" controls>
-        <source
-          src=""
-          type="video/mp4"
-        />
+      <video style="display: none" id="example2" width="600" controls>
+        <source src="" type="video/mp4" />
       </video>
-      <video style="display:none" id="example3" width="600" controls>
-        <source
-          src=""
-          type="video/mp4"
-        />
+      <video style="display: none" id="example3" width="600" controls>
+        <source src="" type="video/mp4" />
       </video>
     </div>
 
-    <div id="fade" (click)="close();"></div>
+    <div id="fade" (click)="close()"></div>
+
 
     <script
       type="text/javascript"

@@ -60,25 +60,13 @@
             #cd1
             id="cd_1"
             style="font-size: 27px; color: white"
-            [config]="{ leftTime: 960 }"
+            [config]="{
+              leftTime: LeftTime,
+              notify: time_array
+            }"
             (event)="timeup($event)"
           ></countdown>
         </b>
-        <button
-          style="visibility: hidden"
-          id="resume"
-          (click)="cd1.resume()"
-        ></button>
-        <button
-          style="visibility: hidden"
-          id="pause"
-          (click)="cd1.pause()"
-        ></button>
-        <button
-          style="visibility: hidden"
-          id="restart"
-          (click)="cd1.restart()"
-        ></button>
       </div>
     </mdb-navbar>
     <div

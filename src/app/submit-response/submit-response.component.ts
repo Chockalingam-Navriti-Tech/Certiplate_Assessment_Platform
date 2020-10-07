@@ -21,6 +21,7 @@ export class SubmitResponseComponent implements OnInit {
     $('#div').css('display', 'none');
     $('#submit').css('display', 'none');
     $('#load').css('display', 'block');
+    $('#progress').css('display', 'block');
     var response_object = JSON.parse(localStorage.getItem('Response_data'));
     var response_string = JSON.stringify(
       response_object.CandidateAssessmentData
@@ -73,6 +74,7 @@ export class SubmitResponseComponent implements OnInit {
                   ) > 0
                 ) {
                   $('#load').css('display', 'none');
+                  $('#progress').css('display', 'none');
                   $('#done').css('display', 'block');
                   response_str.CandidateAssessmentData.TheoryAssessment.AssessmentStatus = 4;
                   response_str.CandidateAssessmentData.TheoryAssessment.AssessmentEvents.push(
@@ -135,6 +137,7 @@ export class SubmitResponseComponent implements OnInit {
                   ) > 0
                 ) {
                   $('#load').css('display', 'none');
+                  $('#progress').css('display', 'none');
                   $('#done').css('display', 'block');
                   response_str.CandidateAssessmentData.PracticalAssessment.AssessmentStatus = 4;
                   response_str.CandidateAssessmentData.PracticalAssessment.AssessmentEvents.push(
@@ -173,6 +176,7 @@ export class SubmitResponseComponent implements OnInit {
                   ) > 0
                 ) {
                   $('#load').css('display', 'none');
+                  $('#progress').css('display', 'none');
                   $('#done').css('display', 'block');
                   response_str.CandidateAssessmentData.VivaAssessment.AssessmentStatus = 4;
                   response_str.CandidateAssessmentData.VivaAssessment.AssessmentEvents.push(
@@ -209,6 +213,7 @@ export class SubmitResponseComponent implements OnInit {
           },
           error: function (e) {
             $('#load').css('display', 'none');
+            $('#progress').css('display', 'none');
             $('#submit').css('display', 'block');
             $('#div').css('display', 'block');
             document.getElementById('warning').innerHTML =
@@ -248,6 +253,7 @@ export class SubmitResponseComponent implements OnInit {
       },
       error: function (e) {
         $('#load').css('display', 'none');
+        $('#progress').css('display', 'none');
         $('#submit').css('display', 'block');
         $('#div').css('display', 'block');
         document.getElementById('warning').innerHTML =

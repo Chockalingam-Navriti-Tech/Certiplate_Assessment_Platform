@@ -44,6 +44,8 @@ var ImageCaptureComponent = /** @class */ (function () {
         configurable: true
     });
     ImageCaptureComponent.prototype.clicked = function () {
+        $('#move-in').css('display', 'block');
+        $('#submit_button').css('display', 'none');
         var data = JSON.parse(localStorage.getItem(this.Req + '_' + this.Id + '_' + 'data'));
         var ImageArrayObj_start, ImageArrayObj_Id;
         var ImageArrayContent = {
@@ -51,12 +53,14 @@ var ImageCaptureComponent = /** @class */ (function () {
         };
         var Req = this.Req;
         var Id = this.Id;
+        var route = this.route;
+        var lat, long;
         if (this.sub == 'theory') {
             data.CandidateAssessmentData.TheoryAssessment.StartImage.FileName =
                 'REG' +
                     data.CandidateAssessmentData.RegistrationId +
                     '_TheoryStart.png';
-            data.CandidateAssessmentData.TheoryAssessment.StartImage.TimeStamp = moment().format("DD-MMM-YYYY h:mm:ss a");
+            data.CandidateAssessmentData.TheoryAssessment.StartImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
             ImageArrayObj_start = {
                 FileName: 'REG' +
                     data.CandidateAssessmentData.RegistrationId +
@@ -66,7 +70,7 @@ var ImageCaptureComponent = /** @class */ (function () {
             ImageArrayContent.ImageArray.push(ImageArrayObj_start);
             data.CandidateAssessmentData.TheoryAssessment.IdentityImage.FileName =
                 'REG' + data.CandidateAssessmentData.RegistrationId + '_TheoryId.png';
-            data.CandidateAssessmentData.TheoryAssessment.IdentityImage.TimeStamp = moment().format("DD-MMM-YYYY h:mm:ss a");
+            data.CandidateAssessmentData.TheoryAssessment.IdentityImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
             ImageArrayObj_Id = {
                 FileName: 'REG' + data.CandidateAssessmentData.RegistrationId + '_TheoryId.png',
                 Image_Data: this.webcamImage2.imageAsDataUrl
@@ -75,32 +79,31 @@ var ImageCaptureComponent = /** @class */ (function () {
             this.Uploadfiles(ImageArrayObj_start);
             this.Uploadfiles(ImageArrayObj_Id);
             //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
-            var lat_1, long_1;
             navigator.geolocation.getCurrentPosition(function (position) {
-                lat_1 = position.coords.latitude;
-                long_1 = position.coords.longitude;
-                data.CandidateAssessmentData.TheoryAssessment.StartImage.Latitude = lat_1;
-                data.CandidateAssessmentData.TheoryAssessment.StartImage.Longitude = long_1;
-                data.CandidateAssessmentData.TheoryAssessment.IdentityImage.Latitude = lat_1;
-                data.CandidateAssessmentData.TheoryAssessment.IdentityImage.Longitude = long_1;
-                localStorage.setItem('lat', lat_1);
-                localStorage.setItem('long', long_1);
+                lat = position.coords.latitude;
+                long = position.coords.longitude;
+                data.CandidateAssessmentData.TheoryAssessment.StartImage.Latitude = lat;
+                data.CandidateAssessmentData.TheoryAssessment.StartImage.Longitude = long;
+                data.CandidateAssessmentData.TheoryAssessment.IdentityImage.Latitude = lat;
+                data.CandidateAssessmentData.TheoryAssessment.IdentityImage.Longitude = long;
+                localStorage.setItem('lat', lat);
+                localStorage.setItem('long', long);
                 data.CandidateAssessmentData.TheoryAssessment.AssessmentEvents.push({
-                    DateTime: moment().format("DD-MMM-YYYY h:mm:ss a"),
+                    DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
                     SubTypeId: 24,
-                    Latitude: lat_1,
-                    Longitude: long_1
+                    Latitude: lat,
+                    Longitude: long
                 });
                 localStorage.setItem(Req + '_' + Id + '_' + 'data', JSON.stringify(data));
+                route.navigate(['theory-instructions']);
             });
-            this.route.navigate(['theory-instructions']);
         }
         else if (this.sub == 'practical') {
             data.CandidateAssessmentData.PracticalAssessment.StartImage.FileName =
                 'REG' +
                     data.CandidateAssessmentData.RegistrationId +
                     '_PracticalStart.png';
-            data.CandidateAssessmentData.PracticalAssessment.StartImage.TimeStamp = moment().format("DD-MMM-YYYY h:mm:ss a");
+            data.CandidateAssessmentData.PracticalAssessment.StartImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
             ImageArrayObj_start = {
                 FileName: 'REG' +
                     data.CandidateAssessmentData.RegistrationId +
@@ -112,7 +115,7 @@ var ImageCaptureComponent = /** @class */ (function () {
                 'REG' +
                     data.CandidateAssessmentData.RegistrationId +
                     '_PracticalId.png';
-            data.CandidateAssessmentData.PracticalAssessment.IdentityImage.TimeStamp = moment().format("DD-MMM-YYYY h:mm:ss a");
+            data.CandidateAssessmentData.PracticalAssessment.IdentityImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
             ImageArrayObj_Id = {
                 FileName: 'REG' +
                     data.CandidateAssessmentData.RegistrationId +
@@ -123,30 +126,29 @@ var ImageCaptureComponent = /** @class */ (function () {
             this.Uploadfiles(ImageArrayObj_start);
             this.Uploadfiles(ImageArrayObj_Id);
             //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
-            var lat_2, long_2;
             navigator.geolocation.getCurrentPosition(function (position) {
-                lat_2 = position.coords.latitude;
-                long_2 = position.coords.longitude;
-                data.CandidateAssessmentData.PracticalAssessment.StartImage.Latitude = lat_2;
-                data.CandidateAssessmentData.PracticalAssessment.StartImage.Longitude = long_2;
-                data.CandidateAssessmentData.PracticalAssessment.IdentityImage.Latitude = lat_2;
-                data.CandidateAssessmentData.PracticalAssessment.IdentityImage.Longitude = long_2;
-                localStorage.setItem('lat', lat_2);
-                localStorage.setItem('long', long_2);
+                lat = position.coords.latitude;
+                long = position.coords.longitude;
+                data.CandidateAssessmentData.PracticalAssessment.StartImage.Latitude = lat;
+                data.CandidateAssessmentData.PracticalAssessment.StartImage.Longitude = long;
+                data.CandidateAssessmentData.PracticalAssessment.IdentityImage.Latitude = lat;
+                data.CandidateAssessmentData.PracticalAssessment.IdentityImage.Longitude = long;
+                localStorage.setItem('lat', lat);
+                localStorage.setItem('long', long);
                 data.CandidateAssessmentData.PracticalAssessment.AssessmentEvents.push({
-                    DateTime: moment().format("DD-MMM-YYYY h:mm:ss a"),
+                    DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
                     SubTypeId: 24,
-                    Latitude: lat_2,
-                    Longitude: long_2
+                    Latitude: lat,
+                    Longitude: long
                 });
                 localStorage.setItem(Req + '_' + Id + '_' + 'data', JSON.stringify(data));
+                route.navigate(['practical-instructions']);
             });
-            this.route.navigate(['practical-instructions']);
         }
         else if (this.sub == 'viva') {
             data.CandidateAssessmentData.VivaAssessment.StartImage.FileName =
                 'REG' + data.CandidateAssessmentData.RegistrationId + '_VivaStart.png';
-            data.CandidateAssessmentData.VivaAssessment.StartImage.TimeStamp = moment().format("DD-MMM-YYYY h:mm:ss a");
+            data.CandidateAssessmentData.VivaAssessment.StartImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
             ImageArrayObj_start = {
                 FileName: 'REG' +
                     data.CandidateAssessmentData.RegistrationId +
@@ -156,7 +158,7 @@ var ImageCaptureComponent = /** @class */ (function () {
             ImageArrayContent.ImageArray.push(ImageArrayObj_start);
             data.CandidateAssessmentData.VivaAssessment.IdentityImage.FileName =
                 'REG' + data.CandidateAssessmentData.RegistrationId + '_VivaId.png';
-            data.CandidateAssessmentData.VivaAssessment.IdentityImage.TimeStamp = moment().format("DD-MMM-YYYY h:mm:ss a");
+            data.CandidateAssessmentData.VivaAssessment.IdentityImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
             ImageArrayObj_Id = {
                 FileName: 'REG' + data.CandidateAssessmentData.RegistrationId + '_VivaId.png',
                 Image_Data: this.webcamImage2.imageAsDataUrl
@@ -165,25 +167,24 @@ var ImageCaptureComponent = /** @class */ (function () {
             this.Uploadfiles(ImageArrayObj_start);
             this.Uploadfiles(ImageArrayObj_Id);
             //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
-            var lat_3, long_3;
             navigator.geolocation.getCurrentPosition(function (position) {
-                lat_3 = position.coords.latitude;
-                long_3 = position.coords.longitude;
-                data.CandidateAssessmentData.VivaAssessment.StartImage.Latitude = lat_3;
-                data.CandidateAssessmentData.VivaAssessment.StartImage.Longitude = long_3;
-                data.CandidateAssessmentData.VivaAssessment.IdentityImage.Latitude = lat_3;
-                data.CandidateAssessmentData.VivaAssessment.IdentityImage.Longitude = long_3;
-                localStorage.setItem('lat', lat_3);
-                localStorage.setItem('long', long_3);
+                lat = position.coords.latitude;
+                long = position.coords.longitude;
+                data.CandidateAssessmentData.VivaAssessment.StartImage.Latitude = lat;
+                data.CandidateAssessmentData.VivaAssessment.StartImage.Longitude = long;
+                data.CandidateAssessmentData.VivaAssessment.IdentityImage.Latitude = lat;
+                data.CandidateAssessmentData.VivaAssessment.IdentityImage.Longitude = long;
+                localStorage.setItem('lat', lat);
+                localStorage.setItem('long', long);
                 data.CandidateAssessmentData.VivaAssessment.AssessmentEvents.push({
-                    DateTime: moment().format("DD-MMM-YYYY h:mm:ss a"),
+                    DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
                     SubTypeId: 24,
-                    Latitude: lat_3,
-                    Longitude: long_3
+                    Latitude: lat,
+                    Longitude: long
                 });
                 localStorage.setItem(Req + '_' + Id + '_' + 'data', JSON.stringify(data));
+                route.navigate(['viva-instructions']);
             });
-            this.route.navigate(['viva-instructions']);
         }
     };
     ImageCaptureComponent.prototype.Uploadfiles = function (ImageArrayContent) {

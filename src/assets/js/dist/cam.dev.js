@@ -8,6 +8,7 @@ function cam(data, sec, index) {
   var _long = localStorage.getItem('long');
 
   var key = '';
+  var upload_url = localStorage.getItem('Video_upload_url');
   $(document).keydown(function (e) {
     key = e.key;
   });
@@ -80,7 +81,7 @@ function cam(data, sec, index) {
       $('#frmImages').append('<input name="video_data" value="' + base64data + '">');
       $("#frmImages").append('<input name="video_file_name" value="' + player.recordedData.name + '">');
       $.ajax({
-        url: 'https://uap-demo.certiplate.com/api/UploadCandidateOnlineAssessmentFile.php',
+        url: upload_url,
         type: 'POST',
         data: new FormData(varForm),
         contentType: false,

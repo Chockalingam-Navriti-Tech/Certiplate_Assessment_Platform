@@ -7,6 +7,7 @@ import * as cocoSsd from '@tensorflow-models/coco-ssd';
 var snapstream = require('snapstream');
 import { CountdownComponent } from 'ngx-countdown';
 import * as moment from 'moment';
+
 var localstream: any;
 var option;
 var id = 0;
@@ -42,6 +43,7 @@ export class TheoryAssessmentComponent implements OnInit {
     },
     audio: false,
   };
+  varNotifyArray: any = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   vdo: any;
   detectedObjects: any = [];
   classifications: any = [];
@@ -49,6 +51,16 @@ export class TheoryAssessmentComponent implements OnInit {
   Id: any;
   data: any;
   id1: any;
+  LeftTime: any = JSON.parse(
+    localStorage.getItem(
+      localStorage.getItem('req_id') +
+        '_' +
+        localStorage.getItem('cand_id') +
+        '_' +
+        'data'
+    )
+  ).CandidateAssessmentData.TheoryAssessment.RemainingDurationSeconds;
+  time_array: any = [];
   //id2: any;
   constructor(
     private route: Router,
@@ -60,6 +72,11 @@ export class TheoryAssessmentComponent implements OnInit {
     this.data = JSON.parse(
       localStorage.getItem(this.Req + '_' + this.Id + '_' + 'data')
     );
+    var left = this.LeftTime;
+    while (left >= 2) {
+      this.time_array.push(left - 1);
+      left -= 1;
+    }
   }
 
   /*async classifyImage(video:any) {
@@ -170,20 +187,6 @@ export class TheoryAssessmentComponent implements OnInit {
         varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.AssessmentStartDateTime = moment().format(
           'DD-MMM-YYYY h:mm:ss a'
         );
-      if (
-        parseInt(
-          varCandidateAssessmentData.CandidateAssessmentData
-            .CandidateAttemptCount
-        ) > 1
-      )
-        $('#resume').click();
-      else if (
-        parseInt(
-          varCandidateAssessmentData.CandidateAssessmentData
-            .CandidateAttemptCount
-        ) == 1
-      )
-        $('#restart').click();
       $.each(
         varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
           .Sections,
@@ -1555,7 +1558,27 @@ export class TheoryAssessmentComponent implements OnInit {
     }
   }
 
-  timeup(event: { action: string }) {
+  /*var var= GetNotifySecondArray(960);
+
+  function GetNotifySecondArray(varSeconds)
+  {
+    var varNotifySecondArray = [];
+    for (var iCounter = RemainingSeconds; iCounter >= 0; i--)
+      varNotifySecondArray.push(i);
+    return varNotifySecondArray;
+  }*/
+
+  timeup(event: any) {
+    varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.RemainingDurationSeconds = event.left as number / 1000;
+    localStorage.setItem(
+      localStorage.getItem('req_id') +
+        '_' +
+        localStorage.getItem('cand_id') +
+        '_' +
+        'data',
+      JSON.stringify(varCandidateAssessmentData)
+    );
+
     if (event.action == 'done') {
       timer = true;
       $('#submit_reponse_btn').click();
@@ -1679,7 +1702,6 @@ export class TheoryAssessmentComponent implements OnInit {
     localstream.getTracks()[0].stop();
     document.removeEventListener('fullscreenchange', this.full_screen);
     document.removeEventListener('visibilitychange', this.visibility);
-    $('#pause').click();
   }
 }
 

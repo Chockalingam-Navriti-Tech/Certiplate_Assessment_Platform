@@ -30,6 +30,12 @@ var varCandidateAssessmentData;
 var PracticalAssessmentComponent = /** @class */ (function () {
     function PracticalAssessmentComponent(route) {
         this.route = route;
+        this.LeftTime = JSON.parse(localStorage.getItem(localStorage.getItem('req_id') +
+            '_' +
+            localStorage.getItem('cand_id') +
+            '_' +
+            'data')).CandidateAssessmentData.PracticalAssessment.RemainingDurationSeconds;
+        this.time_array = [];
         this.constraints = {
             video: {
                 facingMode: 'user',
@@ -41,9 +47,15 @@ var PracticalAssessmentComponent = /** @class */ (function () {
         this.Req = localStorage.getItem('req_id');
         this.Id = localStorage.getItem('cand_id');
         this.data = JSON.parse(localStorage.getItem(this.Req + '_' + this.Id + '_' + 'data'));
+        var left = this.LeftTime;
+        while (left >= 2) {
+            this.time_array.push(left - 1);
+            left -= 1;
+        }
     }
     PracticalAssessmentComponent.prototype.ngOnInit = function () {
         var _this = this;
+        localStorage.setItem('Video_upload_url', environment_1.environment.Upload_files_URL);
         varCandidateAssessmentData = this.data;
         $(function () {
             if (varCandidateAssessmentData.CandidateAssessmentData.Languages[1]
@@ -845,6 +857,12 @@ var PracticalAssessmentComponent = /** @class */ (function () {
       }
     }*/
     PracticalAssessmentComponent.prototype.timeup = function (event) {
+        this.data.CandidateAssessmentData.PracticalAssessment.RemainingDurationSeconds = event.left / 1000;
+        localStorage.setItem(localStorage.getItem('req_id') +
+            '_' +
+            localStorage.getItem('cand_id') +
+            '_' +
+            'data', JSON.stringify(this.data));
         if (event.action == 'done') {
             timer = true;
             $('#submit_reponse_btn').click();
@@ -901,6 +919,7 @@ var PracticalAssessmentComponent = /** @class */ (function () {
         $('#frmImages').append('<input name="image_file_name" value="' +
             ImageArrayContent.FileName +
             '">');
+        var new_data = JSON.parse(localStorage.getItem('Response_data'));
         $.ajax({
             url: environment_1.environment.Upload_files_URL,
             type: 'POST',
@@ -915,7 +934,7 @@ var PracticalAssessmentComponent = /** @class */ (function () {
                 $(document).keydown(function (e) {
                     key = e.key;
                 });
-                Event_log('ASSESSMENT_DATA_UPLOADED', JSON.parse(localStorage.getItem('Response_data')), sec, index, key);
+                Event_log('ASSESSMENT_DATA_UPLOADED', new_data, sec, index, key);
             },
             error: function (e) {
                 alert('Error');
@@ -923,7 +942,7 @@ var PracticalAssessmentComponent = /** @class */ (function () {
                 $(document).keydown(function (e) {
                     key = e.key;
                 });
-                Event_log('ASSESSMENT_DATA_UPLOAD_FAILED', JSON.parse(localStorage.getItem('Response_data')), sec, index, key);
+                Event_log('ASSESSMENT_DATA_UPLOAD_FAILED', new_data, sec, index, key);
             }
         });
     };

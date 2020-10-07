@@ -17,7 +17,7 @@
   (click)="triggerSnapshot('btn2')"
 >
   Take ID Image Snapshot
-</button> 
+</button>
 
 <webcam
   style="position: absolute; top: 11%; left: 35%"
@@ -28,7 +28,13 @@
   (imageCapture)="handleImage1($event)"
 ></webcam>
 
-<h1 class="animated rubberBand" style="position: absolute; top: 50%; left: 29%" *ngIf="webcamImage1">FACE IMAGE</h1>
+<h1
+  class="animated rubberBand"
+  style="position: absolute; top: 50%; left: 29%"
+  *ngIf="webcamImage1"
+>
+  FACE IMAGE
+</h1>
 <div
   style="position: absolute; top: 55%; left: 20%"
   class="snapshot"
@@ -40,7 +46,13 @@
     style="width: 60%; heigth: 60%; border: 5px solid black"
   />
 </div>
-<h1 class="animated rubberBand" style="position: absolute; top: 50%; left: 58%" *ngIf="webcamImage2">ID Card IMAGE</h1>
+<h1
+  class="animated rubberBand"
+  style="position: absolute; top: 50%; left: 58%"
+  *ngIf="webcamImage2"
+>
+  ID Card IMAGE
+</h1>
 <div
   style="position: absolute; top: 55%; left: 50%"
   class="snapshot1"
@@ -62,6 +74,10 @@
 >
   Submit and Proceed
 </button>
-<form style="display: none" id="frmImages">
-</form>
+<div
+  class="spinner-border text-primary mb-3"
+  style="display: none; position: absolute; top: 82.5%; left: 86%"
+  id="move-in"
+></div>
+<form style="display: none" id="frmImages"></form>
 <app-footer></app-footer>

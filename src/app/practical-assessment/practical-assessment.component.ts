@@ -32,12 +32,29 @@ export class PracticalAssessmentComponent implements OnInit {
   Id: any;
   data: any;
   record_state: any;
+
+  LeftTime: any = JSON.parse(
+    localStorage.getItem(
+      localStorage.getItem('req_id') +
+        '_' +
+        localStorage.getItem('cand_id') +
+        '_' +
+        'data'
+    )
+  ).CandidateAssessmentData.PracticalAssessment.RemainingDurationSeconds;
+  time_array: any = [];
+
   constructor(private route: Router) {
     this.Req = localStorage.getItem('req_id');
     this.Id = localStorage.getItem('cand_id');
     this.data = JSON.parse(
       localStorage.getItem(this.Req + '_' + this.Id + '_' + 'data')
     );
+    var left = this.LeftTime;
+    while (left >= 2) {
+      this.time_array.push(left - 1);
+      left -= 1;
+    }
   }
   constraints = {
     video: {
@@ -51,6 +68,7 @@ export class PracticalAssessmentComponent implements OnInit {
   private visibility;
 
   ngOnInit(): void {
+    localStorage.setItem('Video_upload_url', environment.Upload_files_URL);
     varCandidateAssessmentData = this.data;
 
     $(function () {
@@ -908,7 +926,16 @@ export class PracticalAssessmentComponent implements OnInit {
     }
   }*/
 
-  timeup(event: { action: string }) {
+  timeup(event:any) {
+    this.data.CandidateAssessmentData.PracticalAssessment.RemainingDurationSeconds = event.left as number / 1000;
+    localStorage.setItem(
+      localStorage.getItem('req_id') +
+        '_' +
+        localStorage.getItem('cand_id') +
+        '_' +
+        'data',
+      JSON.stringify(this.data)
+    );
     if (event.action == 'done') {
       timer = true;
       $('#submit_reponse_btn').click();
@@ -983,7 +1010,7 @@ export class PracticalAssessmentComponent implements OnInit {
         ImageArrayContent.FileName +
         '">'
     );
-
+    let new_data = JSON.parse(localStorage.getItem('Response_data'));
     $.ajax({
       url: environment.Upload_files_URL,
       type: 'POST',
@@ -1000,7 +1027,7 @@ export class PracticalAssessmentComponent implements OnInit {
         });
         Event_log(
           'ASSESSMENT_DATA_UPLOADED',
-          JSON.parse(localStorage.getItem('Response_data')),
+          new_data,
           sec,
           index,
           key
@@ -1014,7 +1041,7 @@ export class PracticalAssessmentComponent implements OnInit {
         });
         Event_log(
           'ASSESSMENT_DATA_UPLOAD_FAILED',
-          JSON.parse(localStorage.getItem('Response_data')),
+          new_data,
           sec,
           index,
           key
