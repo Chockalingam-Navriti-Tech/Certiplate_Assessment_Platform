@@ -22,7 +22,7 @@ var exit_full_screen = 0;
 var attempted_count = 0;
 var marked_review = 0;
 let timer = false;
-var id1, id2, id3;
+var id1, id2, id3, id4;
 var varCandidateAssessmentData;
 
 @Component({
@@ -157,21 +157,15 @@ export class VivaAssessmentComponent implements OnInit {
         this.classifyImage();
       });*/
 
-    document.addEventListener('contextmenu', (event) => event.preventDefault());
+    document.addEventListener(
+      'contextmenu',
+      (id4 = (event: any) => event.preventDefault())
+    );
     /*$(document).keydown(function (e) {
         e.preventDefault();
       });*/
-    $('body').bind('cut copy paste', function (e) {
+    $('body').on('cut copy paste', function (e) {
       e.preventDefault();
-    });
-    $(document).ready(function () {
-      function disablePrev() {
-        window.history.forward();
-      }
-      //window.onload = disablePrev();
-      window.onpageshow = function (evt: any) {
-        if (evt.persisted) disablePrev();
-      };
     });
     var route = this.route;
 
@@ -1790,6 +1784,8 @@ export class VivaAssessmentComponent implements OnInit {
         'data',
       JSON.stringify(this.data)
     );*/
+    $('body').off();
+    document.removeEventListener('contextmenu', id4);
     document.removeEventListener('fullscreenchange', this.full_screen);
     document.removeEventListener('visibilitychange', this.visibility);
   }

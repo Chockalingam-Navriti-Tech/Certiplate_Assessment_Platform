@@ -25,7 +25,7 @@ var exit_full_screen = 0;
 var attempted_count;
 var marked_review = 0;
 var timer = false;
-var id1, id2, id3;
+var id1, id2, id3, id4;
 var varCandidateAssessmentData;
 var PracticalAssessmentComponent = /** @class */ (function () {
     function PracticalAssessmentComponent(route) {
@@ -104,8 +104,8 @@ var PracticalAssessmentComponent = /** @class */ (function () {
         var VideoContent = {
             VideoArray: []
         };
-        document.addEventListener('contextmenu', function (event) { return event.preventDefault(); });
-        $('body').bind('cut copy paste', function (e) {
+        document.addEventListener('contextmenu', (id4 = function (event) { return event.preventDefault(); }));
+        $('body').on('cut copy paste', function (e) {
             e.preventDefault();
         });
         var datas = this.data;
@@ -1023,6 +1023,8 @@ var PracticalAssessmentComponent = /** @class */ (function () {
             clearInterval(id3);
         }
         localstream.getTracks()[0].stop();
+        $('body').off();
+        document.removeEventListener('contextmenu', id4);
         document.removeEventListener('fullscreenchange', this.full_screen);
         document.removeEventListener('visibilitychange', this.visibility);
         document

@@ -18,7 +18,7 @@ var exit_full_screen = 0;
 var attempted_count: any;
 var marked_review = 0;
 let timer = false;
-var id1, id2, id3;
+var id1, id2, id3, id4;
 var varCandidateAssessmentData;
 
 declare var cam: any;
@@ -136,8 +136,11 @@ export class PracticalAssessmentComponent implements OnInit {
     var VideoContent = {
       VideoArray: [],
     };
-    document.addEventListener('contextmenu', (event) => event.preventDefault());
-    $('body').bind('cut copy paste', function (e) {
+    document.addEventListener(
+      'contextmenu',
+      (id4 = (event:any) => event.preventDefault())
+    );
+    $('body').on('cut copy paste', function (e) {
       e.preventDefault();
     });
 
@@ -1118,6 +1121,8 @@ export class PracticalAssessmentComponent implements OnInit {
       clearInterval(id3);
     }
     localstream.getTracks()[0].stop();
+    $('body').off();
+    document.removeEventListener('contextmenu', id4);
     document.removeEventListener('fullscreenchange', this.full_screen);
     document.removeEventListener('visibilitychange', this.visibility);
     document

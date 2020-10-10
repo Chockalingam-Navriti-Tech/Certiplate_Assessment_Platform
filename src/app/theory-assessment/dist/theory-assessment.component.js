@@ -26,7 +26,7 @@ var exit_full_screen = 0;
 var attempted_count = 0;
 var marked_review = 0;
 var timer = false;
-var id1, id2, id3;
+var id1, id2, id3, id4;
 var varCandidateAssessmentData;
 var TheoryAssessmentComponent = /** @class */ (function () {
     //id2: any;
@@ -124,22 +124,12 @@ var TheoryAssessmentComponent = /** @class */ (function () {
             this.vdo = this.elem.nativeElement.querySelector('#myVideo');
             this.classifyImage();
           });*/
-        document.addEventListener('contextmenu', function (event) { return event.preventDefault(); });
+        document.addEventListener('contextmenu', (id4 = function (event) { return event.preventDefault(); }));
         /*$(document).keydown(function (e) {
             e.preventDefault();
           });*/
-        $('body').bind('cut copy paste', function (e) {
+        $('body').on('cut copy paste', function (e) {
             e.preventDefault();
-        });
-        $(document).ready(function () {
-            function disablePrev() {
-                window.history.forward();
-            }
-            //window.onload = disablePrev();
-            window.onpageshow = function (evt) {
-                if (evt.persisted)
-                    disablePrev();
-            };
         });
         var route = this.route;
         $(document).ready(function () {
@@ -1487,7 +1477,9 @@ var TheoryAssessmentComponent = /** @class */ (function () {
             'data',
           JSON.stringify(this.data)
         );*/
+        $('body').off();
         document.removeEventListener('fullscreenchange', this.full_screen);
+        document.removeEventListener('contextmenu', id4);
         document.removeEventListener('visibilitychange', this.visibility);
     };
     __decorate([
