@@ -1,33 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css']
+  styleUrls: ['./nav-bar.component.css'],
 })
 export class NavBarComponent implements OnInit {
-
-  constructor(private location:Location) { }
+  constructor(private location: Location) {}
 
   ngOnInit(): void {
+    $('#full-screen').css('display', 'block');
+    $('#exit-full-screen').css('display', 'none');
   }
-  elem=document.documentElement;
+  elem = document.documentElement;
   clicked_fullscreen() {
-    if(this.elem.requestFullscreen){
+    if (this.elem.requestFullscreen) {
       this.elem.requestFullscreen();
       $('#full-screen').css('display', 'none');
       $('#exit-full-screen').css('display', 'block');
     }
   }
-  clicked_exitfullscreen(){
-    if(document.exitFullscreen){
+  clicked_exitfullscreen() {
+    if (document.exitFullscreen) {
       document.exitFullscreen();
       $('#full-screen').css('display', 'block');
       $('#exit-full-screen').css('display', 'none');
     }
   }
-  clicked_back(){
+  clicked_back() {
     this.location.back();
   }
 }

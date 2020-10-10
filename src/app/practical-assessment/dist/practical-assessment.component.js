@@ -58,8 +58,7 @@ var PracticalAssessmentComponent = /** @class */ (function () {
         localStorage.setItem('Video_upload_url', environment_1.environment.Upload_files_URL);
         varCandidateAssessmentData = this.data;
         $(function () {
-            if (varCandidateAssessmentData.CandidateAssessmentData.Languages[1]
-                .LanguageName) {
+            if (varCandidateAssessmentData.CandidateAssessmentData.Languages[1]) {
                 document.getElementById(varCandidateAssessmentData.CandidateAssessmentData.Languages[1]
                     .LanguageName).style.display = 'block';
             }
@@ -105,7 +104,7 @@ var PracticalAssessmentComponent = /** @class */ (function () {
         var VideoContent = {
             VideoArray: []
         };
-        //document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('contextmenu', function (event) { return event.preventDefault(); });
         $('body').bind('cut copy paste', function (e) {
             e.preventDefault();
         });
@@ -162,7 +161,39 @@ var PracticalAssessmentComponent = /** @class */ (function () {
             $(document).keydown(function (e) {
                 key = e.key;
             });
-            Event_log('ASSESSMENT_VIOLATION', datas, sec, index, key);
+            html2canvas_1["default"](document.body).then(function (canvas) {
+                var ScreenshotImage = {
+                    Filename: '',
+                    TimeStamp: '',
+                    Latitude: '',
+                    Longitude: ''
+                };
+                ScreenshotImage.Filename =
+                    'REG' +
+                        varCandidateAssessmentData.CandidateAssessmentData.RegistrationId +
+                        '_PracticalViolation_' +
+                        moment().format('YYYYMMDDhhmmss') +
+                        '.jpeg';
+                ScreenshotImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
+                ScreenshotImage.Latitude = lat;
+                ScreenshotImage.Longitude = long;
+                ImageArrayObj = {
+                    FileName: '',
+                    Image_Data: ''
+                };
+                ImageArrayObj.FileName =
+                    'REG' +
+                        varCandidateAssessmentData.CandidateAssessmentData.RegistrationId +
+                        '_PracticalViolation_' +
+                        moment().format('YYYYMMDDhhmmss') +
+                        '.jpeg';
+                ImageArrayObj.Image_Data = canvas.toDataURL('image/jpeg');
+                //ImageArrayContent.ImageArray.push(ImageArrayObj);
+                //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
+                varCandidateAssessmentData.CandidateAssessmentData.PracticalAssessment.ScreenshotImages.push(ScreenshotImage);
+                Uploadfiles(ImageArrayObj);
+            });
+            Event_log('TAB_SWITCH', datas, sec, index, key);
             if (document.hidden) {
                 $('#popup').css({
                     opacity: 1
@@ -216,8 +247,42 @@ var PracticalAssessmentComponent = /** @class */ (function () {
             $(document).keydown(function (e) {
                 key = e.key;
             });
-            Event_log('ASSESSMENT_VIOLATION', datas, sec, index, key);
+            Event_log('EXIT_FULLSCREEN', datas, sec, index, key);
             if (fullscreen % 2 != 0) {
+                html2canvas_1["default"](document.body).then(function (canvas) {
+                    var ScreenshotImage = {
+                        Filename: '',
+                        TimeStamp: '',
+                        Latitude: '',
+                        Longitude: ''
+                    };
+                    ScreenshotImage.Filename =
+                        'REG' +
+                            varCandidateAssessmentData.CandidateAssessmentData
+                                .RegistrationId +
+                            '_PracticalViolation_' +
+                            moment().format('YYYYMMDDhhmmss') +
+                            '.jpeg';
+                    ScreenshotImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
+                    ScreenshotImage.Latitude = lat;
+                    ScreenshotImage.Longitude = long;
+                    ImageArrayObj = {
+                        FileName: '',
+                        Image_Data: ''
+                    };
+                    ImageArrayObj.FileName =
+                        'REG' +
+                            varCandidateAssessmentData.CandidateAssessmentData
+                                .RegistrationId +
+                            '_PracticalViolation_' +
+                            moment().format('YYYYMMDDhhmmss') +
+                            '.jpeg';
+                    ImageArrayObj.Image_Data = canvas.toDataURL('image/jpeg');
+                    //ImageArrayContent.ImageArray.push(ImageArrayObj);
+                    //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
+                    varCandidateAssessmentData.CandidateAssessmentData.PracticalAssessment.ScreenshotImages.push(ScreenshotImage);
+                    Uploadfiles(ImageArrayObj);
+                });
                 $('#popup').css({
                     opacity: 1
                 });
@@ -857,7 +922,8 @@ var PracticalAssessmentComponent = /** @class */ (function () {
       }
     }*/
     PracticalAssessmentComponent.prototype.timeup = function (event) {
-        this.data.CandidateAssessmentData.PracticalAssessment.RemainingDurationSeconds = event.left / 1000;
+        this.data.CandidateAssessmentData.PracticalAssessment.RemainingDurationSeconds =
+            event.left / 1000;
         localStorage.setItem(localStorage.getItem('req_id') +
             '_' +
             localStorage.getItem('cand_id') +
@@ -991,6 +1057,7 @@ function Event_log(events, data, sec, index, key) {
         QuestionIndex: index,
         ActualResponse: parseInt(data.CandidateAssessmentData.PracticalAssessment.Sections[sec].Questions[index].CandidateActualResponseOption),
         KeyboardKey: key,
+        Description: '',
         Latitude: lat,
         Longitude: long
     };
@@ -1037,8 +1104,13 @@ function Event_log(events, data, sec, index, key) {
         case 'KEYBOARD_KEY_PRESSED':
             Assessment_event.SubTypeId = 23;
             break;
-        case 'ASSESSMENT_VIOLATION':
+        case 'EXIT_FULLSCREEN':
             Assessment_event.SubTypeId = 25;
+            Assessment_event.Description = 'Candidate attempted to exit full screen';
+            break;
+        case 'TAB_SWITCH':
+            Assessment_event.SubTypeId = 25;
+            Assessment_event.Description = 'Candidate attempted to switch tabs';
             break;
     }
     data.CandidateAssessmentData.PracticalAssessment.AssessmentEvents.push(Assessment_event);
@@ -1048,8 +1120,8 @@ function Event_log(events, data, sec, index, key) {
         '_' +
         'data';
     if (typeof data == 'string')
-        localStorage.setItem(file, data);
+        localStorage.setItem(file, JSON.stringify(data));
     else
         localStorage.setItem(file, JSON.stringify(data));
-    localStorage.setItem('Response_data', data);
+    localStorage.setItem('Response_data', JSON.stringify(data));
 }

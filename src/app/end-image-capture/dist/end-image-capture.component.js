@@ -110,31 +110,31 @@ var EndImageCaptureComponent = /** @class */ (function () {
             this.route.navigate(['feedback-practical']);
         }
         else if (localStorage.getItem('assessment') == 'viva') {
-            data.CandidateAssessmentData.VivaAssessment.EndImage.FileName =
-                'REG' + data.CandidateAssessmentData.RegistrationId + '_VivaEnd.png';
-            data.CandidateAssessmentData.VivaAssessment.EndImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
-            data.CandidateAssessmentData.VivaAssessment.EndImage.Latitude = lat;
-            data.CandidateAssessmentData.VivaAssessment.EndImage.Longitude = long;
+            data.CandidateAssessmentData.VivaMcqAssessment.EndImage.FileName =
+                'REG' + data.CandidateAssessmentData.RegistrationId + '_VivaMcqEnd.png';
+            data.CandidateAssessmentData.VivaMcqAssessment.EndImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
+            data.CandidateAssessmentData.VivaMcqAssessment.EndImage.Latitude = lat;
+            data.CandidateAssessmentData.VivaMcqAssessment.EndImage.Longitude = long;
             ImageArrayObj = {
-                FileName: 'REG' + data.CandidateAssessmentData.RegistrationId + '_VivaEnd.png',
+                FileName: 'REG' + data.CandidateAssessmentData.RegistrationId + '_VivaMcqEnd.png',
                 Image_Data: this.webcamImage1.imageAsDataUrl
             };
             //ImageArrayContent.ImageArray.push(ImageArrayObj);
             this.Uploadfiles(ImageArrayObj);
             //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
-            data.CandidateAssessmentData.VivaAssessment.AssessmentEvents.push({
+            data.CandidateAssessmentData.VivaMcqAssessment.AssessmentEvents.push({
                 DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
                 SubTypeId: 24,
                 Latitude: lat,
                 Longitude: long
             });
-            data.CandidateAssessmentData.VivaAssessment.CandidateSystemInfo.SystemInfoDateTime = moment().format('DD-MMM-YYYY hh:mm:ss a');
-            data.CandidateAssessmentData.VivaAssessment.CandidateSystemInfo.OperatingSystem = os.platform();
-            data.CandidateAssessmentData.VivaAssessment.CandidateSystemInfo.SystemType = os.arch();
-            data.CandidateAssessmentData.VivaAssessment.CandidateSystemInfo.SystemLocale =
+            data.CandidateAssessmentData.VivaMcqAssessment.CandidateSystemInfo.SystemInfoDateTime = moment().format('DD-MMM-YYYY hh:mm:ss a');
+            data.CandidateAssessmentData.VivaMcqAssessment.CandidateSystemInfo.OperatingSystem = os.platform();
+            data.CandidateAssessmentData.VivaMcqAssessment.CandidateSystemInfo.SystemType = os.arch();
+            data.CandidateAssessmentData.VivaMcqAssessment.CandidateSystemInfo.SystemLocale =
                 window.navigator.language;
-            data.CandidateAssessmentData.VivaAssessment.CandidateSystemInfo.Latitude = lat;
-            data.CandidateAssessmentData.VivaAssessment.CandidateSystemInfo.Longitude = long;
+            data.CandidateAssessmentData.VivaMcqAssessment.CandidateSystemInfo.Latitude = lat;
+            data.CandidateAssessmentData.VivaMcqAssessment.CandidateSystemInfo.Longitude = long;
             localStorage.setItem('Response_data', JSON.stringify(data));
             this.route.navigate(['feedback-viva']);
         }
@@ -153,8 +153,8 @@ var EndImageCaptureComponent = /** @class */ (function () {
             cache: false,
             processData: false,
             success: function (response) {
-                var varResponseData = JSON.parse(response);
-                console.log(varResponseData);
+                ;
+                console.log(response);
             },
             error: function (e) {
                 alert('Error');

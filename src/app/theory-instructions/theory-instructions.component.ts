@@ -22,7 +22,6 @@ export class TheoryInstructionsComponent implements OnInit {
     $(function () {
       if (
         varCandidateAssessmentData.CandidateAssessmentData.Languages[1]
-          .LanguageName
       ) {
         document.getElementById(
           varCandidateAssessmentData.CandidateAssessmentData.Languages[1]

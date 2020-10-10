@@ -17,6 +17,7 @@ var ngx_webcam_1 = require("ngx-webcam");
 var ngx_countdown_1 = require("ngx-countdown");
 var radio_1 = require("@angular/material/radio");
 var card_1 = require("@angular/material/card");
+var angular_disable_browser_back_button_1 = require("angular-disable-browser-back-button");
 // MDB Angular Free
 var angular_bootstrap_md_2 = require("angular-bootstrap-md");
 var app_routing_module_1 = require("./app-routing.module");
@@ -58,6 +59,7 @@ var AppModule = /** @class */ (function () {
                 ngx_countdown_1.CountdownModule,
                 card_1.MatCardModule,
                 router_1.RouterModule.forRoot(app_routing_module_1.routes),
+                angular_disable_browser_back_button_1.BackButtonDisableModule.forRoot(),
                 angular_bootstrap_md_1.MDBBootstrapModule.forRoot(),
             ],
             exports: [animations_1.BrowserAnimationsModule],

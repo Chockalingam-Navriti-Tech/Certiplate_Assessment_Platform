@@ -146,21 +146,21 @@ var ImageCaptureComponent = /** @class */ (function () {
             });
         }
         else if (this.sub == 'viva') {
-            data.CandidateAssessmentData.VivaAssessment.StartImage.FileName =
-                'REG' + data.CandidateAssessmentData.RegistrationId + '_VivaStart.png';
-            data.CandidateAssessmentData.VivaAssessment.StartImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
+            data.CandidateAssessmentData.VivaMcqAssessment.StartImage.FileName =
+                'REG' + data.CandidateAssessmentData.RegistrationId + '_VivaMcqStart.png';
+            data.CandidateAssessmentData.VivaMcqAssessment.StartImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
             ImageArrayObj_start = {
                 FileName: 'REG' +
                     data.CandidateAssessmentData.RegistrationId +
-                    '_VivaStart.png',
+                    '_VivaMcqStart.png',
                 Image_Data: this.webcamImage1.imageAsDataUrl
             };
             ImageArrayContent.ImageArray.push(ImageArrayObj_start);
-            data.CandidateAssessmentData.VivaAssessment.IdentityImage.FileName =
-                'REG' + data.CandidateAssessmentData.RegistrationId + '_VivaId.png';
-            data.CandidateAssessmentData.VivaAssessment.IdentityImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
+            data.CandidateAssessmentData.VivaMcqAssessment.IdentityImage.FileName =
+                'REG' + data.CandidateAssessmentData.RegistrationId + '_VivaMcqId.png';
+            data.CandidateAssessmentData.VivaMcqAssessment.IdentityImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
             ImageArrayObj_Id = {
-                FileName: 'REG' + data.CandidateAssessmentData.RegistrationId + '_VivaId.png',
+                FileName: 'REG' + data.CandidateAssessmentData.RegistrationId + '_VivaMcqId.png',
                 Image_Data: this.webcamImage2.imageAsDataUrl
             };
             //ImageArrayContent.ImageArray.push(ImageArrayObj_Id);
@@ -170,13 +170,13 @@ var ImageCaptureComponent = /** @class */ (function () {
             navigator.geolocation.getCurrentPosition(function (position) {
                 lat = position.coords.latitude;
                 long = position.coords.longitude;
-                data.CandidateAssessmentData.VivaAssessment.StartImage.Latitude = lat;
-                data.CandidateAssessmentData.VivaAssessment.StartImage.Longitude = long;
-                data.CandidateAssessmentData.VivaAssessment.IdentityImage.Latitude = lat;
-                data.CandidateAssessmentData.VivaAssessment.IdentityImage.Longitude = long;
+                data.CandidateAssessmentData.VivaMcqAssessment.StartImage.Latitude = lat;
+                data.CandidateAssessmentData.VivaMcqAssessment.StartImage.Longitude = long;
+                data.CandidateAssessmentData.VivaMcqAssessment.IdentityImage.Latitude = lat;
+                data.CandidateAssessmentData.VivaMcqAssessment.IdentityImage.Longitude = long;
                 localStorage.setItem('lat', lat);
                 localStorage.setItem('long', long);
-                data.CandidateAssessmentData.VivaAssessment.AssessmentEvents.push({
+                data.CandidateAssessmentData.VivaMcqAssessment.AssessmentEvents.push({
                     DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
                     SubTypeId: 24,
                     Latitude: lat,

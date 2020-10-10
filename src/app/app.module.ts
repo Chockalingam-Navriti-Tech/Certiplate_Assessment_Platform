@@ -7,7 +7,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {WebcamModule} from 'ngx-webcam';
 import {CountdownModule, CountdownComponent} from 'ngx-countdown';
 import {MatRadioModule} from '@angular/material/radio';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
+import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
 // MDB Angular Free
 import {
   CheckboxModule,
@@ -38,9 +39,10 @@ import { FeedbackPracticalComponent } from './feedback-practical/feedback-practi
 import { FeedbackVivaComponent } from './feedback-viva/feedback-viva.component';
 import { PracticalAssessmentComponent } from './practical-assessment/practical-assessment.component';
 import { SubmitResponseComponent } from './submit-response/submit-response.component';
+import { VivaAssessmentComponent } from './viva-assessment/viva-assessment.component';
 
 @NgModule({
-  declarations: [AppComponent, routingComponents, NavBarComponent, FooterComponent, TheoryInstructionsComponent, PracticalInstructionsComponent, VivaInstructionsComponent, ImageCaptureComponent, TheoryAssessmentComponent, EndImageCaptureComponent, FeedbackTheoryComponent, FeedbackPracticalComponent, FeedbackVivaComponent, PracticalAssessmentComponent, SubmitResponseComponent],
+  declarations: [AppComponent, routingComponents, NavBarComponent, FooterComponent, TheoryInstructionsComponent, PracticalInstructionsComponent, VivaInstructionsComponent, ImageCaptureComponent, TheoryAssessmentComponent, EndImageCaptureComponent, FeedbackTheoryComponent, FeedbackPracticalComponent, FeedbackVivaComponent, PracticalAssessmentComponent, SubmitResponseComponent, VivaAssessmentComponent],
   imports: [
     WebcamModule,
     MatInputModule,
@@ -58,6 +60,7 @@ import { SubmitResponseComponent } from './submit-response/submit-response.compo
     CountdownModule,
     MatCardModule,
     RouterModule.forRoot(routes),
+    BackButtonDisableModule.forRoot(),
     MDBBootstrapModule.forRoot(),
   ],
   exports: [BrowserAnimationsModule],

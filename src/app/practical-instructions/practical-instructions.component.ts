@@ -22,7 +22,7 @@ export class PracticalInstructionsComponent implements OnInit {
     
     $(function () {
       
-      if (data.CandidateAssessmentData.Languages[1].LanguageName) {
+      if (data.CandidateAssessmentData.Languages[1]) {
         document.getElementById(
           data.CandidateAssessmentData.Languages[1].LanguageName
         ).style.display = 'block';

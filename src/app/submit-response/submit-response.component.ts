@@ -109,18 +109,18 @@ export class SubmitResponseComponent implements OnInit {
                         'block';
                     }
                   } else if (
-                    response_str.CandidateAssessmentData.VivaAssessment
+                    response_str.CandidateAssessmentData.VivaMcqAssessment
                   ) {
                     if (
                       parseInt(
-                        response_str.CandidateAssessmentData.VivaAssessment
+                        response_str.CandidateAssessmentData.VivaMcqAssessment
                           .AssessmentStatus
                       ) != 4
                     ) {
                       document.getElementById('btn').style.display = 'block';
                     } else if (
                       parseInt(
-                        response_str.CandidateAssessmentData.VivaAssessment
+                        response_str.CandidateAssessmentData.VivaMcqAssessment
                           .AssessmentStatus
                       ) == 4
                     ) {
@@ -178,8 +178,8 @@ export class SubmitResponseComponent implements OnInit {
                   $('#load').css('display', 'none');
                   $('#progress').css('display', 'none');
                   $('#done').css('display', 'block');
-                  response_str.CandidateAssessmentData.VivaAssessment.AssessmentStatus = 4;
-                  response_str.CandidateAssessmentData.VivaAssessment.AssessmentEvents.push(
+                  response_str.CandidateAssessmentData.VivaMcqAssessment.AssessmentStatus = 4;
+                  response_str.CandidateAssessmentData.VivaMcqAssessment.AssessmentEvents.push(
                     {
                       DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
                       SubTypeId: 7,
@@ -237,7 +237,7 @@ export class SubmitResponseComponent implements OnInit {
                 }
               );
             } else if (localStorage.getItem('assessment') == 'viva') {
-              response_str.CandidateAssessmentData.VivaAssessment.AssessmentEvents.push(
+              response_str.CandidateAssessmentData.VivaMcqAssessment.AssessmentEvents.push(
                 {
                   DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
                   SubTypeId: 6,
@@ -277,7 +277,7 @@ export class SubmitResponseComponent implements OnInit {
             }
           );
         } else if (localStorage.getItem('assessment') == 'viva') {
-          response_str.CandidateAssessmentData.VivaAssessment.AssessmentEvents.push(
+          response_str.CandidateAssessmentData.VivaMcqAssessment.AssessmentEvents.push(
             {
               DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
               SubTypeId: 6,

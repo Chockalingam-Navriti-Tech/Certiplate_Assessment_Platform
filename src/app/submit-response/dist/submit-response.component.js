@@ -87,12 +87,12 @@ var SubmitResponseComponent = /** @class */ (function () {
                                                 'block';
                                         }
                                     }
-                                    else if (response_str.CandidateAssessmentData.VivaAssessment) {
-                                        if (parseInt(response_str.CandidateAssessmentData.VivaAssessment
+                                    else if (response_str.CandidateAssessmentData.VivaMcqAssessment) {
+                                        if (parseInt(response_str.CandidateAssessmentData.VivaMcqAssessment
                                             .AssessmentStatus) != 4) {
                                             document.getElementById('btn').style.display = 'block';
                                         }
-                                        else if (parseInt(response_str.CandidateAssessmentData.VivaAssessment
+                                        else if (parseInt(response_str.CandidateAssessmentData.VivaMcqAssessment
                                             .AssessmentStatus) == 4) {
                                             document.getElementById('success').style.display =
                                                 'block';
@@ -130,8 +130,8 @@ var SubmitResponseComponent = /** @class */ (function () {
                                     $('#load').css('display', 'none');
                                     $('#progress').css('display', 'none');
                                     $('#done').css('display', 'block');
-                                    response_str.CandidateAssessmentData.VivaAssessment.AssessmentStatus = 4;
-                                    response_str.CandidateAssessmentData.VivaAssessment.AssessmentEvents.push({
+                                    response_str.CandidateAssessmentData.VivaMcqAssessment.AssessmentStatus = 4;
+                                    response_str.CandidateAssessmentData.VivaMcqAssessment.AssessmentEvents.push({
                                         DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
                                         SubTypeId: 7,
                                         Latitude: lat,
@@ -175,7 +175,7 @@ var SubmitResponseComponent = /** @class */ (function () {
                             });
                         }
                         else if (localStorage.getItem('assessment') == 'viva') {
-                            response_str.CandidateAssessmentData.VivaAssessment.AssessmentEvents.push({
+                            response_str.CandidateAssessmentData.VivaMcqAssessment.AssessmentEvents.push({
                                 DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
                                 SubTypeId: 6,
                                 Latitude: lat,
@@ -211,7 +211,7 @@ var SubmitResponseComponent = /** @class */ (function () {
                     });
                 }
                 else if (localStorage.getItem('assessment') == 'viva') {
-                    response_str.CandidateAssessmentData.VivaAssessment.AssessmentEvents.push({
+                    response_str.CandidateAssessmentData.VivaMcqAssessment.AssessmentEvents.push({
                         DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
                         SubTypeId: 6,
                         Latitude: lat,

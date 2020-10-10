@@ -11,13 +11,21 @@ export class VivaInstructionsComponent implements OnInit {
   Req: string;
   Id: string;
   ngOnInit(): void {
-    $(document).ready(function () {
-      function disablePrev() { window.history.forward() }
-      //window.onload = disablePrev();
-      window.onpageshow = function(evt:any) { if (evt.persisted) disablePrev() }
-    })
     this.Req = localStorage.getItem('req_id');
     this.Id = localStorage.getItem('cand_id');
+    var varCandidateAssessmentData = JSON.parse(
+      localStorage.getItem(this.Req + '_' + this.Id + '_' + 'data')
+    );
+    $(function () {
+      if (
+        varCandidateAssessmentData.CandidateAssessmentData.Languages[1]
+      ) {
+        document.getElementById(
+          varCandidateAssessmentData.CandidateAssessmentData.Languages[1]
+            .LanguageName
+        ).style.display = 'block';
+      }
+    });
     this.ajaxcall();
   }
   ajaxcall() {
@@ -27,7 +35,7 @@ export class VivaInstructionsComponent implements OnInit {
     $(document).ready(function () {
       var count = 1;
       $.each(
-        data.CandidateAssessmentData.VivaInstructions[0].InstructionList,
+        data.CandidateAssessmentData.VivaMcqInstructions[0].InstructionList,
         function (index: number, value) {
           document.getElementById('tablecontent').innerHTML +=
             '<br/>' +
@@ -51,5 +59,10 @@ export class VivaInstructionsComponent implements OnInit {
         }
       });
     });
+  }
+  clicked() {
+    let element = document.documentElement;
+    if (element.requestFullscreen) element.requestFullscreen();
+    this.route.navigate(['viva-assessment']);
   }
 }

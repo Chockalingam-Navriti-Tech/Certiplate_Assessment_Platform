@@ -21,23 +21,23 @@ var FeedbackVivaComponent = /** @class */ (function () {
     FeedbackVivaComponent.prototype.ngOnInit = function () {
         var data = this.data;
         $(document).ready(function () {
-            $.each(data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper
+            $.each(data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper
                 .Questions, function (index, value) {
                 var id = (index + 1).toString();
                 document.getElementById(id).innerHTML =
                     index +
                         1 +
                         '. ' +
-                        data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper
+                        data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper
                             .Questions[index].QuestionText +
                         '<br/>';
-                if (data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper
+                if (data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper
                     .Questions[index].Options) {
-                    $.each(data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper
+                    $.each(data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper
                         .Questions[index].Options, function (indices, value) {
                         var opt_id = 'opt' + index + '_' + (indices + 1);
                         document.getElementById(opt_id).innerHTML =
-                            data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper.Questions[index].Options[indices].OptionText;
+                            data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper.Questions[index].Options[indices].OptionText;
                     });
                 }
             });
@@ -45,16 +45,16 @@ var FeedbackVivaComponent = /** @class */ (function () {
             var arr;
             arr = [];
             $('input[name=groupOfDefaultRadios1]').change(function () {
-                data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper.Questions[1].Response =
-                    data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper
+                data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper.Questions[1].Response =
+                    data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper
                         .Questions[1].QuestionId +
                         '=>' +
                         $(this).val();
                 flag1 = true;
                 if (flag1 == true && flag2 == true && flag3 == true && flag4 == true) {
                     if (document.getElementById('text').value != '') {
-                        data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper.Questions[0].Response =
-                            data.CandidateAssessmentData.VivaAssessment
+                        data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper.Questions[0].Response =
+                            data.CandidateAssessmentData.VivaMcqAssessment
                                 .FeedbackQuestionPaper.Questions[0].QuestionId +
                                 '=>' +
                                 document.getElementById('text').value;
@@ -63,16 +63,16 @@ var FeedbackVivaComponent = /** @class */ (function () {
                 }
             });
             $('select[name=groupOfDefaultRadios2]').change(function () {
-                data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper.Questions[2].Response =
-                    data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper
+                data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper.Questions[2].Response =
+                    data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper
                         .Questions[2].QuestionId +
                         '=>' +
                         $(this).val();
                 flag2 = true;
                 if (flag1 == true && flag2 == true && flag3 == true && flag4 == true) {
                     if (document.getElementById('text').value != '') {
-                        data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper.Questions[0].Response =
-                            data.CandidateAssessmentData.VivaAssessment
+                        data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper.Questions[0].Response =
+                            data.CandidateAssessmentData.VivaMcqAssessment
                                 .FeedbackQuestionPaper.Questions[0].QuestionId +
                                 '=>' +
                                 document.getElementById('text').value;
@@ -82,16 +82,16 @@ var FeedbackVivaComponent = /** @class */ (function () {
             });
             $('input[name=groupOfDefaultRadios3]').change(function () {
                 arr.push($(this).val());
-                data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper.Questions[3].Response =
-                    data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper
+                data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper.Questions[3].Response =
+                    data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper
                         .Questions[3].QuestionId +
                         '=>' +
                         arr;
                 flag3 = true;
                 if (flag1 == true && flag2 == true && flag3 == true && flag4 == true) {
                     if (document.getElementById('text').value != '') {
-                        data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper.Questions[0].Response =
-                            data.CandidateAssessmentData.VivaAssessment
+                        data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper.Questions[0].Response =
+                            data.CandidateAssessmentData.VivaMcqAssessment
                                 .FeedbackQuestionPaper.Questions[0].QuestionId +
                                 '=>' +
                                 document.getElementById('text').value;
@@ -100,16 +100,16 @@ var FeedbackVivaComponent = /** @class */ (function () {
                 }
             });
             $('select[name=groupOfDefaultRadios4]').change(function () {
-                data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper.Questions[4].Response =
-                    data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper
+                data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper.Questions[4].Response =
+                    data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper
                         .Questions[4].QuestionId +
                         '=>' +
                         $(this).val();
                 flag4 = true;
                 if (flag1 == true && flag2 == true && flag3 == true && flag4 == true) {
                     if (document.getElementById('text').value != '') {
-                        data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper.Questions[0].Response =
-                            data.CandidateAssessmentData.VivaAssessment
+                        data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper.Questions[0].Response =
+                            data.CandidateAssessmentData.VivaMcqAssessment
                                 .FeedbackQuestionPaper.Questions[0].QuestionId +
                                 '=>' +
                                 document.getElementById('text').value;
@@ -121,7 +121,7 @@ var FeedbackVivaComponent = /** @class */ (function () {
         this.data = data;
     };
     FeedbackVivaComponent.prototype.clicked = function () {
-        this.data.CandidateAssessmentData.VivaAssessment.AssessmentStatus = 3;
+        this.data.CandidateAssessmentData.VivaMcqAssessment.AssessmentStatus = 3;
         localStorage.setItem('Response_data', JSON.stringify(this.data));
         this.route.navigate(['submit-response']);
     };

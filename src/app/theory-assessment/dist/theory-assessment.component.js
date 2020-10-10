@@ -80,8 +80,7 @@ var TheoryAssessmentComponent = /** @class */ (function () {
         var _this = this;
         varCandidateAssessmentData = this.data;
         $(function () {
-            if (varCandidateAssessmentData.CandidateAssessmentData.Languages[1]
-                .LanguageName) {
+            if (varCandidateAssessmentData.CandidateAssessmentData.Languages[1]) {
                 document.getElementById(varCandidateAssessmentData.CandidateAssessmentData.Languages[1]
                     .LanguageName).style.display = 'block';
             }
@@ -125,7 +124,7 @@ var TheoryAssessmentComponent = /** @class */ (function () {
             this.vdo = this.elem.nativeElement.querySelector('#myVideo');
             this.classifyImage();
           });*/
-        //document.addEventListener('contextmenu', (event) => event.preventDefault());
+        document.addEventListener('contextmenu', function (event) { return event.preventDefault(); });
         /*$(document).keydown(function (e) {
             e.preventDefault();
           });*/
@@ -193,6 +192,18 @@ var TheoryAssessmentComponent = /** @class */ (function () {
                 ' s' +
                 '</b>';
         sec = 0;
+        /*if (
+          parseInt(
+            this.data.CandidateAssessmentData.TheoryAssessment.CurrentSectionIndex
+          ) == 0
+        )
+        else
+          sec = parseInt(
+            this.data.CandidateAssessmentData.TheoryAssessment.CurrentSectionIndex
+          );
+        if (localStorage.getItem('current_question_no'))
+          count = parseInt(localStorage.getItem('current_question_no'));
+        else*/
         count = 1;
         var data = this.data;
         document.addEventListener('visibilitychange', (this.visibility = function () {
@@ -200,7 +211,7 @@ var TheoryAssessmentComponent = /** @class */ (function () {
             $(document).keydown(function (e) {
                 key = e.key;
             });
-            Event_log('ASSESSMENT_VIOLATION', data, sec, index, key);
+            Event_log('TAB_SWITCH', data, sec, index, key);
             if (document.hidden) {
                 $('#popup').css({
                     opacity: 1
@@ -248,14 +259,80 @@ var TheoryAssessmentComponent = /** @class */ (function () {
                     }
                 });
             }
+            html2canvas_1["default"](document.body).then(function (canvas) {
+                var ScreenshotImage = {
+                    Filename: '',
+                    TimeStamp: '',
+                    Latitude: '',
+                    Longitude: ''
+                };
+                ScreenshotImage.Filename =
+                    'REG' +
+                        varCandidateAssessmentData.CandidateAssessmentData.RegistrationId +
+                        '_TheoryViolation_' +
+                        moment().format('YYYYMMDDhhmmss') +
+                        '.jpeg';
+                ScreenshotImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
+                ScreenshotImage.Latitude = lat;
+                ScreenshotImage.Longitude = long;
+                ImageArrayObj = {
+                    FileName: '',
+                    Image_Data: ''
+                };
+                ImageArrayObj.FileName =
+                    'REG' +
+                        varCandidateAssessmentData.CandidateAssessmentData.RegistrationId +
+                        '_TheoryViolation_' +
+                        moment().format('YYYYMMDDhhmmss') +
+                        '.jpeg';
+                ImageArrayObj.Image_Data = canvas.toDataURL('image/jpeg');
+                //ImageArrayContent.ImageArray.push(ImageArrayObj);
+                //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
+                varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.ScreenshotImages.push(ScreenshotImage);
+                Uploadfiles(ImageArrayObj);
+            });
         }));
         document.addEventListener('fullscreenchange', (this.full_screen = function () {
             var key = '';
             $(document).keydown(function (e) {
                 key = e.key;
             });
-            Event_log('ASSESSMENT_VIOLATION', data, sec, index, key);
+            Event_log('EXIT_FULLSCREEN', data, sec, index, key);
             if (fullscreen % 2 != 0) {
+                html2canvas_1["default"](document.body).then(function (canvas) {
+                    var ScreenshotImage = {
+                        Filename: '',
+                        TimeStamp: '',
+                        Latitude: '',
+                        Longitude: ''
+                    };
+                    ScreenshotImage.Filename =
+                        'REG' +
+                            varCandidateAssessmentData.CandidateAssessmentData
+                                .RegistrationId +
+                            '_TheoryViolation_' +
+                            moment().format('YYYYMMDDhhmmss') +
+                            '.jpeg';
+                    ScreenshotImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
+                    ScreenshotImage.Latitude = lat;
+                    ScreenshotImage.Longitude = long;
+                    ImageArrayObj = {
+                        FileName: '',
+                        Image_Data: ''
+                    };
+                    ImageArrayObj.FileName =
+                        'REG' +
+                            varCandidateAssessmentData.CandidateAssessmentData
+                                .RegistrationId +
+                            '_TheoryViolation_' +
+                            moment().format('YYYYMMDDhhmmss') +
+                            '.jpeg';
+                    ImageArrayObj.Image_Data = canvas.toDataURL('image/jpeg');
+                    //ImageArrayContent.ImageArray.push(ImageArrayObj);
+                    //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
+                    varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.ScreenshotImages.push(ScreenshotImage);
+                    Uploadfiles(ImageArrayObj);
+                });
                 $('#popup').css({
                     opacity: 1
                 });
@@ -440,7 +517,21 @@ var TheoryAssessmentComponent = /** @class */ (function () {
         var ImageArrayContent = JSON.parse(localStorage.getItem('Image_Array'));
         var data = this.data;
         index = 0;
+        /*if (
+          parseInt(
+            data.CandidateAssessmentData.TheoryAssessment.CurrentQuestionIndex
+          ) == 0
+        )
+        else
+          index = parseInt(
+            data.CandidateAssessmentData.TheoryAssessment.CurrentQuestionIndex
+          );*/
         $(document).ready(function () {
+            /*data.CandidateAssessmentData.TheoryAssessment.CurrentSectionIndex = sec;
+            data.CandidateAssessmentData.TheoryAssessment.CurrentQuestionIndex = index;
+            localStorage.setItem('current_question_no', JSON.stringify(count));
+            if (localStorage.getItem('current_question_no'))
+              count = parseInt(localStorage.getItem('current_question_no'));*/
             document.getElementById('question').innerHTML =
                 count +
                     '. ' +
@@ -566,7 +657,6 @@ var TheoryAssessmentComponent = /** @class */ (function () {
                     }
                 }
                 else if (id > 0) {
-                    console.log('hi');
                     option = $('option:selected').attr('id');
                     if (option == 'Hindi')
                         id = 1;
@@ -745,6 +835,9 @@ var TheoryAssessmentComponent = /** @class */ (function () {
             });
             Event_log('NEXT_BUTTON_CLICKED', varCandidateAssessmentData, sec, index, key);
             $('#previous').removeAttr('disabled');
+            /*data.CandidateAssessmentData.TheoryAssessment.CurrentSectionIndex = sec;
+            data.CandidateAssessmentData.TheoryAssessment.CurrentQuestionIndex = index;
+            localStorage.setItem('current_question_no', JSON.stringify(count));*/
             if (id > 0) {
                 document.getElementById('question').innerHTML =
                     count +
@@ -936,6 +1029,9 @@ var TheoryAssessmentComponent = /** @class */ (function () {
                 key = e.key;
             });
             Event_log('PREVIOUS_BUTTON_CLICKED', varCandidateAssessmentData, sec, index, key);
+            /*data.CandidateAssessmentData.TheoryAssessment.CurrentSectionIndex = sec;
+            data.CandidateAssessmentData.TheoryAssessment.CurrentQuestionIndex = index;
+            localStorage.setItem('current_question_no', JSON.stringify(count));*/
             if (data.CandidateAssessmentData.TheoryAssessment.Sections[sec].Questions[index].CandidateActualResponseOption != -1) {
                 var option = data.CandidateAssessmentData.TheoryAssessment.Sections[sec].Questions[index].CandidateActualResponseOption;
                 if (option == '0')
@@ -1094,6 +1190,9 @@ var TheoryAssessmentComponent = /** @class */ (function () {
     };
     TheoryAssessmentComponent.prototype.clicked = function (section, ind, question) {
         $(function () {
+            /*varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.CurrentSectionIndex = section;
+            varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.CurrentQuestionIndex = index;
+            localStorage.setItem('current_question_no', JSON.stringify(question));*/
             var sections = section + '_' + ind;
             if (document.getElementById(sections).className == 'btn btn-warning px-3')
                 $('#checkbox').prop('checked', true);
@@ -1283,7 +1382,8 @@ var TheoryAssessmentComponent = /** @class */ (function () {
       return varNotifySecondArray;
     }*/
     TheoryAssessmentComponent.prototype.timeup = function (event) {
-        varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.RemainingDurationSeconds = event.left / 1000;
+        varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.RemainingDurationSeconds =
+            event.left / 1000;
         localStorage.setItem(localStorage.getItem('req_id') +
             '_' +
             localStorage.getItem('cand_id') +
@@ -1376,6 +1476,17 @@ var TheoryAssessmentComponent = /** @class */ (function () {
             clearInterval(id3);
         }
         localstream.getTracks()[0].stop();
+        this.data.CandidateAssessmentData.TheoryAssessment.CurrentSectionIndex = sec;
+        this.data.CandidateAssessmentData.TheoryAssessment.CurrentQuestionIndex = index;
+        /*console.log(sec, index);
+        localStorage.setItem(
+          localStorage.getItem('req_id') +
+            '_' +
+            localStorage.getItem('cand_id') +
+            '_' +
+            'data',
+          JSON.stringify(this.data)
+        );*/
         document.removeEventListener('fullscreenchange', this.full_screen);
         document.removeEventListener('visibilitychange', this.visibility);
     };
@@ -1404,6 +1515,7 @@ function Event_log(events, data, sec, index, key) {
         QuestionIndex: index,
         ActualResponse: parseInt(data.CandidateAssessmentData.TheoryAssessment.Sections[sec].Questions[index].CandidateActualResponseOption),
         KeyboardKey: key,
+        Description: '',
         Latitude: lat,
         Longitude: long
     };
@@ -1450,8 +1562,13 @@ function Event_log(events, data, sec, index, key) {
         case 'KEYBOARD_KEY_PRESSED':
             Assessment_event.SubTypeId = 23;
             break;
-        case 'ASSESSMENT_VIOLATION':
+        case 'EXIT_FULLSCREEN':
             Assessment_event.SubTypeId = 25;
+            Assessment_event.Description = 'Candidate attempted to exit full screen';
+            break;
+        case 'TAB_SWITCH':
+            Assessment_event.SubTypeId = 25;
+            Assessment_event.Description = 'Candidate attempted to switch tabs';
             break;
     }
     data.CandidateAssessmentData.TheoryAssessment.AssessmentEvents.push(Assessment_event);
@@ -1461,7 +1578,7 @@ function Event_log(events, data, sec, index, key) {
         '_' +
         'data';
     if (typeof data == 'string')
-        localStorage.setItem(file, data);
+        localStorage.setItem(file, JSON.stringify(data));
     else
         localStorage.setItem(file, JSON.stringify(data));
 }

@@ -14,21 +14,22 @@ var VivaInstructionsComponent = /** @class */ (function () {
         this.router = router;
     }
     VivaInstructionsComponent.prototype.ngOnInit = function () {
-        $(document).ready(function () {
-            function disablePrev() { window.history.forward(); }
-            //window.onload = disablePrev();
-            window.onpageshow = function (evt) { if (evt.persisted)
-                disablePrev(); };
-        });
         this.Req = localStorage.getItem('req_id');
         this.Id = localStorage.getItem('cand_id');
+        var varCandidateAssessmentData = JSON.parse(localStorage.getItem(this.Req + '_' + this.Id + '_' + 'data'));
+        $(function () {
+            if (varCandidateAssessmentData.CandidateAssessmentData.Languages[1]) {
+                document.getElementById(varCandidateAssessmentData.CandidateAssessmentData.Languages[1]
+                    .LanguageName).style.display = 'block';
+            }
+        });
         this.ajaxcall();
     };
     VivaInstructionsComponent.prototype.ajaxcall = function () {
         var data = JSON.parse(localStorage.getItem(this.Req + '_' + this.Id + '_' + 'data'));
         $(document).ready(function () {
             var count = 1;
-            $.each(data.CandidateAssessmentData.VivaInstructions[0].InstructionList, function (index, value) {
+            $.each(data.CandidateAssessmentData.VivaMcqInstructions[0].InstructionList, function (index, value) {
                 document.getElementById('tablecontent').innerHTML +=
                     '<br/>' +
                         '<b style="padding:14px">' +
@@ -51,6 +52,12 @@ var VivaInstructionsComponent = /** @class */ (function () {
                 }
             });
         });
+    };
+    VivaInstructionsComponent.prototype.clicked = function () {
+        var element = document.documentElement;
+        if (element.requestFullscreen)
+            element.requestFullscreen();
+        this.route.navigate(['viva-assessment']);
     };
     VivaInstructionsComponent = __decorate([
         core_1.Component({

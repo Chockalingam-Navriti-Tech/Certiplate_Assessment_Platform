@@ -23,35 +23,66 @@ var AssessmentDetailComponent = /** @class */ (function () {
     AssessmentDetailComponent.prototype.ajaxcall = function () {
         var data = JSON.parse(localStorage.getItem(this.Req + '_' + this.Id + '_' + 'data'));
         $(document).ready(function () {
-            document.getElementById('tablecontent').innerHTML =
-                '<br />' +
-                    '<b style="padding:10px"> Candidate Name : </b>' +
-                    data.CandidateAssessmentData.CandidateName +
-                    "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-                    '<b style="padding:10px"> Registration Number : </b>' +
-                    data.CandidateAssessmentData.RegistrationId +
-                    "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-                    '<b style="padding:10px"> Guardian Name : </b>' +
-                    data.CandidateAssessmentData.GuardianName +
-                    "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-                    '<b style="padding:10px"> Assessment Batch :</b>' +
-                    data.CandidateAssessmentData.AssessmentBatchCode.toUpperCase() +
-                    "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-                    '<b style="padding:10px"> SDMS Batch ID : </b>' +
-                    data.CandidateAssessmentData.SDMSBatchId.toUpperCase() +
-                    "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-                    '<b style="padding:10px"> Project Name : </b>' +
-                    data.CandidateAssessmentData.ProjectName +
-                    "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-                    '<b style="padding:10px"> Client Name : </b>' +
-                    data.CandidateAssessmentData.ClientName +
-                    "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-                    '<b style="padding:10px"> Languages : </b>' +
-                    data.CandidateAssessmentData.Languages[0].LanguageName +
-                    ' and ' +
-                    data.CandidateAssessmentData.Languages[1].LanguageName +
+            if (data.CandidateAssessmentData.Languages[1]) {
+                document.getElementById('tablecontent').innerHTML =
                     '<br />' +
-                    '<br/>';
+                        '<b style="padding:10px"> Candidate Name : </b>' +
+                        data.CandidateAssessmentData.CandidateName +
+                        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+                        '<b style="padding:10px"> Registration Number : </b>' +
+                        data.CandidateAssessmentData.RegistrationId +
+                        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+                        '<b style="padding:10px"> Guardian Name : </b>' +
+                        data.CandidateAssessmentData.GuardianName +
+                        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+                        '<b style="padding:10px"> Assessment Batch :</b>' +
+                        data.CandidateAssessmentData.AssessmentBatchCode.toUpperCase() +
+                        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+                        '<b style="padding:10px"> SDMS Batch ID : </b>' +
+                        data.CandidateAssessmentData.SDMSBatchId.toUpperCase() +
+                        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+                        '<b style="padding:10px"> Project Name : </b>' +
+                        data.CandidateAssessmentData.ProjectName +
+                        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+                        '<b style="padding:10px"> Client Name : </b>' +
+                        data.CandidateAssessmentData.ClientName +
+                        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+                        '<b style="padding:10px"> Languages : </b>' +
+                        data.CandidateAssessmentData.Languages[0].LanguageName +
+                        ' and ' +
+                        data.CandidateAssessmentData.Languages[1].LanguageName +
+                        '<br />' +
+                        '<br/>';
+            }
+            else {
+                document.getElementById('tablecontent').innerHTML =
+                    '<br />' +
+                        '<b style="padding:10px"> Candidate Name : </b>' +
+                        data.CandidateAssessmentData.CandidateName +
+                        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+                        '<b style="padding:10px"> Registration Number : </b>' +
+                        data.CandidateAssessmentData.RegistrationId +
+                        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+                        '<b style="padding:10px"> Guardian Name : </b>' +
+                        data.CandidateAssessmentData.GuardianName +
+                        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+                        '<b style="padding:10px"> Assessment Batch :</b>' +
+                        data.CandidateAssessmentData.AssessmentBatchCode.toUpperCase() +
+                        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+                        '<b style="padding:10px"> SDMS Batch ID : </b>' +
+                        data.CandidateAssessmentData.SDMSBatchId.toUpperCase() +
+                        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+                        '<b style="padding:10px"> Project Name : </b>' +
+                        data.CandidateAssessmentData.ProjectName +
+                        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+                        '<b style="padding:10px"> Client Name : </b>' +
+                        data.CandidateAssessmentData.ClientName +
+                        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+                        '<b style="padding:10px"> Languages : </b>' +
+                        data.CandidateAssessmentData.Languages[0].LanguageName +
+                        '<br />' +
+                        '<br/>';
+            }
             if (data.CandidateAssessmentData.TheoryAssessment) {
                 document.getElementById('vid1').style.visibility = 'visible';
                 document.getElementById('btn1').style.visibility = 'visible';
@@ -60,7 +91,7 @@ var AssessmentDetailComponent = /** @class */ (function () {
                 document.getElementById('vid2').style.visibility = 'visible';
                 document.getElementById('btn2').style.visibility = 'visible';
             }
-            if (data.CandidateAssessmentData.VivaAssessment) {
+            if (data.CandidateAssessmentData.VivaMcqAssessment) {
                 document.getElementById('vid3').style.visibility = 'visible';
                 document.getElementById('btn3').style.visibility = 'visible';
             }
@@ -75,7 +106,7 @@ var AssessmentDetailComponent = /** @class */ (function () {
                 }
             }
             else {
-                if (parseInt(data.CandidateAssessmentData.VivaAssessment.AssessmentStatus) == 4) {
+                if (parseInt(data.CandidateAssessmentData.VivaMcqAssessment.AssessmentStatus) == 4) {
                     document.getElementById('btn3').className = 'btn btn-success';
                     document.getElementById('btn3').setAttribute('disabled', 'disabled');
                 }

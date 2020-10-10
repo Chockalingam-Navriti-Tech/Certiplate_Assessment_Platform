@@ -18,8 +18,7 @@ var TheoryInstructionsComponent = /** @class */ (function () {
         this.Id = localStorage.getItem('cand_id');
         var varCandidateAssessmentData = JSON.parse(localStorage.getItem(this.Req + '_' + this.Id + '_' + 'data'));
         $(function () {
-            if (varCandidateAssessmentData.CandidateAssessmentData.Languages[1]
-                .LanguageName) {
+            if (varCandidateAssessmentData.CandidateAssessmentData.Languages[1]) {
                 document.getElementById(varCandidateAssessmentData.CandidateAssessmentData.Languages[1]
                     .LanguageName).style.display = 'block';
             }

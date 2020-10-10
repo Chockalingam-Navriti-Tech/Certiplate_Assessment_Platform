@@ -81,6 +81,7 @@
                     <input
                       type="text"
                       id="username"
+                      (keyup.enter)="test()"
                       class="form-control"
                       formControlName="elegantFormEmailEx"
                       mdbInput
@@ -97,6 +98,7 @@
                     <input
                       type="password"
                       id="pwd"
+                      (keyup.enter)="test()"
                       formControlName="elegantFormPasswordEx"
                       class="form-control"
                       mdbInput
@@ -106,7 +108,7 @@
                   <div class="text-center mb-3 animated bounceIn">
                     <button
                       style="border-radius: 20px"
-                      type="button"
+                      type="button" 
                       mdbBtn
                       data-toggle="modal"
                       data-target="#basicExampleModal"

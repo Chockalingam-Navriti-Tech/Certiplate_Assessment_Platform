@@ -1,3 +1,4 @@
+import { VivaAssessmentComponent } from './viva-assessment/viva-assessment.component';
 import { SubmitResponseComponent } from './submit-response/submit-response.component';
 import { PracticalAssessmentComponent } from './practical-assessment/practical-assessment.component';
 import { FeedbackVivaComponent } from './feedback-viva/feedback-viva.component';
@@ -9,7 +10,6 @@ import { TheoryInstructionsComponent } from './theory-instructions/theory-instru
 import { PracticalInstructionsComponent } from './practical-instructions/practical-instructions.component';
 import { VivaInstructionsComponent } from './viva-instructions/viva-instructions.component';
 import { FeedbackTheoryComponent } from './feedback-theory/feedback-theory.component';
-
 import { GeneralInstructionsComponent } from './general-instructions/general-instructions.component';
 import { LoginComponent } from './login/login.component';
 import { AssessmentDetailComponent } from './assessment-detail/assessment-detail.component';
@@ -31,6 +31,7 @@ export const routes: Routes = [
   { path: 'feedback-practical', component: FeedbackPracticalComponent },
   { path: 'feedback-viva', component: FeedbackVivaComponent },
   { path: 'submit-response', component: SubmitResponseComponent },
+  { path: 'viva-assessment', component: VivaAssessmentComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
@@ -55,4 +56,5 @@ export const routingComponents = [
   FeedbackPracticalComponent,
   FeedbackVivaComponent,
   SubmitResponseComponent,
+  VivaAssessmentComponent,
 ];

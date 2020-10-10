@@ -14,6 +14,8 @@ var NavBarComponent = /** @class */ (function () {
         this.elem = document.documentElement;
     }
     NavBarComponent.prototype.ngOnInit = function () {
+        $('#full-screen').css('display', 'block');
+        $('#exit-full-screen').css('display', 'none');
     };
     NavBarComponent.prototype.clicked_fullscreen = function () {
         if (this.elem.requestFullscreen) {

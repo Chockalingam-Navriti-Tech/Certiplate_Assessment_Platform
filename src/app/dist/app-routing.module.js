@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 exports.__esModule = true;
 exports.routingComponents = exports.AppRoutingModule = exports.routes = void 0;
+var viva_assessment_component_1 = require("./viva-assessment/viva-assessment.component");
 var submit_response_component_1 = require("./submit-response/submit-response.component");
 var practical_assessment_component_1 = require("./practical-assessment/practical-assessment.component");
 var feedback_viva_component_1 = require("./feedback-viva/feedback-viva.component");
@@ -38,6 +39,7 @@ exports.routes = [
     { path: 'feedback-practical', component: feedback_practical_component_1.FeedbackPracticalComponent },
     { path: 'feedback-viva', component: feedback_viva_component_1.FeedbackVivaComponent },
     { path: 'submit-response', component: submit_response_component_1.SubmitResponseComponent },
+    { path: 'viva-assessment', component: viva_assessment_component_1.VivaAssessmentComponent },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -67,4 +69,5 @@ exports.routingComponents = [
     feedback_practical_component_1.FeedbackPracticalComponent,
     feedback_viva_component_1.FeedbackVivaComponent,
     submit_response_component_1.SubmitResponseComponent,
+    viva_assessment_component_1.VivaAssessmentComponent,
 ];

@@ -100,10 +100,7 @@ export class TheoryAssessmentComponent implements OnInit {
   ngOnInit(): void {
     varCandidateAssessmentData = this.data;
     $(function () {
-      if (
-        varCandidateAssessmentData.CandidateAssessmentData.Languages[1]
-          .LanguageName
-      ) {
+      if (varCandidateAssessmentData.CandidateAssessmentData.Languages[1]) {
         document.getElementById(
           varCandidateAssessmentData.CandidateAssessmentData.Languages[1]
             .LanguageName
@@ -161,7 +158,7 @@ export class TheoryAssessmentComponent implements OnInit {
         this.classifyImage();
       });*/
 
-    //document.addEventListener('contextmenu', (event) => event.preventDefault());
+    document.addEventListener('contextmenu', (event) => event.preventDefault());
     /*$(document).keydown(function (e) {
         e.preventDefault();
       });*/
@@ -243,7 +240,20 @@ export class TheoryAssessmentComponent implements OnInit {
       seconds +
       ' s' +
       '</b>';
+
     sec = 0;
+    /*if (
+      parseInt(
+        this.data.CandidateAssessmentData.TheoryAssessment.CurrentSectionIndex
+      ) == 0
+    )
+    else
+      sec = parseInt(
+        this.data.CandidateAssessmentData.TheoryAssessment.CurrentSectionIndex
+      );
+    if (localStorage.getItem('current_question_no'))
+      count = parseInt(localStorage.getItem('current_question_no'));
+    else*/
     count = 1;
 
     let data = this.data;
@@ -254,7 +264,7 @@ export class TheoryAssessmentComponent implements OnInit {
         $(document).keydown(function (e) {
           key = e.key;
         });
-        Event_log('ASSESSMENT_VIOLATION', data, sec, index, key);
+        Event_log('TAB_SWITCH', data, sec, index, key);
         if (document.hidden) {
           $('#popup').css({
             opacity: 1,
@@ -300,6 +310,40 @@ export class TheoryAssessmentComponent implements OnInit {
             }
           });
         }
+        html2canvas(document.body).then(function (canvas: any) {
+          var ScreenshotImage = {
+            Filename: '',
+            TimeStamp: '',
+            Latitude: '',
+            Longitude: '',
+          };
+          ScreenshotImage.Filename =
+            'REG' +
+            varCandidateAssessmentData.CandidateAssessmentData.RegistrationId +
+            '_TheoryViolation_' +
+            moment().format('YYYYMMDDhhmmss') +
+            '.jpeg';
+          ScreenshotImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
+          ScreenshotImage.Latitude = lat as string;
+          ScreenshotImage.Longitude = long as string;
+          ImageArrayObj = {
+            FileName: '',
+            Image_Data: '',
+          };
+          ImageArrayObj.FileName =
+            'REG' +
+            varCandidateAssessmentData.CandidateAssessmentData.RegistrationId +
+            '_TheoryViolation_' +
+            moment().format('YYYYMMDDhhmmss') +
+            '.jpeg';
+          ImageArrayObj.Image_Data = canvas.toDataURL('image/jpeg');
+          //ImageArrayContent.ImageArray.push(ImageArrayObj);
+          //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
+          varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.ScreenshotImages.push(
+            ScreenshotImage
+          );
+          Uploadfiles(ImageArrayObj);
+        });
       })
     );
 
@@ -310,8 +354,47 @@ export class TheoryAssessmentComponent implements OnInit {
         $(document).keydown(function (e) {
           key = e.key;
         });
-        Event_log('ASSESSMENT_VIOLATION', data, sec, index, key);
+
+        Event_log('EXIT_FULLSCREEN', data, sec, index, key);
         if (fullscreen % 2 != 0) {
+          html2canvas(document.body).then(function (canvas: any) {
+            var ScreenshotImage = {
+              Filename: '',
+              TimeStamp: '',
+              Latitude: '',
+              Longitude: '',
+            };
+            ScreenshotImage.Filename =
+              'REG' +
+              varCandidateAssessmentData.CandidateAssessmentData
+                .RegistrationId +
+              '_TheoryViolation_' +
+              moment().format('YYYYMMDDhhmmss') +
+              '.jpeg';
+            ScreenshotImage.TimeStamp = moment().format(
+              'DD-MMM-YYYY h:mm:ss a'
+            );
+            ScreenshotImage.Latitude = lat as string;
+            ScreenshotImage.Longitude = long as string;
+            ImageArrayObj = {
+              FileName: '',
+              Image_Data: '',
+            };
+            ImageArrayObj.FileName =
+              'REG' +
+              varCandidateAssessmentData.CandidateAssessmentData
+                .RegistrationId +
+              '_TheoryViolation_' +
+              moment().format('YYYYMMDDhhmmss') +
+              '.jpeg';
+            ImageArrayObj.Image_Data = canvas.toDataURL('image/jpeg');
+            //ImageArrayContent.ImageArray.push(ImageArrayObj);
+            //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
+            varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.ScreenshotImages.push(
+              ScreenshotImage
+            );
+            Uploadfiles(ImageArrayObj);
+          });
           $('#popup').css({
             opacity: 1,
           });
@@ -529,7 +612,21 @@ export class TheoryAssessmentComponent implements OnInit {
     var ImageArrayContent = JSON.parse(localStorage.getItem('Image_Array'));
     var data = this.data;
     index = 0;
+    /*if (
+      parseInt(
+        data.CandidateAssessmentData.TheoryAssessment.CurrentQuestionIndex
+      ) == 0
+    )  
+    else
+      index = parseInt(
+        data.CandidateAssessmentData.TheoryAssessment.CurrentQuestionIndex
+      );*/
     $(document).ready(function () {
+      /*data.CandidateAssessmentData.TheoryAssessment.CurrentSectionIndex = sec;
+      data.CandidateAssessmentData.TheoryAssessment.CurrentQuestionIndex = index;
+      localStorage.setItem('current_question_no', JSON.stringify(count));
+      if (localStorage.getItem('current_question_no'))
+        count = parseInt(localStorage.getItem('current_question_no'));*/
       document.getElementById('question').innerHTML =
         count +
         '. ' +
@@ -685,7 +782,6 @@ export class TheoryAssessmentComponent implements OnInit {
               '</font>';
           }
         } else if (id > 0) {
-          console.log('hi');
           option = $('option:selected').attr('id');
           if (option == 'Hindi') id = 1;
           else if (option == 'English') id = 0;
@@ -903,6 +999,9 @@ export class TheoryAssessmentComponent implements OnInit {
         key
       );
       $('#previous').removeAttr('disabled');
+      /*data.CandidateAssessmentData.TheoryAssessment.CurrentSectionIndex = sec;
+      data.CandidateAssessmentData.TheoryAssessment.CurrentQuestionIndex = index;
+      localStorage.setItem('current_question_no', JSON.stringify(count));*/
       if (id > 0) {
         document.getElementById('question').innerHTML =
           count +
@@ -1141,6 +1240,9 @@ export class TheoryAssessmentComponent implements OnInit {
         index,
         key
       );
+      /*data.CandidateAssessmentData.TheoryAssessment.CurrentSectionIndex = sec;
+      data.CandidateAssessmentData.TheoryAssessment.CurrentQuestionIndex = index;
+      localStorage.setItem('current_question_no', JSON.stringify(count));*/
       if (
         data.CandidateAssessmentData.TheoryAssessment.Sections[sec].Questions[
           index
@@ -1345,6 +1447,9 @@ export class TheoryAssessmentComponent implements OnInit {
 
   clicked(section: any, ind: any, question: any) {
     $(function () {
+      /*varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.CurrentSectionIndex = section;
+      varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.CurrentQuestionIndex = index;
+      localStorage.setItem('current_question_no', JSON.stringify(question));*/
       var sections = section + '_' + ind;
       if (document.getElementById(sections).className == 'btn btn-warning px-3')
         $('#checkbox').prop('checked', true);
@@ -1569,7 +1674,8 @@ export class TheoryAssessmentComponent implements OnInit {
   }*/
 
   timeup(event: any) {
-    varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.RemainingDurationSeconds = event.left as number / 1000;
+    varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.RemainingDurationSeconds =
+      (event.left as number) / 1000;
     localStorage.setItem(
       localStorage.getItem('req_id') +
         '_' +
@@ -1700,6 +1806,17 @@ export class TheoryAssessmentComponent implements OnInit {
       clearInterval(id3);
     }
     localstream.getTracks()[0].stop();
+    this.data.CandidateAssessmentData.TheoryAssessment.CurrentSectionIndex = sec;
+    this.data.CandidateAssessmentData.TheoryAssessment.CurrentQuestionIndex = index;
+    /*console.log(sec, index);
+    localStorage.setItem(
+      localStorage.getItem('req_id') +
+        '_' +
+        localStorage.getItem('cand_id') +
+        '_' +
+        'data',
+      JSON.stringify(this.data)
+    );*/
     document.removeEventListener('fullscreenchange', this.full_screen);
     document.removeEventListener('visibilitychange', this.visibility);
   }
@@ -1733,6 +1850,7 @@ function Event_log(
       ].CandidateActualResponseOption
     ),
     KeyboardKey: key,
+    Description: '',
     Latitude: lat,
     Longitude: long,
   };
@@ -1779,8 +1897,13 @@ function Event_log(
     case 'KEYBOARD_KEY_PRESSED':
       Assessment_event.SubTypeId = 23;
       break;
-    case 'ASSESSMENT_VIOLATION':
+    case 'EXIT_FULLSCREEN':
       Assessment_event.SubTypeId = 25;
+      Assessment_event.Description = 'Candidate attempted to exit full screen';
+      break;
+    case 'TAB_SWITCH':
+      Assessment_event.SubTypeId = 25;
+      Assessment_event.Description = 'Candidate attempted to switch tabs';
       break;
   }
   data.CandidateAssessmentData.TheoryAssessment.AssessmentEvents.push(
@@ -1792,6 +1915,6 @@ function Event_log(
     localStorage.getItem('cand_id') +
     '_' +
     'data';
-  if (typeof data == 'string') localStorage.setItem(file, data);
+  if (typeof data == 'string') localStorage.setItem(file, JSON.stringify(data));
   else localStorage.setItem(file, JSON.stringify(data));
 }

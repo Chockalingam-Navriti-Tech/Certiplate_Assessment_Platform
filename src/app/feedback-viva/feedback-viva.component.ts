@@ -17,7 +17,7 @@ export class FeedbackVivaComponent implements OnInit {
     var data = this.data;
     $(document).ready(function () {
       $.each(
-        data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper
+        data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper
           .Questions,
         function (index: number, value) {
           var id = (index + 1).toString();
@@ -25,20 +25,20 @@ export class FeedbackVivaComponent implements OnInit {
             index +
             1 +
             '. ' +
-            data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper
+            data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper
               .Questions[index].QuestionText +
             '<br/>';
           if (
-            data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper
+            data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper
               .Questions[index].Options
           ) {
             $.each(
-              data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper
+              data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper
                 .Questions[index].Options,
               function (indices: number, value) {
                 var opt_id = 'opt' + index + '_' + (indices + 1);
                 document.getElementById(opt_id).innerHTML =
-                  data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper.Questions[
+                  data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper.Questions[
                     index
                   ].Options[indices].OptionText;
               }
@@ -50,8 +50,8 @@ export class FeedbackVivaComponent implements OnInit {
       var arr: string[];
       arr = [];
       $('input[name=groupOfDefaultRadios1]').change(function () {
-        data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper.Questions[1].Response =
-          data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper
+        data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper.Questions[1].Response =
+          data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper
             .Questions[1].QuestionId +
           '=>' +
           $(this).val();
@@ -60,8 +60,8 @@ export class FeedbackVivaComponent implements OnInit {
           if (
             (document.getElementById('text') as HTMLInputElement).value != ''
           ) {
-            data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper.Questions[0].Response =
-              data.CandidateAssessmentData.VivaAssessment
+            data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper.Questions[0].Response =
+              data.CandidateAssessmentData.VivaMcqAssessment
                 .FeedbackQuestionPaper.Questions[0].QuestionId +
               '=>' +
               (document.getElementById('text') as HTMLInputElement).value;
@@ -70,8 +70,8 @@ export class FeedbackVivaComponent implements OnInit {
         }
       });
       $('select[name=groupOfDefaultRadios2]').change(function () {
-        data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper.Questions[2].Response =
-          data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper
+        data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper.Questions[2].Response =
+          data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper
             .Questions[2].QuestionId +
           '=>' +
           $(this).val();
@@ -80,8 +80,8 @@ export class FeedbackVivaComponent implements OnInit {
           if (
             (document.getElementById('text') as HTMLInputElement).value != ''
           ) {
-            data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper.Questions[0].Response =
-              data.CandidateAssessmentData.VivaAssessment
+            data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper.Questions[0].Response =
+              data.CandidateAssessmentData.VivaMcqAssessment
                 .FeedbackQuestionPaper.Questions[0].QuestionId +
               '=>' +
               (document.getElementById('text') as HTMLInputElement).value;
@@ -91,8 +91,8 @@ export class FeedbackVivaComponent implements OnInit {
       });
       $('input[name=groupOfDefaultRadios3]').change(function () {
         arr.push($(this).val() as string);
-        data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper.Questions[3].Response =
-          data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper
+        data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper.Questions[3].Response =
+          data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper
             .Questions[3].QuestionId +
           '=>' +
           arr;
@@ -101,8 +101,8 @@ export class FeedbackVivaComponent implements OnInit {
           if (
             (document.getElementById('text') as HTMLInputElement).value != ''
           ) {
-            data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper.Questions[0].Response =
-              data.CandidateAssessmentData.VivaAssessment
+            data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper.Questions[0].Response =
+              data.CandidateAssessmentData.VivaMcqAssessment
                 .FeedbackQuestionPaper.Questions[0].QuestionId +
               '=>' +
               (document.getElementById('text') as HTMLInputElement).value;
@@ -111,8 +111,8 @@ export class FeedbackVivaComponent implements OnInit {
         }
       });
       $('select[name=groupOfDefaultRadios4]').change(function () {
-        data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper.Questions[4].Response =
-          data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper
+        data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper.Questions[4].Response =
+          data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper
             .Questions[4].QuestionId +
           '=>' +
           $(this).val();
@@ -121,8 +121,8 @@ export class FeedbackVivaComponent implements OnInit {
           if (
             (document.getElementById('text') as HTMLInputElement).value != ''
           ) {
-            data.CandidateAssessmentData.VivaAssessment.FeedbackQuestionPaper.Questions[0].Response =
-              data.CandidateAssessmentData.VivaAssessment
+            data.CandidateAssessmentData.VivaMcqAssessment.FeedbackQuestionPaper.Questions[0].Response =
+              data.CandidateAssessmentData.VivaMcqAssessment
                 .FeedbackQuestionPaper.Questions[0].QuestionId +
               '=>' +
               (document.getElementById('text') as HTMLInputElement).value;
@@ -134,7 +134,7 @@ export class FeedbackVivaComponent implements OnInit {
     this.data = data;
   }
   clicked() {
-    this.data.CandidateAssessmentData.VivaAssessment.AssessmentStatus = 3;
+    this.data.CandidateAssessmentData.VivaMcqAssessment.AssessmentStatus = 3;
     localStorage.setItem('Response_data', JSON.stringify(this.data));
     this.route.navigate(['submit-response']);
   }
