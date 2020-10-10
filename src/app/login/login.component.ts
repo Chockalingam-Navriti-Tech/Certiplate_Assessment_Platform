@@ -389,7 +389,7 @@ export class LoginComponent implements OnInit {
           } else {
             document.getElementById('warning').innerHTML =
               '<b><h2>' +
-              'No assessment has been scheduled for you today! Please contact the system administrator for assistance' +
+              'No assessment has been scheduled for you today! Please contact the system administrator for assistance.' +
               '</h2></b>';
             $('#login').css('display', 'block');
             $('#log-in').css('display', 'none');
