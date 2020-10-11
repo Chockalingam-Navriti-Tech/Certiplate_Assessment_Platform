@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
-import { Router } from '@angular/router';
-import { encode } from 'punycode';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { environment } from 'src/environments/environment';
-import * as moment from 'moment';
+import { Component, OnInit } from "@angular/core";
+import * as $ from "jquery";
+import { Router } from "@angular/router";
+import { encode } from "punycode";
+import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
+import { environment } from "src/environments/environment";
+import * as moment from "moment";
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"],
 })
 export class LoginComponent implements OnInit {
   username: HTMLInputElement;
@@ -16,18 +16,19 @@ export class LoginComponent implements OnInit {
 
   constructor(private route: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   test() {
-    $('#login').css('display', 'none');
-    $('#log-in').css('display', 'block');
-    this.username = document.getElementById('username') as HTMLInputElement;
-    this.password = document.getElementById('pwd') as HTMLInputElement;
-    if (this.username.value == '' || this.password.value == '') {
-      document.getElementById('warning').innerHTML =
-        '<b> <h2>' + 'Login Id and password field are required' + '</h2></b>';
-      $('#login').css('display', 'block');
-      $('#log-in').css('display', 'none');
+    $("#login").css("display", "none");
+    $("#log-in").css("display", "block");
+    this.username = document.getElementById("username") as HTMLInputElement;
+    this.password = document.getElementById("pwd") as HTMLInputElement;
+    if (this.username.value == "" || this.password.value == "") {
+      document.getElementById("warning").innerHTML =
+        "<b> <h2>" + "Login Id and password field are required" + "</h2></b>";
+      $("#login").css("display", "block");
+      $("#log-in").css("display", "none");
     } else if (this.username && this.password) {
       localStorage.setItem(this.username.value, this.password.value);
       this.login();
@@ -36,8 +37,8 @@ export class LoginComponent implements OnInit {
   login() {
     $.ajax({
       url: environment.URL_authentication,
-      type: 'POST',
-      dataType: 'json',
+      type: "POST",
+      dataType: "json",
       data: {
         apiKey: environment.api_key,
         RegistrationId: this.username.value,
@@ -47,20 +48,20 @@ export class LoginComponent implements OnInit {
         var json = JSON.parse(JSON.stringify(data));
         localStorage.setItem(
           json.CandidateAssessmentAuthentication.AssessmentRequestId +
-            '_' +
+            "_" +
             json.CandidateAssessmentAuthentication.CandidateId,
           JSON.stringify(data)
         );
-        if (json.CandidateAssessmentAuthentication.Message == 'SUCCESS') {
-          let output = moment().format('DD-MMM-YYYY');
-          output = ('09' + '-' + 'Oct' + '-' + 2020) as string;
+        if (json.CandidateAssessmentAuthentication.Message == "SUCCESS") {
+          let output = moment().format("DD-MMM-YYYY");
+          output = ("09" + "-" + "Oct" + "-" + 2020) as string;
           if (
             output == json.CandidateAssessmentAuthentication.ScheduledStartDate
           ) {
             $.ajax({
               url: environment.URL_datarequest,
-              type: 'POST',
-              dataType: 'json',
+              type: "POST",
+              dataType: "json",
               data: {
                 apiKey: environment.api_key,
                 RegistrationId: this.username.value,
@@ -68,293 +69,293 @@ export class LoginComponent implements OnInit {
               },
               success: (data) => {
                 if (
-                  localStorage.getItem('req_id') &&
-                  localStorage.getItem('cand_id')
+                  localStorage.getItem("req_id") &&
+                  localStorage.getItem("cand_id")
                 ) {
-                  var req = localStorage.getItem('req_id');
-                  var cand = localStorage.getItem('cand_id');
-                  if (localStorage.getItem(req + '_' + cand + '_data')) {
+                  var req = localStorage.getItem("req_id");
+                  var cand = localStorage.getItem("cand_id");
+                  if (localStorage.getItem(req + "_" + cand + "_data")) {
                     var data = JSON.parse(
-                      localStorage.getItem(req + '_' + cand + '_data')
+                      localStorage.getItem(req + "_" + cand + "_data")
                     );
-                    if (localStorage.getItem('Response_data')) {
-                      data = JSON.parse(localStorage.getItem('Response_data'));
+                    if (localStorage.getItem("Response_data")) {
+                      data = JSON.parse(localStorage.getItem("Response_data"));
                     }
-                    if (localStorage.getItem('assessment') == 'theory') {
+                    if (localStorage.getItem("assessment") == "theory") {
                       if (data.CandidateAssessmentData.PracticalAssessment) {
                         if (
                           data.CandidateAssessmentData.TheoryAssessment
-                            .StartImage.FileName == '' ||
+                            .StartImage.FileName == "" ||
                           data.CandidateAssessmentData.TheoryAssessment
-                            .IdentityImage.FileName == ''
+                            .IdentityImage.FileName == ""
                         )
-                          this.route.navigate(['image-capture']);
+                          this.route.navigate(["image-capture"]);
                         else if (
                           data.CandidateAssessmentData.TheoryAssessment
-                            .StartImage.FileName != '' &&
+                            .StartImage.FileName != "" &&
                           data.CandidateAssessmentData.TheoryAssessment
-                            .IdentityImage.FileName != '' &&
+                            .IdentityImage.FileName != "" &&
                           data.CandidateAssessmentData.TheoryAssessment
-                            .AssessmentStatus == '0'
+                            .AssessmentStatus == "0"
                         ) {
-                          this.route.navigate(['theory-instructions']);
+                          this.route.navigate(["theory-instructions"]);
                         } else if (
                           data.CandidateAssessmentData.TheoryAssessment
-                            .AssessmentStatus == '1'
+                            .AssessmentStatus == "1"
                         ) {
                           let element = document.documentElement;
                           if (element.requestFullscreen)
                             element.requestFullscreen();
-                          this.route.navigate(['theory-assessment']);
+                          this.route.navigate(["theory-assessment"]);
                         } else if (
                           data.CandidateAssessmentData.TheoryAssessment
-                            .AssessmentStatus == '2' &&
+                            .AssessmentStatus == "2" &&
                           data.CandidateAssessmentData.TheoryAssessment.EndImage
-                            .FileName == ''
+                            .FileName == ""
                         )
-                          this.route.navigate(['end-image-capture']);
+                          this.route.navigate(["end-image-capture"]);
                         else if (
                           data.CandidateAssessmentData.TheoryAssessment.EndImage
-                            .FileName != '' &&
+                            .FileName != "" &&
                           data.CandidateAssessmentData.TheoryAssessment
-                            .AssessmentStatus == '2'
+                            .AssessmentStatus == "2"
                         )
-                          this.route.navigate(['feedback-theory']);
+                          this.route.navigate(["feedback-theory"]);
                         else if (
                           data.CandidateAssessmentData.TheoryAssessment
-                            .AssessmentStatus == '3'
+                            .AssessmentStatus == "3"
                         )
-                          this.route.navigate(['submit-response']);
+                          this.route.navigate(["submit-response"]);
                         else if (
                           data.CandidateAssessmentData.TheoryAssessment
-                            .AssessmentStatus == '4' &&
+                            .AssessmentStatus == "4" &&
                           data.CandidateAssessmentData.PracticalAssessment
-                            .AssessmentStatus != '4'
+                            .AssessmentStatus != "4"
                         )
-                          this.route.navigate(['assessment-details']);
+                          this.route.navigate(["assessment-details"]);
                         else if (
                           data.CandidateAssessmentData.TheoryAssessment
-                            .AssessmentStatus == '4' &&
+                            .AssessmentStatus == "4" &&
                           data.CandidateAssessmentData.PracticalAssessment
-                            .AssessmentStatus == '4'
+                            .AssessmentStatus == "4"
                         ) {
                           document.getElementById(
-                            'warning'
-                          ).style.backgroundColor = 'lawngreen';
-                          document.getElementById('warning').innerHTML =
-                            '<b> <h2>' +
-                            'You have completed the assessment' +
-                            '</h2></b>';
-                          $('#login').css('display', 'block');
-                          $('#log-in').css('display', 'none');
+                            "warning"
+                          ).style.backgroundColor = "lawngreen";
+                          document.getElementById("warning").innerHTML =
+                            "<b> <h2>" +
+                            "You have completed the assessment" +
+                            "</h2></b>";
+                          $("#login").css("display", "block");
+                          $("#log-in").css("display", "none");
                         }
                       } else if (
                         data.CandidateAssessmentData.VivaMcqAssessment
                       ) {
                         if (
                           data.CandidateAssessmentData.TheoryAssessment
-                            .StartImage.FileName == '' ||
+                            .StartImage.FileName == "" ||
                           data.CandidateAssessmentData.TheoryAssessment
-                            .IdentityImage.FileName == ''
+                            .IdentityImage.FileName == ""
                         )
-                          this.route.navigate(['image-capture']);
+                          this.route.navigate(["image-capture"]);
                         else if (
                           data.CandidateAssessmentData.TheoryAssessment
-                            .StartImage.FileName != '' &&
+                            .StartImage.FileName != "" &&
                           data.CandidateAssessmentData.TheoryAssessment
-                            .IdentityImage.FileName != '' &&
+                            .IdentityImage.FileName != "" &&
                           data.CandidateAssessmentData.TheoryAssessment
-                            .AssessmentStatus == '0'
+                            .AssessmentStatus == "0"
                         ) {
-                          this.route.navigate(['theory-instructions']);
+                          this.route.navigate(["theory-instructions"]);
                         } else if (
                           data.CandidateAssessmentData.TheoryAssessment
-                            .AssessmentStatus == '1'
+                            .AssessmentStatus == "1"
                         ) {
                           let element = document.documentElement;
                           if (element.requestFullscreen)
                             element.requestFullscreen();
-                          this.route.navigate(['theory-assessment']);
+                          this.route.navigate(["theory-assessment"]);
                         } else if (
                           data.CandidateAssessmentData.TheoryAssessment
-                            .AssessmentStatus == '2' &&
+                            .AssessmentStatus == "2" &&
                           data.CandidateAssessmentData.TheoryAssessment.EndImage
-                            .FileName == ''
+                            .FileName == ""
                         )
-                          this.route.navigate(['end-image-capture']);
+                          this.route.navigate(["end-image-capture"]);
                         else if (
                           data.CandidateAssessmentData.TheoryAssessment.EndImage
-                            .FileName != '' &&
+                            .FileName != "" &&
                           data.CandidateAssessmentData.TheoryAssessment
-                            .AssessmentStatus == '2'
+                            .AssessmentStatus == "2"
                         )
-                          this.route.navigate(['feedback-theory']);
+                          this.route.navigate(["feedback-theory"]);
                         else if (
                           data.CandidateAssessmentData.TheoryAssessment
-                            .AssessmentStatus == '3'
+                            .AssessmentStatus == "3"
                         )
-                          this.route.navigate(['submit-response']);
+                          this.route.navigate(["submit-response"]);
                         else if (
                           data.CandidateAssessmentData.TheoryAssessment
-                            .AssessmentStatus == '4' &&
+                            .AssessmentStatus == "4" &&
                           data.CandidateAssessmentData.VivaMcqAssessment
-                            .AssessmentStatus != '4'
+                            .AssessmentStatus != "4"
                         )
-                          this.route.navigate(['assessment-details']);
+                          this.route.navigate(["assessment-details"]);
                         else if (
                           data.CandidateAssessmentData.TheoryAssessment
-                            .AssessmentStatus == '4' &&
+                            .AssessmentStatus == "4" &&
                           data.CandidateAssessmentData.VivaMcqAssessment
-                            .AssessmentStatus == '4'
+                            .AssessmentStatus == "4"
                         ) {
                           document.getElementById(
-                            'warning'
-                          ).style.backgroundColor = 'lawngreen';
-                          document.getElementById('warning').innerHTML =
-                            '<b> <h2>' +
-                            'You have completed the assessment' +
-                            '</h2></b>';
-                          $('#login').css('display', 'block');
-                          $('#log-in').css('display', 'none');
+                            "warning"
+                          ).style.backgroundColor = "lawngreen";
+                          document.getElementById("warning").innerHTML =
+                            "<b> <h2>" +
+                            "You have completed the assessment" +
+                            "</h2></b>";
+                          $("#login").css("display", "block");
+                          $("#log-in").css("display", "none");
                         }
                       }
                     } else if (
-                      localStorage.getItem('assessment') == 'practical'
+                      localStorage.getItem("assessment") == "practical"
                     ) {
                       if (
                         data.CandidateAssessmentData.PracticalAssessment
-                          .StartImage.FileName == '' ||
+                          .StartImage.FileName == "" ||
                         data.CandidateAssessmentData.PracticalAssessment
-                          .IdentityImage.FileName == ''
+                          .IdentityImage.FileName == ""
                       )
-                        this.route.navigate(['image-capture']);
+                        this.route.navigate(["image-capture"]);
                       else if (
                         data.CandidateAssessmentData.PracticalAssessment
-                          .StartImage.FileName != '' &&
+                          .StartImage.FileName != "" &&
                         data.CandidateAssessmentData.PracticalAssessment
-                          .IdentityImage.FileName != '' &&
+                          .IdentityImage.FileName != "" &&
                         data.CandidateAssessmentData.PracticalAssessment
-                          .AssessmentStatus == '0'
+                          .AssessmentStatus == "0"
                       ) {
-                        this.route.navigate(['practical-instructions']);
+                        this.route.navigate(["practical-instructions"]);
                       } else if (
                         data.CandidateAssessmentData.PracticalAssessment
-                          .AssessmentStatus == '1'
+                          .AssessmentStatus == "1"
                       ) {
                         let element = document.documentElement;
                         if (element.requestFullscreen)
                           element.requestFullscreen();
-                        this.route.navigate(['practical-assessment']);
+                        this.route.navigate(["practical-assessment"]);
                       } else if (
                         data.CandidateAssessmentData.PracticalAssessment
-                          .AssessmentStatus == '2' &&
+                          .AssessmentStatus == "2" &&
                         data.CandidateAssessmentData.PracticalAssessment
-                          .EndImage.FileName == ''
+                          .EndImage.FileName == ""
                       )
-                        this.route.navigate(['end-image-capture']);
+                        this.route.navigate(["end-image-capture"]);
                       else if (
                         data.CandidateAssessmentData.PracticalAssessment
-                          .EndImage.FileName != '' &&
+                          .EndImage.FileName != "" &&
                         data.CandidateAssessmentData.PracticalAssessment
-                          .AssessmentStatus == '2'
+                          .AssessmentStatus == "2"
                       )
-                        this.route.navigate(['feedback-practical']);
+                        this.route.navigate(["feedback-practical"]);
                       else if (
                         data.CandidateAssessmentData.PracticalAssessment
-                          .AssessmentStatus == '3'
+                          .AssessmentStatus == "3"
                       )
-                        this.route.navigate(['submit-response']);
-                      else if (
-                        data.CandidateAssessmentData.TheoryAssessment
-                          .AssessmentStatus != '4' &&
-                        data.CandidateAssessmentData.PracticalAssessment
-                          .AssessmentStatus == '4'
-                      )
-                        this.route.navigate(['assessment-details']);
+                        this.route.navigate(["submit-response"]);
                       else if (
                         data.CandidateAssessmentData.TheoryAssessment
-                          .AssessmentStatus == '4' &&
+                          .AssessmentStatus != "4" &&
                         data.CandidateAssessmentData.PracticalAssessment
-                          .AssessmentStatus == '4'
+                          .AssessmentStatus == "4"
+                      )
+                        this.route.navigate(["assessment-details"]);
+                      else if (
+                        data.CandidateAssessmentData.TheoryAssessment
+                          .AssessmentStatus == "4" &&
+                        data.CandidateAssessmentData.PracticalAssessment
+                          .AssessmentStatus == "4"
                       ) {
                         document.getElementById(
-                          'warning'
-                        ).style.backgroundColor = 'lawngreen';
-                        document.getElementById('warning').innerHTML =
-                          '<b> <h2>' +
-                          'You have completed the assessment' +
-                          '</h2></b>';
-                        $('#login').css('display', 'block');
-                        $('#log-in').css('display', 'none');
+                          "warning"
+                        ).style.backgroundColor = "lawngreen";
+                        document.getElementById("warning").innerHTML =
+                          "<b> <h2>" +
+                          "You have completed the assessment" +
+                          "</h2></b>";
+                        $("#login").css("display", "block");
+                        $("#log-in").css("display", "none");
                       }
-                    } else if (localStorage.getItem('assessment') == 'viva') {
+                    } else if (localStorage.getItem("assessment") == "viva") {
                       if (
                         data.CandidateAssessmentData.VivaMcqAssessment
-                          .StartImage.FileName == '' ||
+                          .StartImage.FileName == "" ||
                         data.CandidateAssessmentData.VivaMcqAssessment
-                          .IdentityImage.FileName == ''
+                          .IdentityImage.FileName == ""
                       )
-                        this.route.navigate(['image-capture']);
+                        this.route.navigate(["image-capture"]);
                       else if (
                         data.CandidateAssessmentData.VivaMcqAssessment
-                          .StartImage.FileName != '' &&
+                          .StartImage.FileName != "" &&
                         data.CandidateAssessmentData.VivaMcqAssessment
-                          .IdentityImage.FileName != '' &&
+                          .IdentityImage.FileName != "" &&
                         data.CandidateAssessmentData.VivaMcqAssessment
-                          .AssessmentStatus == '0'
+                          .AssessmentStatus == "0"
                       ) {
-                        this.route.navigate(['viva-instructions']);
+                        this.route.navigate(["viva-instructions"]);
                       } else if (
                         data.CandidateAssessmentData.VivaMcqAssessment
-                          .AssessmentStatus == '1'
+                          .AssessmentStatus == "1"
                       ) {
                         let element = document.documentElement;
                         if (element.requestFullscreen)
                           element.requestFullscreen();
-                        this.route.navigate(['viva-assessment']);
+                        this.route.navigate(["viva-assessment"]);
                       } else if (
                         data.CandidateAssessmentData.VivaMcqAssessment
-                          .AssessmentStatus == '2' &&
+                          .AssessmentStatus == "2" &&
                         data.CandidateAssessmentData.VivaMcqAssessment.EndImage
-                          .FileName == ''
+                          .FileName == ""
                       )
-                        this.route.navigate(['end-image-capture']);
+                        this.route.navigate(["end-image-capture"]);
                       else if (
                         data.CandidateAssessmentData.VivaMcqAssessment.EndImage
-                          .FileName != '' &&
+                          .FileName != "" &&
                         data.CandidateAssessmentData.VivaMcqAssessment
-                          .AssessmentStatus == '2'
+                          .AssessmentStatus == "2"
                       )
-                        this.route.navigate(['feedback-viva']);
+                        this.route.navigate(["feedback-viva"]);
                       else if (
                         data.CandidateAssessmentData.VivaMcqAssessment
-                          .AssessmentStatus == '3'
+                          .AssessmentStatus == "3"
                       )
-                        this.route.navigate(['submit-response']);
+                        this.route.navigate(["submit-response"]);
                       else if (
                         data.CandidateAssessmentData.VivaMcqAssessment
-                          .AssessmentStatus == '4' &&
+                          .AssessmentStatus == "4" &&
                         data.CandidateAssessmentData.TheoryAssessment
-                          .AssessmentStatus != '4'
+                          .AssessmentStatus != "4"
                       )
-                        this.route.navigate(['assessment-details']);
+                        this.route.navigate(["assessment-details"]);
                       else if (
                         data.CandidateAssessmentData.VivaMcqAssessment
-                          .AssessmentStatus == '4' &&
+                          .AssessmentStatus == "4" &&
                         data.CandidateAssessmentData.TheoryAssessment
-                          .AssessmentStatus == '4'
+                          .AssessmentStatus == "4"
                       ) {
                         document.getElementById(
-                          'warning'
-                        ).style.backgroundColor = 'lawngreen';
-                        document.getElementById('warning').innerHTML =
-                          '<b> <h2>' +
-                          'You have completed the assessment' +
-                          '</h2></b>';
-                        $('#login').css('display', 'block');
-                        $('#log-in').css('display', 'none');
+                          "warning"
+                        ).style.backgroundColor = "lawngreen";
+                        document.getElementById("warning").innerHTML =
+                          "<b> <h2>" +
+                          "You have completed the assessment" +
+                          "</h2></b>";
+                        $("#login").css("display", "block");
+                        $("#log-in").css("display", "none");
                       }
-                    } else this.route.navigate(['assessment-details']);
+                    } else this.route.navigate(["general-instructions"]);
                   }
                 } else {
                   var datas = JSON.parse(JSON.stringify(data));
@@ -364,49 +365,49 @@ export class LoginComponent implements OnInit {
                   else
                     datas.CandidateAssessmentData.VivaMcqAssessment.AssessmentStatus = 0;
                   localStorage.setItem(
-                    'req_id',
+                    "req_id",
                     datas.CandidateAssessmentData.AssessmentRequestId
                   );
                   localStorage.setItem(
-                    'cand_id',
+                    "cand_id",
                     datas.CandidateAssessmentData.CandidateId
                   );
                   localStorage.setItem(
                     datas.CandidateAssessmentData.AssessmentRequestId +
-                      '_' +
+                      "_" +
                       datas.CandidateAssessmentData.CandidateId +
-                      '_' +
-                      'data',
+                      "_" +
+                      "data",
                     JSON.stringify(datas)
                   );
-                  this.route.navigate(['general-instructions']);
+                  this.route.navigate(["general-instructions"]);
                 }
               },
               error: function (err) {
-                console.log('error:' + err);
+                console.log("error:" + err);
               },
             });
           } else {
-            document.getElementById('warning').innerHTML =
-              '<b><h2>' +
-              'No assessment has been scheduled for you today! Please contact the system administrator for assistance.' +
-              '</h2></b>';
-            $('#login').css('display', 'block');
-            $('#log-in').css('display', 'none');
+            document.getElementById("warning").innerHTML =
+              "<b><h2>" +
+              "No assessment has been scheduled for you today! Please contact the system administrator for assistance." +
+              "</h2></b>";
+            $("#login").css("display", "block");
+            $("#log-in").css("display", "none");
           }
         } else {
-          document.getElementById('warning').innerHTML =
-            '<b><h2>' +
+          document.getElementById("warning").innerHTML =
+            "<b><h2>" +
             json.CandidateAssessmentAuthentication.Message +
-            '</h2></b>';
-          $('#login').css('display', 'block');
-          $('#log-in').css('display', 'none');
+            "</h2></b>";
+          $("#login").css("display", "block");
+          $("#log-in").css("display", "none");
         }
       },
       error: function (err) {
-        console.log('error:' + err);
-        $('#login').css('display', 'block');
-        $('#log-in').css('display', 'none');
+        console.log("error:" + err);
+        $("#login").css("display", "block");
+        $("#log-in").css("display", "none");
       },
     });
   }
