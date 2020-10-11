@@ -162,12 +162,12 @@ export class TheoryAssessmentComponent implements OnInit {
       "contextmenu",
       (id4 = (event: any) => event.preventDefault())
     );
-    
-    $(function () {
+
+    /*$(function () {
       $(document).keydown(function (e: any) {
         return false;
       });
-    });
+    });*/
 
     $("body").on("cut copy paste", function (e) {
       e.preventDefault();
