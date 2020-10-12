@@ -53,8 +53,7 @@ export class LoginComponent implements OnInit {
           JSON.stringify(data)
         );
         if (json.CandidateAssessmentAuthentication.Message == "SUCCESS") {
-          let output = moment().format("DD-MMM-YYYY");
-          output = ("09" + "-" + "Oct" + "-" + 2020) as string;
+          let output = moment().format("DD-MMM-YYYY") as string;
           if (
             output == json.CandidateAssessmentAuthentication.ScheduledStartDate
           ) {
