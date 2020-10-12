@@ -10,13 +10,15 @@ export class NavBarComponent implements OnInit {
   constructor(private location: Location) {}
 
   ngOnInit(): void {
-    /*if (document.fullscreenElement != null) {
-      $("#full-screen").css("display", "none");
-      $("#exit-full-screen").css("display", "block");
-    } else {
-      $("#full-screen").css("display", "block");
-      $("#exit-full-screen").css("display", "none");
-    }*/
+    $(function () {
+      if (document.fullscreenElement != null) {
+        $("#full-screen").css("display", "none");
+        $("#exit-full-screen").css("display", "block");
+      } else {
+        $("#full-screen").css("display", "block");
+        $("#exit-full-screen").css("display", "none");
+      }
+    });
   }
 
   elem = document.documentElement;
@@ -35,5 +37,4 @@ export class NavBarComponent implements OnInit {
       $("#exit-full-screen").css("display", "none");
     }
   }
-  
 }

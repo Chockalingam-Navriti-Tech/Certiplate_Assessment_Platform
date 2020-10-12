@@ -46,13 +46,13 @@
       [containerInside]="false"
     >
       <ul
-        style="position: fixed; right: 3%"
+        style="position: absolute; right: 3%"
         class="navbar-nav nav-flex-icons animated rubberBand"
       >
         <li class="nav-item">
           <b
             ><a
-              style="color: black; font-size: 18px; padding: 15px"
+              style="color: black; font-size: 18px; display: none"
               id="full-screen"
               (click)="clicked_fullscreen()"
               ><i class="fas fa-expand"></i> </a
@@ -61,7 +61,7 @@
         <li class="nav-item">
           <b
             ><a
-              style="color: black; font-size: 18px"
+              style="color: black; font-size: 18px; display: none"
               id="exit-full-screen"
               (click)="clicked_exitfullscreen()"
               ><i class="fas fa-compress"></i> </a
@@ -89,7 +89,7 @@
       -->
       <img
         class="center animated flip"
-        style="position: fixed"
+        style="position: absolute"
         src="/assets/images/logo.png"
       />
     </mdb-navbar>
