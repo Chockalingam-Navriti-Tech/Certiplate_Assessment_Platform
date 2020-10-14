@@ -22,7 +22,7 @@ var exit_full_screen = 0;
 var attempted_count = 0;
 var marked_review = 0;
 let timer = false;
-var id1, id2, id3, id4;
+var id1, id2, id3, id4, id5;
 var varCandidateAssessmentData;
 
 @Component({
@@ -79,30 +79,40 @@ export class TheoryAssessmentComponent implements OnInit {
     }
   }
 
-  /*async classifyImage(video:any) {
+  /*async classifyImage(video: any) {
     const modelPromise = await cocoSsd.load();
-    if (this.elem.nativeElement.querySelector('#video').play() !== undefined) {
-      this.elem.nativeElement.querySelector('#video').play().then(async _ => {
-        const model = await mobileNet.load();
-        this.classifications = await model.classify(video);
-        modelPromise.detect(video).then(async (predict) => {
-          console.log(predict);
-          requestAnimationFrame(() => {
-            this.classifyImage.apply(this);
+    if (
+      this.elem.nativeElement.querySelector("#myVideo").play() !== undefined
+    ) {
+      this.elem.nativeElement
+        .querySelector("#myVideo")
+        .play()
+        .then(async (_) => {
+          const model = await mobileNet.load();
+          this.classifications = await model.classify(video);
+          modelPromise.detect(video).then(async (predict) => {
+            console.log(predict);
+            requestAnimationFrame(() => {
+              this.classifyImage.apply(this);
+            });
           });
+        })
+        .catch((err: any) => {
+          console.warn(err);
         });
-      }).catch((err:any) => {
-        console.warn(err);
-      });
     }
   }*/
 
   ngOnInit(): void {
     varCandidateAssessmentData = this.data;
     $(function () {
-      if (varCandidateAssessmentData.CandidateAssessmentData.Languages[1]) {
+      for (
+        var i = 0;
+        i < parseInt(varCandidateAssessmentData.CandidateAssessmentData.Languages.length);
+        i++
+      ) {
         document.getElementById(
-          varCandidateAssessmentData.CandidateAssessmentData.Languages[1]
+          varCandidateAssessmentData.CandidateAssessmentData.Languages[i]
             .LanguageName
         ).style.display = "block";
       }
@@ -153,10 +163,12 @@ export class TheoryAssessmentComponent implements OnInit {
     });
 
     /*navigator.mediaDevices.getUserMedia(this.constraints).then((stream) => {
-        this.elem.nativeElement.querySelector('#myVideo').srcObject = stream;
-        this.vdo = this.elem.nativeElement.querySelector('#myVideo');
-        this.classifyImage();
-      });*/
+      this.elem.nativeElement.querySelector("#myVideo").srcObject = stream;
+      this.vdo = this.elem.nativeElement.querySelector("#myVideo");
+      id5 = setInterval(() => {
+        this.classifyImage(this.vdo);
+      }, 2000);
+    });*/
 
     document.addEventListener(
       "contextmenu",
@@ -1461,11 +1473,9 @@ export class TheoryAssessmentComponent implements OnInit {
       if (section == "sec3" && ind == "2")
         $("#next").attr("disabled", "disabled");
       count = parseInt(question);
-      if (ind == "1") index = 0;
-      else if (ind == "2") index = 1;
-      if (section == "sec1") sec = 0;
-      else if (section == "sec2") sec = 1;
-      else if (section == "sec3") sec = 2;
+      index = parseInt(ind) - 1;
+      var sec_split = section.split('c');
+      sec = parseInt(sec_split[1])-1;
       if (id == 0) {
         document.getElementById("question").innerHTML =
           question +
@@ -1533,6 +1543,7 @@ export class TheoryAssessmentComponent implements OnInit {
             .Sections[sec].Questions[index].Options[3].OptionTextList[id] +
           "</font>";
       }
+      console.log(sec, index);
       if (
         parseInt(
           varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
@@ -1803,6 +1814,9 @@ export class TheoryAssessmentComponent implements OnInit {
     }
     if (id3) {
       clearInterval(id3);
+    }
+    if (id5) {
+      clearInterval(id5);
     }
     localstream.getTracks()[0].stop();
     this.data.CandidateAssessmentData.TheoryAssessment.CurrentSectionIndex = sec;

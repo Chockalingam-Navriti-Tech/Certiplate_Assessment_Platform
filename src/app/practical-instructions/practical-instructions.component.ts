@@ -21,11 +21,15 @@ export class PracticalInstructionsComponent implements OnInit {
     );
     
     $(function () {
-      
-      if (data.CandidateAssessmentData.Languages[1]) {
+      for (
+        var i = 0;
+        i < parseInt(data.CandidateAssessmentData.Languages.length);
+        i++
+      ) {
         document.getElementById(
-          data.CandidateAssessmentData.Languages[1].LanguageName
-        ).style.display = 'block';
+          data.CandidateAssessmentData.Languages[i]
+            .LanguageName
+        ).style.display = "block";
       }
     });
 
@@ -73,6 +77,7 @@ export class PracticalInstructionsComponent implements OnInit {
         else if (option == 'Gujarati') id = 6;
         else if (option == 'Marati') id = 7;
         else if (option == 'Bengali') id = 8;
+        else id = 0;
         if (id == 0) {
           document.getElementById('tablecontent').innerHTML = " ";
           var count = 1;

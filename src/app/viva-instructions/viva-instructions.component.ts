@@ -18,13 +18,15 @@ export class VivaInstructionsComponent implements OnInit {
       localStorage.getItem(this.Req + '_' + this.Id + '_' + 'data')
     );
     $(function () {
-      if (
-        varCandidateAssessmentData.CandidateAssessmentData.Languages[1]
+      for (
+        var i = 0;
+        i < parseInt(varCandidateAssessmentData.CandidateAssessmentData.Languages.length);
+        i++
       ) {
         document.getElementById(
-          varCandidateAssessmentData.CandidateAssessmentData.Languages[1]
+          varCandidateAssessmentData.CandidateAssessmentData.Languages[i]
             .LanguageName
-        ).style.display = 'block';
+        ).style.display = "block";
       }
     });
     this.ajaxcall();
@@ -62,6 +64,7 @@ export class VivaInstructionsComponent implements OnInit {
         else if (option == 'Gujarati') id = 6;
         else if (option == 'Marati') id = 7;
         else if (option == 'Bengali') id = 8;
+        else id = 0;
         if (id == 0) {
           document.getElementById('tablecontent').innerHTML = " ";
           var count = 1;

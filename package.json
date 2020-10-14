@@ -28,7 +28,7 @@
     "@fortawesome/fontawesome-free": "^5.14.0",
     "@material/card": "^7.0.0",
     "@sweetalert2/theme-dark": "^3.2.0",
-    "@tensorflow-models/coco-ssd": "2.0.1",
+    "@tensorflow-models/coco-ssd": "^2.1.0",
     "@tensorflow-models/mobilenet": "^2.0.4",
     "@tensorflow/tfjs": "^1.4.0",
     "@types/bootstrap-notify": "^3.1.35",

@@ -29,65 +29,44 @@ export class AssessmentDetailComponent {
       localStorage.getItem(this.Req + "_" + this.Id + "_" + "data")
     );
     $(document).ready(function () {
-      if (data.CandidateAssessmentData.Languages[1]) {
-        document.getElementById("tablecontent").innerHTML =
-          "<br />" +
-          '<b style="padding:10px"> Candidate Name : </b>' +
-          data.CandidateAssessmentData.CandidateName +
-          "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-          '<b style="padding:10px"> Registration Number : </b>' +
-          data.CandidateAssessmentData.RegistrationId +
-          "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-          '<b style="padding:10px"> Guardian Name : </b>' +
-          data.CandidateAssessmentData.GuardianName +
-          "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-          '<b style="padding:10px"> Assessment Batch :</b>' +
-          data.CandidateAssessmentData.AssessmentBatchCode.toUpperCase() +
-          "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-          '<b style="padding:10px"> SDMS Batch ID : </b>' +
-          data.CandidateAssessmentData.SDMSBatchId.toUpperCase() +
-          "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-          '<b style="padding:10px"> Project Name : </b>' +
-          data.CandidateAssessmentData.ProjectName +
-          "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-          '<b style="padding:10px"> Client Name : </b>' +
-          data.CandidateAssessmentData.ClientName +
-          "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-          '<b style="padding:10px"> Languages : </b>' +
-          data.CandidateAssessmentData.Languages[0].LanguageName +
-          " and " +
-          data.CandidateAssessmentData.Languages[1].LanguageName +
-          "<br />" +
-          "<br/>";
-      } else {
-        document.getElementById("tablecontent").innerHTML =
-          "<br />" +
-          '<b style="padding:10px"> Candidate Name : </b>' +
-          data.CandidateAssessmentData.CandidateName +
-          "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-          '<b style="padding:10px"> Registration Number : </b>' +
-          data.CandidateAssessmentData.RegistrationId +
-          "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-          '<b style="padding:10px"> Guardian Name : </b>' +
-          data.CandidateAssessmentData.GuardianName +
-          "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-          '<b style="padding:10px"> Assessment Batch :</b>' +
-          data.CandidateAssessmentData.AssessmentBatchCode.toUpperCase() +
-          "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-          '<b style="padding:10px"> SDMS Batch ID : </b>' +
-          data.CandidateAssessmentData.SDMSBatchId.toUpperCase() +
-          "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-          '<b style="padding:10px"> Project Name : </b>' +
-          data.CandidateAssessmentData.ProjectName +
-          "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-          '<b style="padding:10px"> Client Name : </b>' +
-          data.CandidateAssessmentData.ClientName +
-          "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-          '<b style="padding:10px"> Languages : </b>' +
-          data.CandidateAssessmentData.Languages[0].LanguageName +
-          "<br />" +
-          "<br/>";
+      var lang = "";
+      for (
+        var i = 0;
+        i < parseInt(data.CandidateAssessmentData.Languages.length);
+        i++
+      ) {
+        if (i != parseInt(data.CandidateAssessmentData.Languages.length) - 1)
+          lang +=
+            data.CandidateAssessmentData.Languages[i].LanguageName + ", ";
+        else lang += data.CandidateAssessmentData.Languages[i].LanguageName;
       }
+      document.getElementById("tablecontent").innerHTML =
+        "<br />" +
+        '<b style="padding:10px"> Candidate Name : </b>' +
+        data.CandidateAssessmentData.CandidateName +
+        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+        '<b style="padding:10px"> Registration Number : </b>' +
+        data.CandidateAssessmentData.RegistrationId +
+        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+        '<b style="padding:10px"> Guardian Name : </b>' +
+        data.CandidateAssessmentData.GuardianName +
+        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+        '<b style="padding:10px"> Assessment Batch :</b>' +
+        data.CandidateAssessmentData.AssessmentBatchCode.toUpperCase() +
+        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+        '<b style="padding:10px"> SDMS Batch ID : </b>' +
+        data.CandidateAssessmentData.SDMSBatchId.toUpperCase() +
+        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+        '<b style="padding:10px"> Project Name : </b>' +
+        data.CandidateAssessmentData.ProjectName +
+        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+        '<b style="padding:10px"> Client Name : </b>' +
+        data.CandidateAssessmentData.ClientName +
+        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
+        '<b style="padding:10px"> Languages : </b>' +
+        lang +
+        "<br />" +
+        "<br/>";
       if (data.CandidateAssessmentData.TheoryAssessment) {
         document.getElementById("vid1").style.visibility = "visible";
         document.getElementById("btn1").style.visibility = "visible";

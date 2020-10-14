@@ -16,8 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private route: Router) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   test() {
     $("#login").css("display", "none");
@@ -47,9 +46,7 @@ export class LoginComponent implements OnInit {
       success: (data) => {
         var json = JSON.parse(JSON.stringify(data));
         localStorage.setItem(
-          json.CandidateAssessmentAuthentication.AssessmentRequestId +
-            "_" +
-            json.CandidateAssessmentAuthentication.CandidateId,
+          this.username.value + "_" + this.password.value,
           JSON.stringify(data)
         );
         if (json.CandidateAssessmentAuthentication.Message == "SUCCESS") {
@@ -67,12 +64,11 @@ export class LoginComponent implements OnInit {
                 password: this.password.value,
               },
               success: (data) => {
+                var req: string = this.username.value;
+                var cand: string = this.password.value;
                 if (
-                  localStorage.getItem("req_id") &&
-                  localStorage.getItem("cand_id")
+                  localStorage.getItem(req + '_'+ cand + '_data')
                 ) {
-                  var req = localStorage.getItem("req_id");
-                  var cand = localStorage.getItem("cand_id");
                   if (localStorage.getItem(req + "_" + cand + "_data")) {
                     var data = JSON.parse(
                       localStorage.getItem(req + "_" + cand + "_data")
@@ -365,16 +361,13 @@ export class LoginComponent implements OnInit {
                     datas.CandidateAssessmentData.VivaMcqAssessment.AssessmentStatus = 0;
                   localStorage.setItem(
                     "req_id",
-                    datas.CandidateAssessmentData.AssessmentRequestId
+                    this.username.value
                   );
+                  localStorage.setItem("cand_id", this.password.value);
                   localStorage.setItem(
-                    "cand_id",
-                    datas.CandidateAssessmentData.CandidateId
-                  );
-                  localStorage.setItem(
-                    datas.CandidateAssessmentData.AssessmentRequestId +
+                    this.username.value +
                       "_" +
-                      datas.CandidateAssessmentData.CandidateId +
+                      this.password.value +
                       "_" +
                       "data",
                     JSON.stringify(datas)

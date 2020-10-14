@@ -4,7 +4,7 @@ function cam(data, sec, index) {
     let lat = localStorage.getItem('lat');
     let long = localStorage.getItem('long');
     var key = '';
-    let upload_url=localStorage.getItem('Video_upload_url');
+    let upload_url = localStorage.getItem('Video_upload_url');
     $(document).keydown(function (e) {
         key = e.key;
     });
@@ -14,6 +14,9 @@ function cam(data, sec, index) {
         width: 560,
         height: 360,
         fluid: false,
+        controlBar: {
+            fullscreenToggle: false,
+        },
         plugins: {
             record: {
                 audio: true,

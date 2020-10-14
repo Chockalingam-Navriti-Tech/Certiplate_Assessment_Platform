@@ -99,11 +99,15 @@ export class VivaAssessmentComponent implements OnInit {
   ngOnInit(): void {
     varCandidateAssessmentData = this.data;
     $(function () {
-      if (varCandidateAssessmentData.CandidateAssessmentData.Languages[1]) {
+      for (
+        var i = 0;
+        i < parseInt(varCandidateAssessmentData.CandidateAssessmentData.Languages.length);
+        i++
+      ) {
         document.getElementById(
-          varCandidateAssessmentData.CandidateAssessmentData.Languages[1]
+          varCandidateAssessmentData.CandidateAssessmentData.Languages[i]
             .LanguageName
-        ).style.display = 'block';
+        ).style.display = "block";
       }
     });
 
@@ -1429,11 +1433,9 @@ export class VivaAssessmentComponent implements OnInit {
       if (section == 'sec3' && ind == '2')
         $('#next').attr('disabled', 'disabled');
       count = parseInt(question);
-      if (ind == '1') index = 0;
-      else if (ind == '2') index = 1;
-      if (section == 'sec1') sec = 0;
-      else if (section == 'sec2') sec = 1;
-      else if (section == 'sec3') sec = 2;
+      index = parseInt(ind) - 1;
+      var sec_split = section.split('c');
+      sec = parseInt(sec_split[1]) - 1;
       if (id == 0) {
         document.getElementById('question').innerHTML =
           question +
