@@ -40,13 +40,57 @@
       </h2>
       <i
         id="done"
-        style="display: none; color: green; position: fixed; left: 57%"
+        style="display: none; color: green; position: fixed; left: 56%"
         class="fa fa-check fa-lg"
       >
         Done</i
       >
     </div>
   </div>
+  <div style="position: fixed; top: 33.5%; left: 36.5%">
+    <h2 style="margin: 3px; color: black">
+      <b>Response File Upload :</b>
+    </h2>
+    <a
+      style="position: fixed; top: 33%; left: 51.4%"
+      id="submits"
+      class="btn btn-secondary"
+      (click)="clicked_file_upload()"
+      >Submit Response</a
+    >
+    <div
+      id="loads"
+      style="display: none; size: 15px; position: fixed; top: 33.5%; left: 54%"
+      class="spinner-border text-primary"
+    ></div>
+    <h2
+      id="progresses"
+      style="
+        display: none;
+        size: 15px;
+        position: fixed;
+        left: 57%;
+        top: 33.5%;
+        margin: 2px;
+      "
+    >
+      In progress...
+    </h2>
+    <i
+      id="dones"
+      style="
+        display: none;
+        color: green;
+        position: fixed;
+        top: 34.5%;
+        left: 55%;
+      "
+      class="fa fa-check fa-lg"
+    >
+      Done</i
+    >
+  </div>
+
   <div style="position: fixed; top: 55%; left: 41%">
     <a
       id="btn"

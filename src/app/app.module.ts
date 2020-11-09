@@ -8,6 +8,7 @@ import {WebcamModule} from 'ngx-webcam';
 import {CountdownModule, CountdownComponent} from 'ngx-countdown';
 import {MatRadioModule} from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
+import {DataTablesModule} from 'angular-datatables';
 import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
 // MDB Angular Free
 import {
@@ -40,14 +41,18 @@ import { FeedbackVivaComponent } from './feedback-viva/feedback-viva.component';
 import { PracticalAssessmentComponent } from './practical-assessment/practical-assessment.component';
 import { SubmitResponseComponent } from './submit-response/submit-response.component';
 import { VivaAssessmentComponent } from './viva-assessment/viva-assessment.component';
+import { ProctorCountViewsComponent } from './proctor-count-views/proctor-count-views.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ChangePasswordSuccessComponent } from './change-password-success/change-password-success.component';
 
 @NgModule({
-  declarations: [AppComponent, routingComponents, NavBarComponent, FooterComponent, TheoryInstructionsComponent, PracticalInstructionsComponent, VivaInstructionsComponent, ImageCaptureComponent, TheoryAssessmentComponent, EndImageCaptureComponent, FeedbackTheoryComponent, FeedbackPracticalComponent, FeedbackVivaComponent, PracticalAssessmentComponent, SubmitResponseComponent, VivaAssessmentComponent],
+  declarations: [AppComponent, routingComponents, NavBarComponent, FooterComponent, TheoryInstructionsComponent, PracticalInstructionsComponent, VivaInstructionsComponent, ImageCaptureComponent, TheoryAssessmentComponent, EndImageCaptureComponent, FeedbackTheoryComponent, FeedbackPracticalComponent, FeedbackVivaComponent, PracticalAssessmentComponent, SubmitResponseComponent, VivaAssessmentComponent, ProctorCountViewsComponent, ChangePasswordComponent, ChangePasswordSuccessComponent],
   imports: [
     WebcamModule,
     MatInputModule,
     BrowserModule,
     AppRoutingModule,
+    DataTablesModule,
     MatButtonModule,
     BrowserAnimationsModule,
     CheckboxModule,

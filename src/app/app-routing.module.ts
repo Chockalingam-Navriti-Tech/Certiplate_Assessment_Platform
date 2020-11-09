@@ -1,3 +1,5 @@
+import { ChangePasswordSuccessComponent } from './change-password-success/change-password-success.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 import { VivaAssessmentComponent } from './viva-assessment/viva-assessment.component';
 import { SubmitResponseComponent } from './submit-response/submit-response.component';
 import { PracticalAssessmentComponent } from './practical-assessment/practical-assessment.component';
@@ -15,6 +17,7 @@ import { LoginComponent } from './login/login.component';
 import { AssessmentDetailComponent } from './assessment-detail/assessment-detail.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ProctorCountViewsComponent } from './proctor-count-views/proctor-count-views.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -32,6 +35,12 @@ export const routes: Routes = [
   { path: 'feedback-viva', component: FeedbackVivaComponent },
   { path: 'submit-response', component: SubmitResponseComponent },
   { path: 'viva-assessment', component: VivaAssessmentComponent },
+  { path: 'proctor-count-views', component: ProctorCountViewsComponent },
+  { path: 'changepassword', component: ChangePasswordComponent },
+  {
+    path: 'password_changed_successfully',
+    component: ChangePasswordSuccessComponent,
+  },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
@@ -57,4 +66,7 @@ export const routingComponents = [
   FeedbackVivaComponent,
   SubmitResponseComponent,
   VivaAssessmentComponent,
+  ProctorCountViewsComponent,
+  ChangePasswordComponent,
+  ChangePasswordSuccessComponent,
 ];

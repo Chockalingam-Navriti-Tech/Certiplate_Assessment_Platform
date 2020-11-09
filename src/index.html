@@ -5,7 +5,7 @@
     <title>Certiplate</title>
     <base href="./" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="196x196"/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="196x196" />
     <link
       href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap"
       rel="stylesheet"
@@ -18,10 +18,10 @@
       rel="stylesheet"
       href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.css"
     />
-    <link
+    <!--link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
+    /-->
     <link
       href="https://unpkg.com/video.js/dist/video-js.min.css"
       rel="stylesheet"
@@ -32,17 +32,72 @@
       integrity="sha512-hyKmVnhxnTbMeJ7il+nU6o03Y6jtMyRTbQBqvyrLoOWvYoNh5FyjURnYZMaw5UL10odtX3SeENhWLmbb2+lqTg=="
       crossorigin="anonymous"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.datatables.net/fixedheader/3.1.7/css/fixedHeader.dataTables.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.datatables.net/fixedcolumns/3.3.2/css/fixedColumns.dataTables.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/4.0.0/material-components-web.min.css"
+      rel="stylesheet"
+    />
+    <!--script src="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css"></script-->
   </head>
   <body class="mat-typography">
     <app-root></app-root>
     <app-assessment-detail></app-assessment-detail>
+    <script
+      src="http://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+      integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+      integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://raw.githubusercontent.com/l-lin/angular-datatables/dev/dist/angular-datatables.js"></script>
+    <script src="https://raw.githubusercontent.com/DataTables/FixedColumns/3.0.3/js/dataTables.fixedColumns.js"></script>
+    <script src="https://raw.githubusercontent.com/l-lin/angular-datatables/v0.4.2/dist/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
     <script type="text/javascript" src="assets/js/cam.js"></script>
     <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
     <script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
     <script src="//cdn.webrtc-experiment.com/RecordRTC.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/videojs-record/4.1.0/videojs.record.min.js"
-    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-record/4.1.0/videojs.record.min.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/adapterjs/0.15.5/adapter.min.js"
       integrity="sha512-8HaugtT+4c0rhgZIggNCv7I2N0u5OuCXQutD91XdRLqtBl4kD5z2B6QmHczDFMpeENZV060Fip3S954njcfv9A=="

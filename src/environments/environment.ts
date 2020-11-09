@@ -4,6 +4,18 @@
 
 export const environment = {
   production: false,
+  URL_authentication_email : 'https://uap-demo-api.certiplate.com/json/asynconeway/GetAuthenticationResponseDataRequest',
+  ClientIP : '127.0.0.1',
+  ClientBrowser : 'MozillaFirefox',
+  ApiKey : 'ddcd795c-1051-4bc6-8b31-c5b60b68544c',
+  URL_logout_authentication : 'https://uap-demo-api.certiplate.com/json/asynconeway/GetLogoutResponseDataRequest',
+  URL_send_mail : 'https://uap-demo-api.certiplate.com/json/asynconeway/SendForgotPasswordMailRequest',
+  URL_reset_password : 'https://uap-demo-api.certiplate.com/json/asynconeway/GetResetPasswordResponseDataRequest',
+  URL_sectorwise_details : 'https://uap-demo-api.certiplate.com/json/asynconeway/GetSectorwiseAssessorCertificationStatusCountDataRequest',
+  URL_QPwise_details : 'https://uap-demo-api.certiplate.com/json/asynconeway/GetQPwiseAssessorCertificationStatusCountDataRequest',
+  URL_assessor_cert_details : 'http://uap-demo-api.certiplate.com/json/asynconeway/GetAssessorCertificationDetailedDataRequest',
+  URL_change_password : 'https://uap-demo-api.certiplate.com/json/asynconeway/ChangeUserPasswordRequest',
+
   URL_authentication:
     'https://uap-demo-api.certiplate.com/json/asynconeway/GetCandidateAssessmentAuthenticationRequest',
   URL_datarequest:
@@ -18,6 +30,10 @@ export const environment = {
     'https://uap-demo.certiplate.com/api/UploadCandidateOnlineAssessmentFile.php',
   Submit_Responsedata_URL:
     'https://uap-demo-api.certiplate.com/json/asynconeway/SubmitCandidateAssessmentDataRequest',
+  Proctor_Count_Views_URL:
+    'https://uap-demo-api.certiplate.com/json/asynconeway/GetStateAndLanguagewiseProctorCountDataRequest',
+  Proctor_Count_Views_Api_Key:
+    'ddcd795c-1051-4bc6-8b31-c5b60b68544c',
 };
 
 /*

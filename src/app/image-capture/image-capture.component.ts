@@ -1,7 +1,7 @@
 import { environment } from './../../environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { WebcamImage } from 'ngx-webcam';
+import { WebcamImage,WebcamInitError} from 'ngx-webcam';
 import { Subject, Observable } from 'rxjs';
 import * as moment from 'moment';
 
@@ -42,6 +42,12 @@ export class ImageCaptureComponent implements OnInit {
     return this.trigger.asObservable();
   }
 
+  public handleInitError(error: WebcamInitError): void{
+    if (error.mediaStreamError && error.mediaStreamError.name == "NotAllowedError") {
+      alert("Camera Permission was not allowed!");
+      this.route.navigate(['login']);
+    }
+  }
   clicked() {
     $('#move-in').css('display', 'block');
     $('#submit_button').css('display', 'none');

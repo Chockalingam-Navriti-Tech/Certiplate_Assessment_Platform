@@ -1,7 +1,13 @@
+import { async } from '@angular/core/testing';
 import { environment } from './../../environments/environment';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
+
+declare var window: any;
+var total_count = 0,
+  count = 0;
+var response_object;
 @Component({
   selector: 'app-submit-response',
   templateUrl: './submit-response.component.html',
@@ -15,6 +21,136 @@ export class SubmitResponseComponent implements OnInit {
   ngOnInit(): void {
     this.Req = localStorage.getItem('req_id');
     this.Id = localStorage.getItem('cand_id');
+    response_object = JSON.parse(localStorage.getItem('Response_data'));
+  }
+
+  async onInitFs(fs: any) {
+    if (localStorage.getItem('assessment') == 'theory') {
+      total_count = 0;
+      if (
+        response_object.CandidateAssessmentData.TheoryAssessment
+          .ScreenshotImages.length == 0 &&
+        response_object.CandidateAssessmentData.TheoryAssessment.SnapshotImages
+          .length == 0
+      ) {
+        $('#loads').css('display', 'none');
+        $('#progresses').css('display', 'none');
+        $('#dones').css('display', 'block');
+      } else {
+        $.each(
+          response_object.CandidateAssessmentData.TheoryAssessment
+            .ScreenshotImages,
+          function (index, value) {
+            total_count += 1;
+            ReadFileFromFileSystem(fs, value.Filename);
+          }
+        );
+        $.each(
+          response_object.CandidateAssessmentData.TheoryAssessment
+            .SnapshotImages,
+          function (index, value) {
+            total_count += 1;
+            ReadFileFromFileSystem(fs, value.Filename);
+          }
+        );
+      }
+    } else if (localStorage.getItem('assessment') == 'practical') {
+      total_count = 0;
+      var flag = 0;
+      if (
+        response_object.CandidateAssessmentData.PracticalAssessment
+          .ScreenshotImages.length == 0 &&
+        response_object.CandidateAssessmentData.PracticalAssessment
+          .SnapshotImages.length == 0
+      ) {
+        flag = 1;
+      } else {
+        $.each(
+          response_object.CandidateAssessmentData.PracticalAssessment
+            .ScreenshotImages,
+          function (index, value) {
+            total_count += 1;
+            ReadFileFromFileSystem(fs, value.Filename);
+          }
+        );
+        $.each(
+          response_object.CandidateAssessmentData.PracticalAssessment
+            .SnapshotImages,
+          function (index, value) {
+            total_count += 1;
+            ReadFileFromFileSystem(fs, value.Filename);
+          }
+        );
+      }
+
+      $.each(
+        response_object.CandidateAssessmentData.PracticalAssessment.Sections,
+        function (index, value1) {
+          $.each(
+            response_object.CandidateAssessmentData.PracticalAssessment
+              .Sections[index].Questions,
+            function (ind, value2) {
+              if (value2.CandidateResponseVideoFileName != '') {
+                total_count += 1;
+                ReadVideoFromFileSystem(
+                  fs,
+                  value2.CandidateResponseVideoFileName
+                );
+              }
+            }
+          );
+        }
+      );
+      if (flag == 1 && total_count == 0) {
+        $('#loads').css('display', 'none');
+        $('#progresses').css('display', 'none');
+        $('#dones').css('display', 'block');
+      }
+    } else if (localStorage.getItem('assessment') == 'viva') {
+      total_count = 0;
+      if (
+        response_object.CandidateAssessmentData.VivaMcqAssessment
+          .ScreenshotImages.length == 0 &&
+        response_object.CandidateAssessmentData.VivaMcqAssessment.SnapshotImages
+          .length == 0
+      ) {
+        $('#loads').css('display', 'none');
+        $('#progresses').css('display', 'none');
+        $('#dones').css('display', 'block');
+      } else {
+        $.each(
+          response_object.CandidateAssessmentData.VivaMcqAssessment
+            .ScreenshotImages,
+          function (index, value) {
+            total_count += 1;
+            ReadFileFromFileSystem(fs, value.Filename);
+          }
+        );
+        $.each(
+          response_object.CandidateAssessmentData.VivaMcqAssessment
+            .SnapshotImages,
+          function (index, value) {
+            total_count += 1;
+            ReadFileFromFileSystem(fs, value.Filename);
+          }
+        );
+      }
+    }
+  }
+
+  clicked_file_upload() {
+    $('#div').css('display', 'none');
+    $('#submits').css('display', 'none');
+    $('#loads').css('display', 'block');
+    $('#progresses').css('display', 'block');
+    window.requestFileSystem =
+      window.requestFileSystem || window.webkitRequestFileSystem;
+    window.requestFileSystem(
+      window.TEMPORARY,
+      100 * 1024 * 1024,
+      this.onInitFs,
+      errorHandler
+    );
   }
 
   clicked() {
@@ -22,7 +158,6 @@ export class SubmitResponseComponent implements OnInit {
     $('#submit').css('display', 'none');
     $('#load').css('display', 'block');
     $('#progress').css('display', 'block');
-    var response_object = JSON.parse(localStorage.getItem('Response_data'));
     var response_string = JSON.stringify(
       response_object.CandidateAssessmentData
     );
@@ -296,5 +431,310 @@ export class SubmitResponseComponent implements OnInit {
   }
   finished() {
     this.route.navigate(['login']);
+  }
+}
+
+function ReadFileFromFileSystem(varFs: any, fileName: any) {
+  varFs.root.getFile(
+    fileName,
+    {},
+    function (fileEntry: any) {
+      // Get a File object representing the file,
+      // then use FileReader to read its contents.
+      fileEntry.file(function (file: any) {
+        var reader = new FileReader();
+
+        reader.onloadend = function (e: any) {
+          var varFormData = new FormData();
+          varFormData.append('image_file_name', fileName);
+          varFormData.append('image_data', this.result as string);
+          const res = Uploadfiles(varFormData);
+          console.log(res);
+        };
+        reader.readAsText(file);
+      }, errorHandler);
+    },
+    errorHandler
+  );
+}
+
+function ReadVideoFromFileSystem(varFs: any, fileName: any) {
+  varFs.root.getFile(
+    fileName,
+    {},
+    function (fileEntry: any) {
+      // Get a File object representing the file,
+      // then use FileReader to read its contents.
+      fileEntry.file(function (file: any) {
+        var reader = new FileReader();
+
+        reader.onloadend = function (e: any) {
+          var varFormData = new FormData();
+          varFormData.append('video_file_name', fileName);
+          varFormData.append('video_data', this.result as string);
+          const res = Uploadfiles(varFormData);
+          console.log(res);
+        };
+        reader.readAsText(file);
+      }, errorHandler);
+    },
+    errorHandler
+  );
+}
+
+function Uploadfiles(varFormData: any) {
+  var res;
+  $.ajax({
+    url: environment.Upload_files_URL,
+    type: 'POST',
+    data: varFormData,
+    contentType: false,
+    cache: false,
+    processData: false,
+    async: false,
+    success: function (response) {
+      res = response;
+      Event_log('ASSESSMENT_DATA_UPLOADED', response_object);
+      count += 1;
+      if (count == total_count) {
+        $('#loads').css('display', 'none');
+        $('#progresses').css('display', 'none');
+        $('#dones').css('display', 'block');
+      }
+    },
+    error: function (e) {
+      Event_log('ASSESSMENT_DATA_UPLOAD_FAILED', response_object);
+      alert('Error');
+    },
+  });
+  return res;
+}
+
+function errorHandler(err: any) {
+  console.log(err);
+}
+
+function Event_log(events: string, data: any) {
+  let lat = localStorage.getItem('lat');
+  let long = localStorage.getItem('long');
+  if (localStorage.getItem('assessment') == 'theory') {
+    var Assessment_event = {
+      DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
+      SubTypeId: 0,
+      Description: '',
+      Latitude: lat,
+      Longitude: long,
+    };
+    switch (events) {
+      case 'ASSESSMENT_STARTED':
+        Assessment_event.SubTypeId = 1;
+        break;
+      case 'ASSESSMENT_CONTINUED':
+        Assessment_event.SubTypeId = 2;
+        break;
+      case 'ASSESSMENT_FINISHED':
+        Assessment_event.SubTypeId = 3;
+        break;
+      case 'ASSESSMENT_DATA_UPLOAD_FAILED':
+        Assessment_event.SubTypeId = 4;
+        break;
+      case 'ASSESSMENT_DATA_UPLOADED':
+        Assessment_event.SubTypeId = 5;
+        break;
+      case 'ASSESSMENT_SUBMITTED':
+        Assessment_event.SubTypeId = 7;
+        break;
+      case 'QUESTION_LINK_CLICKED':
+        Assessment_event.SubTypeId = 12;
+        break;
+      case 'PREVIOUS_BUTTON_CLICKED':
+        Assessment_event.SubTypeId = 13;
+        break;
+      case 'NEXT_BUTTON_CLICKED':
+        Assessment_event.SubTypeId = 14;
+        break;
+      case 'QUESTION_LANGUAGE_CHANGED':
+        Assessment_event.SubTypeId = 15;
+        break;
+      case 'QUESTION_MARKED_FOR_REVIEW':
+        Assessment_event.SubTypeId = 17;
+        break;
+      case 'QUESTION_UNMARKED_FOR_REVIEW':
+        Assessment_event.SubTypeId = 18;
+        break;
+      case 'OPTION_SELECTED':
+        Assessment_event.SubTypeId = 21;
+        break;
+      case 'KEYBOARD_KEY_PRESSED':
+        Assessment_event.SubTypeId = 23;
+        break;
+      case 'EXIT_FULLSCREEN':
+        Assessment_event.SubTypeId = 25;
+        Assessment_event.Description =
+          'Candidate attempted to exit full screen';
+        break;
+      case 'TAB_SWITCH':
+        Assessment_event.SubTypeId = 25;
+        Assessment_event.Description = 'Candidate attempted to switch tabs';
+        break;
+    }
+    data.CandidateAssessmentData.TheoryAssessment.AssessmentEvents.push(
+      Assessment_event
+    );
+    var file =
+      localStorage.getItem('req_id') +
+      '_' +
+      localStorage.getItem('cand_id') +
+      '_' +
+      'data';
+    if (typeof data == 'string')
+      localStorage.setItem(file, JSON.stringify(data));
+    else localStorage.setItem(file, JSON.stringify(data));
+  } else if (localStorage.getItem('assessment') == 'practical') {
+    var Assessment_event = {
+      DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
+      SubTypeId: 0,
+      Description: '',
+      Latitude: lat,
+      Longitude: long,
+    };
+    switch (events) {
+      case 'ASSESSMENT_STARTED':
+        Assessment_event.SubTypeId = 1;
+        break;
+      case 'ASSESSMENT_CONTINUED':
+        Assessment_event.SubTypeId = 2;
+        break;
+      case 'ASSESSMENT_FINISHED':
+        Assessment_event.SubTypeId = 3;
+        break;
+      case 'ASSESSMENT_DATA_UPLOAD_FAILED':
+        Assessment_event.SubTypeId = 4;
+        break;
+      case 'ASSESSMENT_DATA_UPLOADED':
+        Assessment_event.SubTypeId = 5;
+        break;
+      case 'ASSESSMENT_SUBMITTED':
+        Assessment_event.SubTypeId = 7;
+        break;
+      case 'QUESTION_LINK_CLICKED':
+        Assessment_event.SubTypeId = 12;
+        break;
+      case 'PREVIOUS_BUTTON_CLICKED':
+        Assessment_event.SubTypeId = 13;
+        break;
+      case 'NEXT_BUTTON_CLICKED':
+        Assessment_event.SubTypeId = 14;
+        break;
+      case 'QUESTION_LANGUAGE_CHANGED':
+        Assessment_event.SubTypeId = 15;
+        break;
+      case 'QUESTION_MARKED_FOR_REVIEW':
+        Assessment_event.SubTypeId = 17;
+        break;
+      case 'QUESTION_UNMARKED_FOR_REVIEW':
+        Assessment_event.SubTypeId = 18;
+        break;
+      case 'OPTION_SELECTED':
+        Assessment_event.SubTypeId = 21;
+        break;
+      case 'KEYBOARD_KEY_PRESSED':
+        Assessment_event.SubTypeId = 23;
+        break;
+      case 'EXIT_FULLSCREEN':
+        Assessment_event.SubTypeId = 25;
+        Assessment_event.Description =
+          'Candidate attempted to exit full screen';
+        break;
+      case 'TAB_SWITCH':
+        Assessment_event.SubTypeId = 25;
+        Assessment_event.Description = 'Candidate attempted to switch tabs';
+        break;
+    }
+    data.CandidateAssessmentData.PracticalAssessment.AssessmentEvents.push(
+      Assessment_event
+    );
+    var file =
+      localStorage.getItem('req_id') +
+      '_' +
+      localStorage.getItem('cand_id') +
+      '_' +
+      'data';
+    if (typeof data == 'string')
+      localStorage.setItem(file, JSON.stringify(data));
+    else localStorage.setItem(file, JSON.stringify(data));
+  } else if (localStorage.getItem('assessment') == 'viva') {
+    var Assessment_event = {
+      DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
+      SubTypeId: 0,
+      Description: '',
+      Latitude: lat,
+      Longitude: long,
+    };
+    switch (events) {
+      case 'ASSESSMENT_STARTED':
+        Assessment_event.SubTypeId = 1;
+        break;
+      case 'ASSESSMENT_CONTINUED':
+        Assessment_event.SubTypeId = 2;
+        break;
+      case 'ASSESSMENT_FINISHED':
+        Assessment_event.SubTypeId = 3;
+        break;
+      case 'ASSESSMENT_DATA_UPLOAD_FAILED':
+        Assessment_event.SubTypeId = 4;
+        break;
+      case 'ASSESSMENT_DATA_UPLOADED':
+        Assessment_event.SubTypeId = 5;
+        break;
+      case 'ASSESSMENT_SUBMITTED':
+        Assessment_event.SubTypeId = 7;
+        break;
+      case 'QUESTION_LINK_CLICKED':
+        Assessment_event.SubTypeId = 12;
+        break;
+      case 'PREVIOUS_BUTTON_CLICKED':
+        Assessment_event.SubTypeId = 13;
+        break;
+      case 'NEXT_BUTTON_CLICKED':
+        Assessment_event.SubTypeId = 14;
+        break;
+      case 'QUESTION_LANGUAGE_CHANGED':
+        Assessment_event.SubTypeId = 15;
+        break;
+      case 'QUESTION_MARKED_FOR_REVIEW':
+        Assessment_event.SubTypeId = 17;
+        break;
+      case 'QUESTION_UNMARKED_FOR_REVIEW':
+        Assessment_event.SubTypeId = 18;
+        break;
+      case 'OPTION_SELECTED':
+        Assessment_event.SubTypeId = 21;
+        break;
+      case 'KEYBOARD_KEY_PRESSED':
+        Assessment_event.SubTypeId = 23;
+        break;
+      case 'EXIT_FULLSCREEN':
+        Assessment_event.SubTypeId = 25;
+        Assessment_event.Description =
+          'Candidate attempted to exit full screen';
+        break;
+      case 'TAB_SWITCH':
+        Assessment_event.SubTypeId = 25;
+        Assessment_event.Description = 'Candidate attempted to switch tabs';
+        break;
+    }
+    data.CandidateAssessmentData.VivaMcqAssessment.AssessmentEvents.push(
+      Assessment_event
+    );
+    var file =
+      localStorage.getItem('req_id') +
+      '_' +
+      localStorage.getItem('cand_id') +
+      '_' +
+      'data';
+    if (typeof data == 'string')
+      localStorage.setItem(file, JSON.stringify(data));
+    else localStorage.setItem(file, JSON.stringify(data));
   }
 }

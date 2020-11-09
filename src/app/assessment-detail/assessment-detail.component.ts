@@ -110,14 +110,17 @@ export class AssessmentDetailComponent {
   }
 
   clicked_theory() {
+    localStorage.setItem(this.Req + "_" + this.Id + "_assessment", 'theory');
     localStorage.setItem("assessment", "theory");
     this.route.navigate(["image-capture"]);
   }
   clicked_practical() {
+    localStorage.setItem(this.Req + "_" + this.Id + "_assessment", 'practical');
     localStorage.setItem("assessment", "practical");
     this.route.navigate(["image-capture"]);
   }
   clicked_viva() {
+    localStorage.setItem(this.Req + "_" + this.Id + "_assessment", 'viva');
     localStorage.setItem("assessment", "viva");
     this.route.navigate(["image-capture"]);
   }

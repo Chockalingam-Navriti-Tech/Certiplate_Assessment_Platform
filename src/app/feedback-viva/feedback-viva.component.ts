@@ -136,6 +136,10 @@ export class FeedbackVivaComponent implements OnInit {
   clicked() {
     this.data.CandidateAssessmentData.VivaMcqAssessment.AssessmentStatus = 3;
     localStorage.setItem('Response_data', JSON.stringify(this.data));
+    localStorage.setItem(
+      localStorage.getItem('req_id') + '_' + localStorage.getItem('cand_id') + '_data',
+      JSON.stringify(this.data)
+    );
     this.route.navigate(['submit-response']);
   }
 }

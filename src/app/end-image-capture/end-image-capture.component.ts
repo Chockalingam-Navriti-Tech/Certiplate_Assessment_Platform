@@ -1,7 +1,7 @@
 import { environment } from './../../environments/environment';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { WebcamImage } from 'ngx-webcam';
+import { WebcamImage, WebcamInitError } from 'ngx-webcam';
 import { Subject, Observable, Subscription } from 'rxjs';
 import * as moment from 'moment';
 import * as os from 'os';
@@ -39,6 +39,16 @@ export class EndImageCaptureComponent implements OnInit {
 
   public get triggerObservable(): Observable<void> {
     return this.trigger.asObservable();
+  }
+
+  public handleInitError(error: WebcamInitError): void {
+    if (
+      error.mediaStreamError &&
+      error.mediaStreamError.name == 'NotAllowedError'
+    ) {
+      alert('Camera Permission was not allowed!');
+      this.route.navigate(['login']);
+    }
   }
 
   clicked() {
@@ -83,6 +93,10 @@ export class EndImageCaptureComponent implements OnInit {
       data.CandidateAssessmentData.TheoryAssessment.CandidateSystemInfo.Latitude = lat;
       data.CandidateAssessmentData.TheoryAssessment.CandidateSystemInfo.Longitude = long;
       localStorage.setItem('Response_data', JSON.stringify(data));
+      localStorage.setItem(
+        this.Req + '_' + this.Id + '_data',
+        JSON.stringify(data)
+      );
       this.route.navigate(['feedback-theory']);
     } else if (localStorage.getItem('assessment') == 'practical') {
       data.CandidateAssessmentData.PracticalAssessment.EndImage.FileName =
@@ -120,6 +134,10 @@ export class EndImageCaptureComponent implements OnInit {
       data.CandidateAssessmentData.PracticalAssessment.CandidateSystemInfo.Latitude = lat;
       data.CandidateAssessmentData.PracticalAssessment.CandidateSystemInfo.Longitude = long;
       localStorage.setItem('Response_data', JSON.stringify(data));
+      localStorage.setItem(
+        this.Req + '_' + this.Id + '_data',
+        JSON.stringify(data)
+      );
       this.route.navigate(['feedback-practical']);
     } else if (localStorage.getItem('assessment') == 'viva') {
       data.CandidateAssessmentData.VivaMcqAssessment.EndImage.FileName =
@@ -131,7 +149,9 @@ export class EndImageCaptureComponent implements OnInit {
       data.CandidateAssessmentData.VivaMcqAssessment.EndImage.Longitude = long;
       ImageArrayObj = {
         FileName:
-          'REG' + data.CandidateAssessmentData.RegistrationId + '_VivaMcqEnd.png',
+          'REG' +
+          data.CandidateAssessmentData.RegistrationId +
+          '_VivaMcqEnd.png',
         Image_Data: this.webcamImage1.imageAsDataUrl,
       };
       //ImageArrayContent.ImageArray.push(ImageArrayObj);
@@ -153,6 +173,10 @@ export class EndImageCaptureComponent implements OnInit {
       data.CandidateAssessmentData.VivaMcqAssessment.CandidateSystemInfo.Latitude = lat;
       data.CandidateAssessmentData.VivaMcqAssessment.CandidateSystemInfo.Longitude = long;
       localStorage.setItem('Response_data', JSON.stringify(data));
+      localStorage.setItem(
+        this.Req + '_' + this.Id + '_data',
+        JSON.stringify(data)
+      );
       this.route.navigate(['feedback-viva']);
     }
   }
@@ -176,7 +200,7 @@ export class EndImageCaptureComponent implements OnInit {
       contentType: false,
       cache: false,
       processData: false,
-      success: function (response) {;
+      success: function (response) {
         console.log(response);
       },
       error: function (e) {

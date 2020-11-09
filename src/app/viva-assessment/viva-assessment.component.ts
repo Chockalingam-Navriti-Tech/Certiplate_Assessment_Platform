@@ -9,7 +9,7 @@ import { CountdownComponent } from 'ngx-countdown';
 import * as moment from 'moment';
 
 var localstream: any;
-var option;
+var option, route: any;
 var id = 0;
 var count: number;
 var counter = 1;
@@ -17,6 +17,8 @@ var index: number;
 var sec: number;
 var quest;
 var fullscreen = 0;
+var full_screen;
+var visibility;
 var tab_switch_count = 0;
 var exit_full_screen = 0;
 var attempted_count = 0;
@@ -24,6 +26,16 @@ var marked_review = 0;
 let timer = false;
 var id1, id2, id3, id4;
 var varCandidateAssessmentData;
+var EventImage = '';
+declare var window: any;
+var constraints = {
+  video: {
+    facingMode: 'user',
+    width: 1280,
+    height: 720,
+  },
+  audio: false,
+};
 
 @Component({
   selector: 'app-viva-assessment',
@@ -32,16 +44,6 @@ var varCandidateAssessmentData;
 })
 export class VivaAssessmentComponent implements OnInit {
   public question: string;
-  private full_screen;
-  private visibility;
-  constraints = {
-    video: {
-      facingMode: 'user',
-      width: 1280,
-      height: 720,
-    },
-    audio: false,
-  };
   varNotifyArray: any = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   vdo: any;
   detectedObjects: any = [];
@@ -49,7 +51,6 @@ export class VivaAssessmentComponent implements OnInit {
   Req: any;
   Id: any;
   data: any;
-  id1: any;
   LeftTime: any = JSON.parse(
     localStorage.getItem(
       localStorage.getItem('req_id') +
@@ -98,16 +99,20 @@ export class VivaAssessmentComponent implements OnInit {
 
   ngOnInit(): void {
     varCandidateAssessmentData = this.data;
+    route = this.route;
     $(function () {
       for (
         var i = 0;
-        i < parseInt(varCandidateAssessmentData.CandidateAssessmentData.Languages.length);
+        i <
+        parseInt(
+          varCandidateAssessmentData.CandidateAssessmentData.Languages.length
+        );
         i++
       ) {
         document.getElementById(
           varCandidateAssessmentData.CandidateAssessmentData.Languages[i]
             .LanguageName
-        ).style.display = "block";
+        ).style.display = 'block';
       }
     });
 
@@ -171,7 +176,6 @@ export class VivaAssessmentComponent implements OnInit {
     $('body').on('cut copy paste', function (e) {
       e.preventDefault();
     });
-    var route = this.route;
 
     $(document).ready(function () {
       if (
@@ -220,7 +224,7 @@ export class VivaAssessmentComponent implements OnInit {
       '</b>';
     document.getElementById('info2').innerHTML =
       '<b>Question Paper Title : ' +
-      this.data.CandidateAssessmentData.QuestionPaperTitle.toUpperCase() +
+      this.data.CandidateAssessmentData.QuestionPaperTitle+
       '</b>' +
       '<br/>' +
       '<b>Sections : ' +
@@ -228,7 +232,7 @@ export class VivaAssessmentComponent implements OnInit {
       '</b>';
     document.getElementById('info3').innerHTML =
       '<b>Job : ' +
-      this.data.CandidateAssessmentData.QualificationPackName.toUpperCase() +
+      this.data.CandidateAssessmentData.QualificationPackName+
       '</b>' +
       '<br/>' +
       '<b>Duration : ' +
@@ -239,29 +243,82 @@ export class VivaAssessmentComponent implements OnInit {
       '</b>';
 
     sec = 0;
-    /*if (
-      parseInt(
-        this.data.CandidateAssessmentData.VivaMcqAssessment.CurrentSectionIndex
-      ) == 0
-    )
-    else
-      sec = parseInt(
-        this.data.CandidateAssessmentData.VivaMcqAssessment.CurrentSectionIndex
-      );
-    if (localStorage.getItem('current_question_no'))
-      count = parseInt(localStorage.getItem('current_question_no'));
-    else*/
     count = 1;
+    varCandidateAssessmentData = this.data;
 
-    let data = this.data;
+    $('input[name=groupOfDefaultRadios]').change(function () {
+      var key: string = '';
+      $(document).keydown(function (e) {
+        key = e.key;
+      });
+      Event_log('OPTION_SELECTED', varCandidateAssessmentData, sec, index, key);
+      var selected = 'sec' + (sec + 1) + '_' + (index + 1);
+      if (document.getElementById(selected).className != 'btn btn-success px-3')
+        attempted_count += 1;
+      var id = $('input[name=groupOfDefaultRadios]:checked').attr('id');
+      if (
+        document.getElementById(selected).className == 'btn btn-warning px-3'
+      ) {
+        $('#checkbox').prop('checked', false);
+        marked_review -= 1;
+      }
+      document.getElementById(selected).className = 'btn btn-success px-3';
+      if (id == 'Group1')
+        varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.Sections[
+          sec
+        ].Questions[index].CandidateActualResponseOption = '0';
+      if (id == 'Group2')
+        varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.Sections[
+          sec
+        ].Questions[index].CandidateActualResponseOption = '1';
+      if (id == 'Group3')
+        varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.Sections[
+          sec
+        ].Questions[index].CandidateActualResponseOption = '2';
+      if (id == 'Group4')
+        varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.Sections[
+          sec
+        ].Questions[index].CandidateActualResponseOption = '3';
+    });
+
+    id3 = setInterval(() => {
+      varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.RemainingDurationSeconds = parseInt(
+        varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment
+          .TotalDurationSeconds
+      );
+      localStorage.setItem(
+        this.Req + '_' + this.Id + '_' + 'data',
+        JSON.stringify(varCandidateAssessmentData)
+      );
+    }, 5000);
+
+    window.requestFileSystem =
+      window.requestFileSystem || window.webkitRequestFileSystem;
+    window.requestFileSystem(
+      window.TEMPORARY,
+      100 * 1024 * 1024,
+      this.onInitFs,
+      errorHandler
+    );
+
+    this.initial();
+  }
+
+  onInitFs(fs: any) {
+    let data = varCandidateAssessmentData;
+    var ImageArrayObj;
+    let lat = localStorage.getItem('lat');
+    let long = localStorage.getItem('long');
+
+    //visibility change
     document.addEventListener(
       'visibilitychange',
-      (this.visibility = function () {
+      (visibility = function () {
         var key: string = '';
         $(document).keydown(function (e) {
           key = e.key;
         });
-        Event_log('TAB_SWITCH', data, sec, index, key);
+
         if (document.hidden) {
           $('#popup').css({
             opacity: 1,
@@ -327,71 +384,69 @@ export class VivaAssessmentComponent implements OnInit {
             FileName: '',
             Image_Data: '',
           };
-          ImageArrayObj.FileName =
-            'REG' +
-            varCandidateAssessmentData.CandidateAssessmentData.RegistrationId +
-            '_VivaMcqViolation_' +
-            moment().format('YYYYMMDDhhmmss') +
-            '.jpeg';
+          ImageArrayObj.FileName = ScreenshotImage.Filename;
           ImageArrayObj.Image_Data = canvas.toDataURL('image/jpeg');
+          EventImage = ImageArrayObj.FileName;
+          Event_log('TAB_SWITCH', data, sec, index, key);
           //ImageArrayContent.ImageArray.push(ImageArrayObj);
           //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
           varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.ScreenshotImages.push(
             ScreenshotImage
           );
-          Uploadfiles(ImageArrayObj);
+          WriteFileToFileSystem(
+            fs,
+            ImageArrayObj.FileName,
+            ImageArrayObj.Image_Data
+          );
         });
       })
     );
 
+    //fullscreen change
     document.addEventListener(
       'fullscreenchange',
-      (this.full_screen = function () {
+      (full_screen = function (event: any) {
+        fullscreen += 1;
         var key: string = '';
         $(document).keydown(function (e) {
           key = e.key;
         });
-
-        Event_log('EXIT_FULLSCREEN', data, sec, index, key);
+        html2canvas(document.body).then(function (canvas: any) {
+          var ScreenshotImage = {
+            Filename: '',
+            TimeStamp: '',
+            Latitude: '',
+            Longitude: '',
+          };
+          ScreenshotImage.Filename =
+            'REG' +
+            varCandidateAssessmentData.CandidateAssessmentData.RegistrationId +
+            '_VivaMcqViolation_' +
+            moment().format('YYYYMMDDhhmmss') +
+            '.jpeg';
+          ScreenshotImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
+          ScreenshotImage.Latitude = lat as string;
+          ScreenshotImage.Longitude = long as string;
+          ImageArrayObj = {
+            FileName: '',
+            Image_Data: '',
+          };
+          ImageArrayObj.FileName = ScreenshotImage.Filename;
+          ImageArrayObj.Image_Data = canvas.toDataURL('image/jpeg');
+          EventImage = ImageArrayObj.FileName;
+          Event_log('EXIT_FULLSCREEN', data, sec, index, key);
+          //ImageArrayContent.ImageArray.push(ImageArrayObj);
+          //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
+          varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.ScreenshotImages.push(
+            ScreenshotImage
+          );
+          WriteFileToFileSystem(
+            fs,
+            ImageArrayObj.FileName,
+            ImageArrayObj.Image_Data
+          );
+        });
         if (fullscreen % 2 != 0) {
-          html2canvas(document.body).then(function (canvas: any) {
-            var ScreenshotImage = {
-              Filename: '',
-              TimeStamp: '',
-              Latitude: '',
-              Longitude: '',
-            };
-            ScreenshotImage.Filename =
-              'REG' +
-              varCandidateAssessmentData.CandidateAssessmentData
-                .RegistrationId +
-              '_VivaMcqViolation_' +
-              moment().format('YYYYMMDDhhmmss') +
-              '.jpeg';
-            ScreenshotImage.TimeStamp = moment().format(
-              'DD-MMM-YYYY h:mm:ss a'
-            );
-            ScreenshotImage.Latitude = lat as string;
-            ScreenshotImage.Longitude = long as string;
-            ImageArrayObj = {
-              FileName: '',
-              Image_Data: '',
-            };
-            ImageArrayObj.FileName =
-              'REG' +
-              varCandidateAssessmentData.CandidateAssessmentData
-                .RegistrationId +
-              '_VivaMcqViolation_' +
-              moment().format('YYYYMMDDhhmmss') +
-              '.jpeg';
-            ImageArrayObj.Image_Data = canvas.toDataURL('image/jpeg');
-            //ImageArrayContent.ImageArray.push(ImageArrayObj);
-            //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
-            varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.ScreenshotImages.push(
-              ScreenshotImage
-            );
-            Uploadfiles(ImageArrayObj);
-          });
           $('#popup').css({
             opacity: 1,
           });
@@ -439,63 +494,10 @@ export class VivaAssessmentComponent implements OnInit {
             }
           });
         }
-        fullscreen += 1;
       })
     );
 
-    varCandidateAssessmentData = this.data;
-
-    $('input[name=groupOfDefaultRadios]').change(function () {
-      var key: string = '';
-      $(document).keydown(function (e) {
-        key = e.key;
-      });
-      Event_log('OPTION_SELECTED', varCandidateAssessmentData, sec, index, key);
-      var selected = 'sec' + (sec + 1) + '_' + (index + 1);
-      if (document.getElementById(selected).className != 'btn btn-success px-3')
-        attempted_count += 1;
-      var id = $('input[name=groupOfDefaultRadios]:checked').attr('id');
-      if (
-        document.getElementById(selected).className == 'btn btn-warning px-3'
-      ) {
-        $('#checkbox').prop('checked', false);
-        marked_review -= 1;
-      }
-      document.getElementById(selected).className = 'btn btn-success px-3';
-      if (id == 'Group1')
-        varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.Sections[
-          sec
-        ].Questions[index].CandidateActualResponseOption = '0';
-      if (id == 'Group2')
-        varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.Sections[
-          sec
-        ].Questions[index].CandidateActualResponseOption = '1';
-      if (id == 'Group3')
-        varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.Sections[
-          sec
-        ].Questions[index].CandidateActualResponseOption = '2';
-      if (id == 'Group4')
-        varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.Sections[
-          sec
-        ].Questions[index].CandidateActualResponseOption = '3';
-    });
-
-    id3 = setInterval(() => {
-      varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.RemainingDurationSeconds = parseInt(
-        varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment
-          .TotalDurationSeconds
-      );
-      localStorage.setItem(
-        this.Req + '_' + this.Id + '_' + 'data',
-        JSON.stringify(varCandidateAssessmentData)
-      );
-    }, 5000);
-
-    var counting = 0;
-    var ImageArrayObj;
-    let lat = localStorage.getItem('lat');
-    let long = localStorage.getItem('long');
-    let Uploadfiles = this.Uploadfiles;
+    //screenshot for every 30 sec
     id1 = setInterval(() => {
       html2canvas(document.body).then(function (canvas: any) {
         var ScreenshotImage = {
@@ -507,9 +509,9 @@ export class VivaAssessmentComponent implements OnInit {
         ScreenshotImage.Filename =
           'REG' +
           varCandidateAssessmentData.CandidateAssessmentData.RegistrationId +
-          '_VivaMcqScreenShot_{' +
-          counting +
-          '}.jpeg';
+          '_VivaMcqScreenShot_' +
+          moment().format('YYYYMMDDhhmmss') +
+          '.jpeg';
         ScreenshotImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
         ScreenshotImage.Latitude = lat as string;
         ScreenshotImage.Longitude = long as string;
@@ -517,29 +519,23 @@ export class VivaAssessmentComponent implements OnInit {
           FileName: '',
           Image_Data: '',
         };
-        ImageArrayObj.FileName =
-          'REG' +
-          varCandidateAssessmentData.CandidateAssessmentData.RegistrationId +
-          '_VivaMcqScreenShot_{' +
-          counting +
-          '}.jpeg';
+        ImageArrayObj.FileName = ScreenshotImage.Filename;
         ImageArrayObj.Image_Data = canvas.toDataURL('image/jpeg');
         //ImageArrayContent.ImageArray.push(ImageArrayObj);
         //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
         varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.ScreenshotImages.push(
           ScreenshotImage
         );
-        counting += 1;
-        Uploadfiles(ImageArrayObj);
+        WriteFileToFileSystem(
+          fs,
+          ImageArrayObj.FileName,
+          ImageArrayObj.Image_Data
+        );
       });
-      localStorage.setItem(
-        'Response_data',
-        JSON.stringify(varCandidateAssessmentData)
-      );
     }, 30000);
-    var constraints = this.constraints;
-    var countings = 0;
     //let classify = this.classifyImage;
+
+    //snapshot for every 30 sec
     navigator.getUserMedia(
       constraints,
       function (stream) {
@@ -564,9 +560,9 @@ export class VivaAssessmentComponent implements OnInit {
               'REG' +
               varCandidateAssessmentData.CandidateAssessmentData
                 .RegistrationId +
-              '_VivaMcqSnapShot_{' +
-              countings +
-              '}.jpeg';
+              '_VivaMcqSnapShot_' +
+              moment().format('YYYYMMDDhhmmss') +
+              '.jpeg';
             SnapshotImage.TimeStamp = moment().format('DD-MMM-YYYY h:mm:ss a');
             SnapshotImage.Latitude = lat as string;
             SnapshotImage.Longitude = long as string;
@@ -574,35 +570,27 @@ export class VivaAssessmentComponent implements OnInit {
               FileName: '',
               Image_Data: '',
             };
-            ImageArrayObj.FileName =
-              'REG' +
-              varCandidateAssessmentData.CandidateAssessmentData
-                .RegistrationId +
-              '_VivaMcqSnapShot_{' +
-              countings +
-              '}.jpeg';
+            ImageArrayObj.FileName = SnapshotImage.Filename;
             ImageArrayObj.Image_Data = varcanvas;
             //ImageArrayContent.ImageArray.push(ImageArrayObj);
             //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
             varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.SnapshotImages.push(
               SnapshotImage
             );
-            countings += 1;
-            Uploadfiles(ImageArrayObj);
+            WriteFileToFileSystem(
+              fs,
+              ImageArrayObj.FileName,
+              ImageArrayObj.Image_Data
+            );
           }
-          localStorage.setItem(
-            'Response_data',
-            JSON.stringify(varCandidateAssessmentData)
-          );
         }, 30000);
       },
       function (err) {
         alert('there was an error ' + err);
       }
     );
-
-    this.initial();
   }
+
   initial() {
     var varCandidateAssessmentData = this.data;
     $('input[name=groupOfDefaultRadios]').prop('checked', false);
@@ -710,14 +698,19 @@ export class VivaAssessmentComponent implements OnInit {
         if (id == 0) {
           option = $('option:selected').attr('id');
           if (option == 'Hindi') id = 1;
-          else if (option == 'English') id = 0;
           else if (option == 'Tamil') id = 2;
-          else if (option == 'Kannada') id = 3;
-          else if (option == 'Telugu') id = 4;
-          else if (option == 'Malayalam') id = 5;
-          else if (option == 'Gujarati') id = 6;
-          else if (option == 'Marati') id = 7;
-          else if (option == 'Bengali') id = 8;
+          else if (option == 'Telugu') id = 3;
+          else if (option == 'Kannada') id = 4;
+          else if (option == 'Gujarati') id = 5;
+          else if (option == 'Oriya') id = 6;
+          else if (option == 'Assamese') id = 7;
+          else if (option == 'Urdu') id = 8;
+          else if (option == 'Marati') id = 9;
+          else if (option == 'Malayalam') id = 10;
+          else if (option == 'Bengali') id = 11;
+          else if (option == 'Punjabi') id = 12;
+          else if (option == 'Manipuri') id = 13;
+          else id = 0;
           if (id == 0) {
             document.getElementById('question').innerHTML =
               count +
@@ -776,14 +769,19 @@ export class VivaAssessmentComponent implements OnInit {
         } else if (id > 0) {
           option = $('option:selected').attr('id');
           if (option == 'Hindi') id = 1;
-          else if (option == 'English') id = 0;
           else if (option == 'Tamil') id = 2;
-          else if (option == 'Kannada') id = 3;
-          else if (option == 'Telugu') id = 4;
-          else if (option == 'Malayalam') id = 5;
-          else if (option == 'Gujarati') id = 6;
-          else if (option == 'Marati') id = 7;
-          else if (option == 'Bengali') id = 8;
+          else if (option == 'Telugu') id = 3;
+          else if (option == 'Kannada') id = 4;
+          else if (option == 'Gujarati') id = 5;
+          else if (option == 'Oriya') id = 6;
+          else if (option == 'Assamese') id = 7;
+          else if (option == 'Urdu') id = 8;
+          else if (option == 'Marati') id = 9;
+          else if (option == 'Malayalam') id = 10;
+          else if (option == 'Bengali') id = 11;
+          else if (option == 'Punjabi') id = 12;
+          else if (option == 'Manipuri') id = 13;
+          else id = 0;
           if (id == 0) {
             document.getElementById('question').innerHTML =
               count +
@@ -900,7 +898,7 @@ export class VivaAssessmentComponent implements OnInit {
         key = e.key;
       });
       Event_log(
-        'ASSESSMENT_CONTINUED',
+        'ASSESSMENT_STARTED',
         varCandidateAssessmentData,
         sec,
         index,
@@ -1105,12 +1103,18 @@ export class VivaAssessmentComponent implements OnInit {
         option = $('option:selected').attr('id');
         if (option == 'Hindi') id = 1;
         else if (option == 'Tamil') id = 2;
-        else if (option == 'Kannada') id = 3;
-        else if (option == 'Telugu') id = 4;
-        else if (option == 'Malayalam') id = 5;
-        else if (option == 'Gujarati') id = 6;
-        else if (option == 'Marati') id = 7;
-        else if (option == 'Bengali') id = 8;
+        else if (option == 'Telugu') id = 3;
+        else if (option == 'Kannada') id = 4;
+        else if (option == 'Gujarati') id = 5;
+        else if (option == 'Oriya') id = 6;
+        else if (option == 'Assamese') id = 7;
+        else if (option == 'Urdu') id = 8;
+        else if (option == 'Marati') id = 9;
+        else if (option == 'Malayalam') id = 10;
+        else if (option == 'Bengali') id = 11;
+        else if (option == 'Punjabi') id = 12;
+        else if (option == 'Manipuri') id = 13;
+        else id = 0;
       });
     });
 
@@ -1327,12 +1331,18 @@ export class VivaAssessmentComponent implements OnInit {
         option = $('option:selected').attr('id');
         if (option == 'Hindi') id = 1;
         else if (option == 'Tamil') id = 2;
-        else if (option == 'Kannada') id = 3;
-        else if (option == 'Telugu') id = 4;
-        else if (option == 'Malayalam') id = 5;
-        else if (option == 'Gujarati') id = 6;
-        else if (option == 'Marati') id = 7;
-        else if (option == 'Bengali') id = 8;
+        else if (option == 'Telugu') id = 3;
+        else if (option == 'Kannada') id = 4;
+        else if (option == 'Gujarati') id = 5;
+        else if (option == 'Oriya') id = 6;
+        else if (option == 'Assamese') id = 7;
+        else if (option == 'Urdu') id = 8;
+        else if (option == 'Marati') id = 9;
+        else if (option == 'Malayalam') id = 10;
+        else if (option == 'Bengali') id = 11;
+        else if (option == 'Punjabi') id = 12;
+        else if (option == 'Manipuri') id = 13;
+        else id = 0;
       });
     });
 
@@ -1716,54 +1726,6 @@ export class VivaAssessmentComponent implements OnInit {
     this.route.navigate(['end-image-capture']);
   }
 
-  Uploadfiles(ImageArrayContent: any) {
-    $('#frmImages').append(
-      '<input name="image_data" value="' + ImageArrayContent.Image_Data + '">'
-    );
-    $('#frmImages').append(
-      '<input name="image_file_name" value="' +
-        ImageArrayContent.FileName +
-        '">'
-    );
-    var varForm = <HTMLFormElement>document.getElementById('frmImages');
-    $.ajax({
-      url: environment.Upload_files_URL,
-      type: 'POST',
-      data: new FormData(varForm),
-      contentType: false,
-      cache: false,
-      processData: false,
-      success: function (response) {
-        console.log(response);
-        var key: string = '';
-        $(document).keydown(function (e) {
-          key = e.key;
-        });
-        Event_log(
-          'ASSESSMENT_DATA_UPLOADED',
-          varCandidateAssessmentData,
-          sec,
-          index,
-          key
-        );
-      },
-      error: function (e) {
-        var key: string = '';
-        $(document).keydown(function (e) {
-          key = e.key;
-        });
-        Event_log(
-          'ASSESSMENT_DATA_UPLOAD_FAILED',
-          varCandidateAssessmentData,
-          sec,
-          index,
-          key
-        );
-        alert('Error');
-      },
-    });
-  }
-
   ngOnDestroy() {
     if (id1) {
       clearInterval(id1);
@@ -1788,9 +1750,36 @@ export class VivaAssessmentComponent implements OnInit {
     );*/
     $('body').off();
     document.removeEventListener('contextmenu', id4);
-    document.removeEventListener('fullscreenchange', this.full_screen);
-    document.removeEventListener('visibilitychange', this.visibility);
+    document.removeEventListener('fullscreenchange', full_screen);
+    document.removeEventListener('visibilitychange', visibility);
   }
+}
+
+function WriteFileToFileSystem(varFs: any, fileName: any, fileContent: any) {
+  varFs.root.getFile(
+    '/' + fileName,
+    { create: true },
+    function (fileEntry: any) {
+      // Create a FileWriter object for our FileEntry (log.txt).
+      fileEntry.createWriter(function (fileWriter: any) {
+        fileWriter.onwriteend = function (e: any) {
+          console.log('Write completed.');
+        };
+
+        fileWriter.onerror = function (e: any) {
+          console.log('Write failed: ' + e.toString());
+        };
+
+        var blob = new Blob([fileContent], { type: 'text/plain' });
+
+        fileWriter.write(blob);
+      }, errorHandler);
+    },
+    errorHandler
+  );
+}
+function errorHandler(err: any) {
+  console.log(err);
 }
 
 function Event_log(
@@ -1824,6 +1813,7 @@ function Event_log(
     Description: '',
     Latitude: lat,
     Longitude: long,
+    EventImage: '',
   };
   switch (events) {
     case 'ASSESSMENT_STARTED':
@@ -1871,10 +1861,12 @@ function Event_log(
     case 'EXIT_FULLSCREEN':
       Assessment_event.SubTypeId = 25;
       Assessment_event.Description = 'Candidate attempted to exit full screen';
+      Assessment_event.EventImage = EventImage;
       break;
     case 'TAB_SWITCH':
       Assessment_event.SubTypeId = 25;
       Assessment_event.Description = 'Candidate attempted to switch tabs';
+      Assessment_event.EventImage = EventImage;
       break;
   }
   data.CandidateAssessmentData.VivaMcqAssessment.AssessmentEvents.push(

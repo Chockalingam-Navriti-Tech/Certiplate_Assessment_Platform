@@ -1,11 +1,30 @@
-function cam(data, sec, index) {
+var data, sec, index, video, player;
+
+function cam(datas, secs, indexes) {
+    data = datas;
+    sec = secs;
+    index = indexes;
+    video = "video" + (sec + 1) + "_" + (index + 1);
+    document.getElementById(video).style.display = "block";
+    window.requestFileSystem =
+        window.requestFileSystem || window.webkitRequestFileSystem;
+    window.requestFileSystem(
+        window.TEMPORARY,
+        1000 * 1024 * 1024,
+        onInitFs,
+        errorHandler
+    );
+
+}
+
+function onInitFs(fs) {
+    console.log(fs);
     var flag = false;
-    var player;
     let lat = localStorage.getItem('lat');
     let long = localStorage.getItem('long');
     var key = '';
     let upload_url = localStorage.getItem('Video_upload_url');
-    $(document).keydown(function (e) {
+    $(document).keydown(function(e) {
         key = e.key;
     });
     var options = {
@@ -26,27 +45,25 @@ function cam(data, sec, index) {
             }
         }
     };
-    var video = "video" + (sec + 1) + "_" + (index + 1);
-    document.getElementById(video).style.display = "block";
-    player = videojs(video, options, function () {
+    player = videojs(video, options, function() {
         var msg = 'Using video.js ' + videojs.VERSION +
             ' with videojs-record ' + videojs.getPluginVersion('record') +
             ' and recordrtc ' + RecordRTC.version;
         videojs.log(msg);
     });
-    player.on('deviceError', function () {
+    player.on('deviceError', function() {
         console.log('device error:', player.deviceErrorCode);
     });
 
-    player.on('error', function (element, error) {
+    player.on('error', function(element, error) {
         console.error(error);
     });
 
-    player.on('progressRecord', function () {
+    player.on('progressRecord', function() {
 
     })
 
-    player.on('startRecord', function () {
+    player.on('startRecord', function() {
         data.CandidateAssessmentData.PracticalAssessment.AssessmentEvents.push({
             DateTime: "",
             SubTypeId: 19,
@@ -72,7 +89,7 @@ function cam(data, sec, index) {
         console.log('started recording!');
     });
 
-    player.on('finishRecord', function () {
+    player.on('finishRecord', function() {
         data.CandidateAssessmentData.PracticalAssessment.AssessmentEvents.push({
             DateTime: "",
             SubTypeId: 20,
@@ -102,31 +119,10 @@ function cam(data, sec, index) {
         var reader = new FileReader();
         var base64data;
         reader.readAsDataURL(player.recordedData);
-        reader.onloadend = function () {
+        reader.onloadend = function() {
             base64data = reader.result;
             document.getElementById(video).setAttribute('src', reader.result);
-            var varForm = document.getElementById('frmImages');
-            $('#frmImages').append(
-                '<input name="video_data" value="' + base64data + '">'
-            );
-            $("#frmImages").append('<input name="video_file_name" value="' + player.recordedData.name + '">');
-
-            $.ajax({
-                url: upload_url,
-                type: 'POST',
-                data: new FormData(varForm),
-                contentType: false,
-                cache: false,
-                processData: false,
-                success: function (response) {
-                    //var varResponseData = JSON.parse(response);
-                    console.log(response);
-                },
-                error: function (e) {
-                    alert('Error');
-                },
-            });
-            //localStorage.setItem('VideoContent', JSON.stringify(videoContent));
+            WriteFileToFileSystem(fs, player.recordedData.name, base64data);
         }
         var sections = 'sec' + (sec + 1) + '_' + (index + 1);
         document.getElementById(sections).className = 'btn btn-success px-3';
@@ -137,10 +133,37 @@ function cam(data, sec, index) {
             type: "VideoRecordCompletedEvent",
             message: 'RECORDED'
         });
+        player.record().stopStream();
     });
     localStorage.setItem("Response_data", JSON.stringify(data));
 
+}
 
+function WriteFileToFileSystem(varFs, fileName, fileContent) {
+    varFs.root.getFile('/' + fileName, { create: true }, function(fileEntry) {
+
+        // Create a FileWriter object for our FileEntry (log.txt).
+        fileEntry.createWriter(function(fileWriter) {
+
+            fileWriter.onwriteend = function(e) {
+                console.log('Write completed.');
+            };
+
+            fileWriter.onerror = function(e) {
+                console.log('Write failed: ' + e.toString());
+            };
+
+            var blob = new Blob([fileContent], { type: 'text/plain' })
+
+            fileWriter.write(blob);
+
+        }, errorHandler);
+
+    }, errorHandler);
+}
+
+function errorHandler(err) {
+    console.log(err);
 }
 
 

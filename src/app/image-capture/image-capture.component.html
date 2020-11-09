@@ -24,6 +24,7 @@
   id="webcam"
   [height]="400"
   [width]="400"
+  (initError)="handleInitError($event)"
   [trigger]="triggerObservable"
   (imageCapture)="handleImage1($event)"
 ></webcam>
