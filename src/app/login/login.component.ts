@@ -235,6 +235,7 @@ export class LoginComponent implements OnInit {
                     } else this.route.navigate(['assessment-details']);
                   } else {
                     var datas = JSON.parse(JSON.stringify(data));
+                    console.log(datas);
                     datas.CandidateAssessmentData.TheoryAssessment.AssessmentStatus = 0;
                     if (datas.CandidateAssessmentData.PracticalAssessment)
                       datas.CandidateAssessmentData.PracticalAssessment.AssessmentStatus = 0;

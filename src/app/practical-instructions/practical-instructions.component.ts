@@ -1,6 +1,7 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 var option, id: any;
+var lang = [];
 @Component({
   selector: 'app-practical-instructions',
   templateUrl: './practical-instructions.component.html',
@@ -21,6 +22,19 @@ export class PracticalInstructionsComponent implements OnInit {
     );
     
     $(function () {
+      for (
+        var i = 0;
+        i <
+        parseInt(
+          data.CandidateAssessmentData.Languages.length
+        );
+        i++
+      ) {
+        var obj =
+          data.CandidateAssessmentData.Languages[i];
+        obj = obj.LanguageName as string;
+        lang.push({ obj, i });
+      }
       for (
         var i = 0;
         i < parseInt(data.CandidateAssessmentData.Languages.length);
@@ -69,20 +83,10 @@ export class PracticalInstructionsComponent implements OnInit {
       );
       $('#dropdown').change(function () {
         option = $('option:selected').attr('id');
-        if (option == "Hindi") id = 1;
-        else if (option == "Tamil") id = 2;
-        else if (option == "Telugu") id = 3;
-        else if (option == "Kannada") id = 4;
-        else if (option == "Gujarati") id = 5;
-        else if (option == "Oriya") id = 6;
-        else if (option == "Assamese") id = 7;
-        else if (option == "Urdu") id = 8; 
-        else if (option == "Marati") id = 9;
-        else if (option == "Malayalam") id = 10;  
-        else if (option == "Bengali") id = 11;
-        else if (option == "Punjabi") id = 12;
-        else if (option == "Manipuri") id = 13;
-        else id = 0;
+        lang.find(function (item, ind) {
+          if (item.obj == option)
+            id = item.i;
+        })
         if (id == 0) {
           document.getElementById('tablecontent').innerHTML = " ";
           var count = 1;
