@@ -28,7 +28,8 @@ export class TheoryInstructionsComponent implements OnInit {
         );
         i++
       ) {
-        var obj = varCandidateAssessmentData.CandidateAssessmentData.Languages[i];
+        var obj =
+          varCandidateAssessmentData.CandidateAssessmentData.Languages[i];
         obj = obj.LanguageName as string;
         lang.push({ obj, i });
       }
@@ -40,6 +41,10 @@ export class TheoryInstructionsComponent implements OnInit {
         );
         i++
       ) {
+        console.log(
+          varCandidateAssessmentData.CandidateAssessmentData.Languages[i]
+            .LanguageName
+        );
         document.getElementById(
           varCandidateAssessmentData.CandidateAssessmentData.Languages[i]
             .LanguageName
@@ -74,9 +79,8 @@ export class TheoryInstructionsComponent implements OnInit {
       $("#dropdown").change(function () {
         option = $("option:selected").attr("id");
         lang.find(function (item, ind) {
-          if (item.obj == option)
-            id = item.i;
-        })
+          if (item.obj == option) id = item.i;
+        });
         if (id == 0) {
           document.getElementById("tablecontent").innerHTML = " ";
           var count = 1;

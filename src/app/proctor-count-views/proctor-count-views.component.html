@@ -12,14 +12,14 @@
           <img src="/assets/images/logo.png" />
         </div>
         <button
-          class="btn dropdown-toggle mr-4"
+          class="btn dropdown-toggle mr-4 shadow-lg"
           type="button"
           id="drop"
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false"
         >
-          {{UserId}}
+          {{ UserId }}
         </button>
         <div class="dropdown-menu">
           <a class="dropdown-item" [routerLink]="['/changepassword']"
@@ -59,8 +59,6 @@
         <table
           class="mdl-data-table stripe hover cell-border order-column display"
           id="myTable"
-          datatable
-          [dtOptions]="dtOptions"
         >
           <thead>
             <tr>

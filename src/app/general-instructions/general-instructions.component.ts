@@ -21,6 +21,21 @@ export class GeneralInstructionsComponent implements OnInit {
     var data = JSON.parse(
       localStorage.getItem(this.Req + "_" + this.Id + "_" + "data")
     );
+
+    for (
+      var i = 0;
+      i <
+      parseInt(
+        data.CandidateAssessmentData.Languages.length
+      );
+      i++
+    ) {
+      document.getElementById(
+        data.CandidateAssessmentData.Languages[i]
+          .LanguageName
+      ).style.display = "block";
+    }
+
     $(document).ready(function () {
       document.getElementById("instruction").innerHTML =
         "<br />" +

@@ -79,6 +79,7 @@ export class LoginComponent implements OnInit {
                   parseInt(data.CandidateAssessmentData.CandidateAttemptCount) >
                   parseInt(data.CandidateAssessmentData.MaximumAttemptCount)
                 ) {
+                  console.log(data);
                   document.getElementById('warning').innerHTML =
                     '<b> <h2>' + 'Exceeded Maximum Attempt Count' + '</h2></b>';
                   $('#login').css('display', 'block');

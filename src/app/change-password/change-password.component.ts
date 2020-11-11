@@ -114,4 +114,12 @@ export class ChangePasswordComponent implements OnInit {
       },
     });
   }
+  clicked() {
+    if (sessionStorage.getItem('previous_page') == "proctor-attributes") {
+      this.route.navigate(['proctor-attributes']);
+    }
+    else {
+      this.route.navigate(['proctor-count-views']);
+    }
+  }
 }

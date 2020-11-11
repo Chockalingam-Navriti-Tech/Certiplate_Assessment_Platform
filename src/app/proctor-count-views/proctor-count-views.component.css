@@ -11,7 +11,7 @@ html {
 .container {
     padding: 4px 10px;
     position: absolute;
-    top: 21vh;
+    top: 19vh;
     left: 12.5%;
     font-size: 16px;
     width: 75%;
@@ -38,18 +38,15 @@ html {
 
 .dropdown-menu {
     width: 25%;
-    height: 35vh;
+    height: 21vh;
     background-color: black;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
     border-radius: 10px;
 }
 
 .dropdown-menu a {
     font-size: 16px;
     letter-spacing: 2px;
-    padding: 2px 15px;
+    padding: 13px 30px;
     color: rgb(255, 255, 255);
 }
 
@@ -218,7 +215,7 @@ h1 {
 .spinner-border {
     position: absolute;
     z-index: 999;
-    top: 37vh;
+    top: 35.5vh;
     left: 48%;
 }
 

@@ -1055,12 +1055,30 @@ export class PracticalAssessmentComponent implements OnInit {
     );
     if (event.action == 'done') {
       timer = true;
+      if (id1) {
+        clearInterval(id1);
+      }
+      if (id2) {
+        clearInterval(id2);
+      }
+      if (id3) {
+        clearInterval(id3);
+      }
+      localstream.stop();
+      $('body').off();
+      document.removeEventListener('contextmenu', id4);
+      document.removeEventListener('fullscreenchange', full_screen);
+      document.removeEventListener('visibilitychange', visibility);
       $('#submit_reponse_btn').click();
     }
   }
 
   submit() {
-    if (timer) $('#no').attr('disabled', 'disabled');
+    if (timer) {
+      document.getElementById("1").innerHTML =
+        "<h2 style='color:red'>TIME UP</h2><br>"; 
+      $("#no").attr("disabled", "disabled");
+    };
     attempted_count = 0;
     let total_question = 0;
     var data = this.data;
@@ -1085,7 +1103,7 @@ export class PracticalAssessmentComponent implements OnInit {
       );
     });
     $(document).ready(function () {
-      document.getElementById('1').innerHTML =
+      document.getElementById('1').innerHTML +=
         '<h2>Total questions : ' +
         total_question +
         ' questions <br></h2>' +

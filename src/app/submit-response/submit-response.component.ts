@@ -494,9 +494,9 @@ function Uploadfiles(varFormData: any) {
     async: false,
     success: function (response) {
       res = response;
-      Event_log('ASSESSMENT_DATA_UPLOADED', response_object);
       count += 1;
       if (count == total_count) {
+        Event_log('ASSESSMENT_DATA_UPLOADED', response_object);
         $('#loads').css('display', 'none');
         $('#progresses').css('display', 'none');
         $('#dones').css('display', 'block');

@@ -34,6 +34,11 @@ export const environment = {
     'https://uap-demo-api.certiplate.com/json/asynconeway/GetStateAndLanguagewiseProctorCountDataRequest',
   Proctor_Count_Views_Api_Key:
     'ddcd795c-1051-4bc6-8b31-c5b60b68544c',
+  Proctor_Attributes_URL:
+    'https://uap-demo-api.certiplate.com/json/asynconeway/GetStateAndLanguagewiseProctorDetailedDataRequest',
+  Proctor_Attributes_Api_Key:
+    'ddcd795c-1051-4bc6-8b31-c5b60b68544c',
+  
 };
 
 /*
