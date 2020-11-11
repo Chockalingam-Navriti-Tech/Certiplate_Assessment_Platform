@@ -576,7 +576,7 @@ export class PracticalAssessmentComponent implements OnInit {
           else if (option == 'Oriya') id = 6;
           else if (option == 'Assamese') id = 7;
           else if (option == 'Urdu') id = 8;
-          else if (option == 'Marati') id = 9;
+          else if (option == 'Marathi') id = 9;
           else if (option == 'Malayalam') id = 10;
           else if (option == 'Bengali') id = 11;
           else if (option == 'Punjabi') id = 12;
@@ -607,7 +607,7 @@ export class PracticalAssessmentComponent implements OnInit {
           else if (option == "Oriya") id = 6;
           else if (option == "Assamese") id = 7;
           else if (option == "Urdu") id = 8;
-          else if (option == "Marati") id = 9;
+          else if (option == "Marathi") id = 9;
           else if (option == "Malayalam") id = 10;
           else if (option == "Bengali") id = 11;
           else if (option == "Punjabi") id = 12;
@@ -762,7 +762,7 @@ export class PracticalAssessmentComponent implements OnInit {
         else if (option == 'Oriya') id = 6;
         else if (option == 'Assamese') id = 7;
         else if (option == 'Urdu') id = 8;
-        else if (option == 'Marati') id = 9;
+        else if (option == 'Marathi') id = 9;
         else if (option == 'Malayalam') id = 10;
         else if (option == 'Bengali') id = 11;
         else if (option == 'Punjabi') id = 12;
@@ -865,7 +865,7 @@ export class PracticalAssessmentComponent implements OnInit {
         else if (option == 'Oriya') id = 6;
         else if (option == 'Assamese') id = 7;
         else if (option == 'Urdu') id = 8;
-        else if (option == 'Marati') id = 9;
+        else if (option == 'Marathi') id = 9;
         else if (option == 'Malayalam') id = 10;
         else if (option == 'Bengali') id = 11;
         else if (option == 'Punjabi') id = 12;
@@ -1074,11 +1074,6 @@ export class PracticalAssessmentComponent implements OnInit {
   }
 
   submit() {
-    if (timer) {
-      document.getElementById("1").innerHTML =
-        "<h2 style='color:red'>TIME UP</h2><br>"; 
-      $("#no").attr("disabled", "disabled");
-    };
     attempted_count = 0;
     let total_question = 0;
     var data = this.data;
@@ -1103,16 +1098,37 @@ export class PracticalAssessmentComponent implements OnInit {
       );
     });
     $(document).ready(function () {
-      document.getElementById('1').innerHTML +=
-        '<h2>Total questions : ' +
-        total_question +
-        ' questions <br></h2>' +
-        '<h2>Attempted questions : ' +
-        attempted_count +
-        ' questions <br></h2>' +
-        '<h2>Unattempted questions : ' +
-        (total_question - attempted_count) +
-        ' questions <br></h2>';
+      if (timer) {
+        document.getElementById("1").innerHTML =
+          "<h2 style='color:red'>TIME UP</h2><br>" +
+          "<h2>Total questions : " +
+          total_question +
+          " questions <br></h2>" +
+          "<h2>Attempted questions : " +
+          attempted_count +
+          " questions <br></h2>" +
+          "<h2>Unattempted questions : " +
+          (total_question - attempted_count) +
+          " questions <br></h2>" +
+          "<h2> Marked for Review : " +
+          marked_review +
+          " questions<br></h2>";
+        $("#no").attr("disabled", "disabled");
+      } else {
+        document.getElementById("1").innerHTML =
+          "<h2>Total questions : " +
+          total_question +
+          " questions <br></h2>" +
+          "<h2>Attempted questions : " +
+          attempted_count +
+          " questions <br></h2>" +
+          "<h2>Unattempted questions : " +
+          (total_question - attempted_count) +
+          " questions <br></h2>" +
+          "<h2> Marked for Review : " +
+          marked_review +
+          " questions<br></h2>";
+      }
     });
   }
 
