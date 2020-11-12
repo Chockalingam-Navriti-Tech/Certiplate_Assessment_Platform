@@ -267,6 +267,9 @@ export class TheoryAssessmentComponent implements OnInit {
       if (
         document.getElementById(selected).className == "btn btn-warning px-3"
       ) {
+        document.getElementById(selected).classList.remove("btn-warning");
+        if (document.getElementById(selected).className == "btn btn-success px-3")
+          attempted_count -= 1;
         $("#checkbox").prop("checked", false);
         marked_review -= 1;
       }
@@ -1473,7 +1476,6 @@ export class TheoryAssessmentComponent implements OnInit {
           .Sections[no1 - 1].Questions.length;
       no1 = no1.toString();
       no2 = no2.toString();
-      console.log(no1, no2);
       /*varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.CurrentSectionIndex = section;
       varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.CurrentQuestionIndex = index;
       localStorage.setItem('current_question_no', JSON.stringify(question));*/
