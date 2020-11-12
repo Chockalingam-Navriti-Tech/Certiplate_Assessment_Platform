@@ -1121,10 +1121,7 @@ export class PracticalAssessmentComponent implements OnInit {
           " questions <br></h2>" +
           "<h2>Unattempted questions : " +
           (total_question - attempted_count) +
-          " questions <br></h2>" +
-          "<h2> Marked for Review : " +
-          marked_review +
-          " questions<br></h2>";
+          " questions <br></h2>";
       }
     });
   }
