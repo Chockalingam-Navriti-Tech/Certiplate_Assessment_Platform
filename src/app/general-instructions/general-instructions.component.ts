@@ -1,6 +1,8 @@
 import { Router, ActivatedRoute } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
 import * as $ from "jquery";
+var option, id: any;
+var lang = [];
 
 @Component({
   selector: "app-general-instructions",
@@ -21,35 +23,98 @@ export class GeneralInstructionsComponent implements OnInit {
     var data = JSON.parse(
       localStorage.getItem(this.Req + "_" + this.Id + "_" + "data")
     );
-
     for (
       var i = 0;
-      i <
-      parseInt(
-        data.CandidateAssessmentData.Languages.length
-      );
+      i < parseInt(data.CandidateAssessmentData.Languages.length);
+      i++
+    ) {
+      var obj = data.CandidateAssessmentData.Languages[i];
+      obj = obj.LanguageName as string;
+      lang.push({ obj, i });
+    }
+    for (
+      var i = 0;
+      i < parseInt(data.CandidateAssessmentData.Languages.length);
       i++
     ) {
       document.getElementById(
-        data.CandidateAssessmentData.Languages[i]
-          .LanguageName
+        data.CandidateAssessmentData.Languages[i].LanguageName
       ).style.display = "block";
     }
 
     $(document).ready(function () {
-      document.getElementById("instruction").innerHTML =
-        "<br />" +
-        '<b style="padding:10px"> 1 : </b>' +
-        "<b> " +
-        data.CandidateAssessmentData.GeneralInstructions[0].InstructionList[0] +
-        "</b>" +
-        "<hr style='height:1px;border-width:0;color:black;background-color:black'>" +
-        '<b style="padding:10px"> 2 : </b>' +
-        "<b>" +
-        data.CandidateAssessmentData.GeneralInstructions[0].InstructionList[1] +
-        "</b>" +
-        "<br />" +
-        "<br/>";
+      var count = 1;
+      $.each(
+        data.CandidateAssessmentData.TheoryInstructions[0].InstructionList,
+        function (index: number, value) {
+          document.getElementById("tablecontent").innerHTML +=
+            "<br/>" +
+            '<b style="padding:14px">' +
+            count +
+            ":</b>" +
+            '<b style="padding:5px">' +
+            value +
+            " </b>" +
+            "<br/>" +
+            "<br/>" +
+            "<hr style='heigth:1px;border-width:20;color:black;background-color:black'>";
+          count += 1;
+        }
+      );
+
+      $("#dropdown").change(function () {
+        option = $("option:selected").attr("id");
+        lang.find(function (item, ind) {
+          if (item.obj == option) id = item.i;
+        });
+        if (id == 0) {
+          document.getElementById("tablecontent").innerHTML = " ";
+          var count = 1;
+          $.each(
+            data.CandidateAssessmentData.GeneralInstructions[0].InstructionList,
+            function (index: number, value) {
+              document.getElementById("tablecontent").innerHTML +=
+                "<br/>" +
+                '<b style="padding:14px">' +
+                count +
+                ":</b>" +
+                '<b style="padding:5px">' +
+                value +
+                " </b>" +
+                "<br/>" +
+                "<br/>" +
+                "<hr style='heigth:1px;border-width:20;color:black;background-color:black'>";
+              count += 1;
+            }
+          );
+        } else {
+          document.getElementById("tablecontent").innerHTML = " ";
+          var count = 1;
+          var value_lang =
+            data.CandidateAssessmentData.GeneralInstructions[id]
+              .InstructionList;
+          $.each(
+            data.CandidateAssessmentData.GeneralInstructions[0].InstructionList,
+            function (index: number, value) {
+              document.getElementById("tablecontent").innerHTML +=
+                "<br/>" +
+                '<b style="padding:14px">' +
+                count +
+                ":</b>" +
+                '<b style="padding:14px">' +
+                value +
+                " </b>" +
+                "<br/><div style='padding:7px 56px'>" +
+                value_lang[index] +
+                "<br/>" +
+                "<br/></div>" +
+                "<hr style='heigth:1px;border-width:20;color:black;background-color:black'>";
+              count += 1;
+            }
+          );
+        }
+      });
+
       $("#materialchecked").click(function () {
         //check if checkbox is checked
         if ($(this).is(":checked")) {
