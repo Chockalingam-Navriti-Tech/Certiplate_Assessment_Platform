@@ -268,7 +268,9 @@ export class TheoryAssessmentComponent implements OnInit {
         document.getElementById(selected).className == "btn btn-warning px-3"
       ) {
         document.getElementById(selected).classList.remove("btn-warning");
-        if (document.getElementById(selected).className == "btn btn-success px-3")
+        if (varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.Sections[
+          sec
+        ].Questions[index].CandidateActualResponseOption != '-1')
           attempted_count -= 1;
         $("#checkbox").prop("checked", false);
         marked_review -= 1;
@@ -1488,7 +1490,8 @@ export class TheoryAssessmentComponent implements OnInit {
       $("#previous").removeAttr("disabled");
       if (section == "sec1" && ind == "1")
         $("#previous").attr("disabled", "disabled");
-      if (section == "sec"+no1  && ind == no2) $("#next").attr("disabled", "disabled");
+      if (section == "sec" + no1 && ind == no2)
+        $("#next").attr("disabled", "disabled");
       count = parseInt(question);
       index = parseInt(ind) - 1;
       var sec_split = section.split("c");

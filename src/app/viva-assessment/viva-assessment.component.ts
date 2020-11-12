@@ -259,6 +259,11 @@ export class VivaAssessmentComponent implements OnInit {
       if (
         document.getElementById(selected).className == "btn btn-warning px-3"
       ) {
+        document.getElementById(selected).classList.remove("btn-warning");
+        if (varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.Sections[
+          sec
+        ].Questions[index].CandidateActualResponseOption != '-1')
+          attempted_count -= 1;
         $("#checkbox").prop("checked", false);
         marked_review -= 1;
       }

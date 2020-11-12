@@ -45,7 +45,7 @@ export class GeneralInstructionsComponent implements OnInit {
     $(document).ready(function () {
       var count = 1;
       $.each(
-        data.CandidateAssessmentData.TheoryInstructions[0].InstructionList,
+        data.CandidateAssessmentData.GeneralInstructions[0].InstructionList,
         function (index: number, value) {
           document.getElementById("tablecontent").innerHTML +=
             "<br/>" +
