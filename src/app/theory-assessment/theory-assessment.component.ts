@@ -204,7 +204,7 @@ export class TheoryAssessmentComponent implements OnInit {
               if (
                 varCandidateAssessmentData.CandidateAssessmentData
                   .TheoryAssessment.Sections[index].Questions[ind]
-                  .CandidateActualResponseOption != "-1"
+                  .CandidateCurrentResponseOption != "-1"
               ) {
                 var sections = "sec" + (index + 1) + "_" + (ind + 1);
                 document.getElementById(sections).className =
@@ -270,7 +270,7 @@ export class TheoryAssessmentComponent implements OnInit {
         document.getElementById(selected).classList.remove("btn-warning");
         if (varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.Sections[
           sec
-        ].Questions[index].CandidateActualResponseOption != '-1')
+        ].Questions[index].CandidateCurrentResponseOption != '-1')
           attempted_count -= 1;
         $("#checkbox").prop("checked", false);
         marked_review -= 1;
@@ -279,19 +279,19 @@ export class TheoryAssessmentComponent implements OnInit {
       if (id == "Group1")
         varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.Sections[
           sec
-        ].Questions[index].CandidateActualResponseOption = "0";
+        ].Questions[index].CandidateCurrentResponseOption = "0";
       if (id == "Group2")
         varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.Sections[
           sec
-        ].Questions[index].CandidateActualResponseOption = "1";
+        ].Questions[index].CandidateCurrentResponseOption = "1";
       if (id == "Group3")
         varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.Sections[
           sec
-        ].Questions[index].CandidateActualResponseOption = "2";
+        ].Questions[index].CandidateCurrentResponseOption = "2";
       if (id == "Group4")
         varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.Sections[
           sec
-        ].Questions[index].CandidateActualResponseOption = "3";
+        ].Questions[index].CandidateCurrentResponseOption = "3";
     });
 
     //storing data for every 5 sec
@@ -875,12 +875,12 @@ export class TheoryAssessmentComponent implements OnInit {
     if (
       parseInt(
         varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
-          .Sections[sec].Questions[index].CandidateActualResponseOption
+          .Sections[sec].Questions[index].CandidateCurrentResponseOption
       ) != -1
     ) {
       var option =
         varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
-          .Sections[sec].Questions[index].CandidateActualResponseOption;
+          .Sections[sec].Questions[index].CandidateCurrentResponseOption;
       if (option == "0") $("#Group1").prop("checked", true);
       if (option == "1") $("#Group2").prop("checked", true);
       if (option == "2") $("#Group3").prop("checked", true);
@@ -1151,12 +1151,12 @@ export class TheoryAssessmentComponent implements OnInit {
     if (
       parseInt(
         varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
-          .Sections[sec].Questions[index].CandidateActualResponseOption
+          .Sections[sec].Questions[index].CandidateCurrentResponseOption
       ) != -1
     ) {
       var option =
         varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
-          .Sections[sec].Questions[index].CandidateActualResponseOption;
+          .Sections[sec].Questions[index].CandidateCurrentResponseOption;
       if (option == "0") $("#Group1").prop("checked", true);
       if (option == "1") $("#Group2").prop("checked", true);
       if (option == "2") $("#Group3").prop("checked", true);
@@ -1263,12 +1263,12 @@ export class TheoryAssessmentComponent implements OnInit {
       if (
         data.CandidateAssessmentData.TheoryAssessment.Sections[sec].Questions[
           index
-        ].CandidateActualResponseOption != -1
+        ].CandidateCurrentResponseOption != -1
       ) {
         var option =
           data.CandidateAssessmentData.TheoryAssessment.Sections[sec].Questions[
             index
-          ].CandidateActualResponseOption;
+          ].CandidateCurrentResponseOption;
         if (option == "0") $("#Group1").prop("checked", true);
         if (option == "1") $("#Group2").prop("checked", true);
         if (option == "2") $("#Group3").prop("checked", true);
@@ -1391,12 +1391,12 @@ export class TheoryAssessmentComponent implements OnInit {
     if (
       parseInt(
         varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
-          .Sections[sec].Questions[index].CandidateActualResponseOption
+          .Sections[sec].Questions[index].CandidateCurrentResponseOption
       ) != -1
     ) {
       var option =
         varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
-          .Sections[sec].Questions[index].CandidateActualResponseOption;
+          .Sections[sec].Questions[index].CandidateCurrentResponseOption;
       if (option == "0") $("#Group1").prop("checked", true);
       if (option == "1") $("#Group2").prop("checked", true);
       if (option == "2") $("#Group3").prop("checked", true);
@@ -1567,12 +1567,12 @@ export class TheoryAssessmentComponent implements OnInit {
       if (
         parseInt(
           varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
-            .Sections[sec].Questions[index].CandidateActualResponseOption
+            .Sections[sec].Questions[index].CandidateCurrentResponseOption
         ) != -1
       ) {
         var option =
           varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
-            .Sections[sec].Questions[index].CandidateActualResponseOption;
+            .Sections[sec].Questions[index].CandidateCurrentResponseOption;
         if (option == "0") $("#Group1").prop("checked", true);
         if (option == "1") $("#Group2").prop("checked", true);
         if (option == "2") $("#Group3").prop("checked", true);
@@ -1681,7 +1681,7 @@ export class TheoryAssessmentComponent implements OnInit {
       if (
         parseInt(
           varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
-            .Sections[sec].Questions[index].CandidateActualResponseOption
+            .Sections[sec].Questions[index].CandidateCurrentResponseOption
         ) != -1
       ) {
         document.getElementById(section).className = "btn btn-success px-3";
@@ -1890,10 +1890,10 @@ function Event_log(
       ].QuestionId
     ),
     QuestionIndex: index,
-    ActualResponse: parseInt(
+    CurrentResponse: parseInt(
       data.CandidateAssessmentData.TheoryAssessment.Sections[sec].Questions[
         index
-      ].CandidateActualResponseOption
+      ].CandidateCurrentResponseOption
     ),
     KeyboardKey: key,
     Description: "",
