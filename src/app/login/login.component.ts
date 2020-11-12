@@ -76,8 +76,8 @@ export class LoginComponent implements OnInit {
               },
               success: (data) => {
                 if (
-                  parseInt(json.CandidateAssessmentData.CandidateAttemptCount) >
-                  parseInt(json.CandidateAssessmentData.MaximumAttemptCount)
+                  parseInt(json.CandidateAssessmentAuthentication.CandidateAttemptCount) >
+                  parseInt(json.CandidateAssessmentAuthentication.MaximumAttemptCount)
                 ) {
                   document.getElementById('warning').innerHTML =
                     '<b> <h2>' + 'Exceeded Maximum Attempt Count' + '</h2></b>';
