@@ -27,6 +27,8 @@ let timer = false;
 var id1, id2, id3, id4, id5;
 var varCandidateAssessmentData;
 var EventImage = "";
+
+declare var $: any;
 declare var window: any;
 var constraints = {
   video: {
@@ -174,12 +176,12 @@ export class TheoryAssessmentComponent implements OnInit {
       }, 2000);
     });*/
 
-    /*document.addEventListener(
-      'contextmenu',
+    document.addEventListener(
+      "contextmenu",
       (id4 = (event: any) => event.preventDefault())
-    );*/
+    );
 
-    $("body").on("cut copy paste", function (e) {
+    $("body").on("cut copy paste", function (e:any) {
       e.preventDefault();
     });
 
@@ -1697,7 +1699,6 @@ export class TheoryAssessmentComponent implements OnInit {
         "data",
       JSON.stringify(varCandidateAssessmentData)
     );
-
     if (event.action == "done") {
       timer = true;
       if (id1) {
