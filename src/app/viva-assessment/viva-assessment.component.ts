@@ -1428,6 +1428,14 @@ export class VivaAssessmentComponent implements OnInit {
 
   clicked(section: any, ind: any, question: any) {
     $(function () {
+      var no1 =
+        varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment
+          .Sections.length;
+      var no2 =
+        varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment
+          .Sections[no1 - 1].Questions.length;
+      no1 = no1.toString();
+      no2 = no2.toString();
       /*varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.CurrentSectionIndex = section;
       varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.CurrentQuestionIndex = index;
       localStorage.setItem('current_question_no', JSON.stringify(question));*/
@@ -1440,7 +1448,7 @@ export class VivaAssessmentComponent implements OnInit {
       $("#previous").removeAttr("disabled");
       if (section == "sec1" && ind == "1")
         $("#previous").attr("disabled", "disabled");
-      if (section == "sec3" && ind == "2")
+      if (section == "sec" + no1 && ind == no2)
         $("#next").attr("disabled", "disabled");
       count = parseInt(question);
       index = parseInt(ind) - 1;

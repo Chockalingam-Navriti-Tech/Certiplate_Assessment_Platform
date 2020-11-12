@@ -912,6 +912,14 @@ export class PracticalAssessmentComponent implements OnInit {
 
   clicked(section: string, ind: string, question: string) {
     $(function () {
+      var no1 =
+        varCandidateAssessmentData.CandidateAssessmentData.PracticalAssessment
+          .Sections.length;
+      var no2 =
+        varCandidateAssessmentData.CandidateAssessmentData.PracticalAssessment
+          .Sections[no1 - 1].Questions.length;
+      no1 = no1.toString();
+      no2 = no2.toString();
       for (
         var i = 0;
         i <
@@ -934,7 +942,7 @@ export class PracticalAssessmentComponent implements OnInit {
       $("#previous").removeAttr("disabled");
       if (section == "1" && ind == "1")
         $("#previous").attr("disabled", "disabled");
-      if (section == "3" && ind == "1") $("#next").attr("disabled", "disabled");
+      if (section == no1 && ind == no2 ) $("#next").attr("disabled", "disabled");
       count = parseInt(question);
       index = parseInt(ind) - 1;
       sec = parseInt(section) - 1;

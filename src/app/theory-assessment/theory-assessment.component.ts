@@ -181,7 +181,7 @@ export class TheoryAssessmentComponent implements OnInit {
       (id4 = (event: any) => event.preventDefault())
     );
 
-    $("body").on("cut copy paste", function (e:any) {
+    $("body").on("cut copy paste", function (e: any) {
       e.preventDefault();
     });
 
@@ -1090,8 +1090,10 @@ export class TheoryAssessmentComponent implements OnInit {
         index + 1 ==
           data.CandidateAssessmentData.TheoryAssessment.Sections[sec].Questions
             .length
-      )
+      ) {
+        console.log(sec + 1, index + 1);
         $("#next").attr("disabled", "disabled");
+      }
     } else {
       sec += 1;
       if (sec < data.CandidateAssessmentData.TheoryAssessment.Sections.length) {
@@ -1463,6 +1465,15 @@ export class TheoryAssessmentComponent implements OnInit {
 
   clicked(section: any, ind: any, question: any) {
     $(function () {
+      var no1 =
+        varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
+          .Sections.length;
+      var no2 =
+        varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
+          .Sections[no1 - 1].Questions.length;
+      no1 = no1.toString();
+      no2 = no2.toString();
+      console.log(no1, no2);
       /*varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.CurrentSectionIndex = section;
       varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.CurrentQuestionIndex = index;
       localStorage.setItem('current_question_no', JSON.stringify(question));*/
@@ -1475,8 +1486,7 @@ export class TheoryAssessmentComponent implements OnInit {
       $("#previous").removeAttr("disabled");
       if (section == "sec1" && ind == "1")
         $("#previous").attr("disabled", "disabled");
-      if (section == "sec3" && ind == "2")
-        $("#next").attr("disabled", "disabled");
+      if (section == "sec"+no1  && ind == no2) $("#next").attr("disabled", "disabled");
       count = parseInt(question);
       index = parseInt(ind) - 1;
       var sec_split = section.split("c");
