@@ -232,8 +232,81 @@ export class LoginComponent implements OnInit {
                         $('#login').css('display', 'block');
                         $('#log-in').css('display', 'none');
                       }
-                    } else this.route.navigate(['assessment-details']);
-                  } else {
+                    }
+                    else if (
+                      localStorage.getItem(req + '_' + cand + '_assessment') ==
+                      'viva'
+                    ) {
+                      if (
+                        data.CandidateAssessmentData.VivaMcqAssessment
+                          .StartImage.FileName == '' ||
+                        data.CandidateAssessmentData.VivaMcqAssessment
+                          .IdentityImage.FileName == ''
+                      )
+                        this.route.navigate(['image-capture']);
+                      else if (
+                        data.CandidateAssessmentData.VivaMcqAssessment
+                          .StartImage.FileName != '' &&
+                        data.CandidateAssessmentData.VivaMcqAssessment
+                          .IdentityImage.FileName != '' &&
+                        data.CandidateAssessmentData.VivaMcqAssessment
+                          .AssessmentStatus == '0'
+                      ) {
+                        this.route.navigate(['viva-instructions']);
+                      } else if (
+                        data.CandidateAssessmentData.VivaMcqAssessment
+                          .AssessmentStatus == '1'
+                      ) {
+                        let element = document.documentElement;
+                        if (element.requestFullscreen)
+                          element.requestFullscreen();
+                        this.route.navigate(['viva-assessment']);
+                      } else if (
+                        data.CandidateAssessmentData.VivaMcqAssessment
+                          .AssessmentStatus == '2' &&
+                        data.CandidateAssessmentData.VivaMcqAssessment
+                          .EndImage.FileName == ''
+                      )
+                        this.route.navigate(['end-image-capture']);
+                      else if (
+                        data.CandidateAssessmentData.VivaMcqAssessment
+                          .EndImage.FileName != '' &&
+                        data.CandidateAssessmentData.VivaMcqAssessment
+                          .AssessmentStatus == '2'
+                      )
+                        this.route.navigate(['feedback-viva']);
+                      else if (
+                        data.CandidateAssessmentData.VivaMcqAssessment
+                          .AssessmentStatus == '3'
+                      )
+                        this.route.navigate(['submit-response']);
+                      else if (
+                        data.CandidateAssessmentData.TheoryAssessment
+                          .AssessmentStatus != '4' &&
+                        data.CandidateAssessmentData.VivaMcqAssessment
+                          .AssessmentStatus == '4'
+                      )
+                        this.route.navigate(['assessment-details']);
+                      else if (
+                        data.CandidateAssessmentData.TheoryAssessment
+                          .AssessmentStatus == '4' &&
+                        data.CandidateAssessmentData.VivaMcqAssessment
+                          .AssessmentStatus == '4'
+                      ) {
+                        document.getElementById(
+                          'warning'
+                        ).style.backgroundColor = 'lawngreen';
+                        document.getElementById('warning').innerHTML =
+                          '<b> <h2>' +
+                          'You have completed the assessment' +
+                          '</h2></b>';
+                        $('#login').css('display', 'block');
+                        $('#log-in').css('display', 'none');
+                      }
+                    }
+                    else this.route.navigate(['assessment-details']);
+                  }
+                  else {
                     var datas = JSON.parse(JSON.stringify(data));
                     console.log(datas);
                     datas.CandidateAssessmentData.TheoryAssessment.AssessmentStatus = 0;
