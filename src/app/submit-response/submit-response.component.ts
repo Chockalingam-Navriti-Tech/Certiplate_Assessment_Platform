@@ -612,9 +612,11 @@ function Event_log(events: string, data: any) {
         break;
       case 'ASSESSMENT_DATA_UPLOAD_FAILED':
         Assessment_event.SubTypeId = 4;
+        Assessment_event.Description = "Assessment data upload failed";
         break;
       case 'ASSESSMENT_DATA_UPLOADED':
         Assessment_event.SubTypeId = 5;
+        Assessment_event.Description = "Assessment data uploaded";
         break;
       case 'ASSESSMENT_SUBMITTED':
         Assessment_event.SubTypeId = 7;
@@ -685,9 +687,11 @@ function Event_log(events: string, data: any) {
         break;
       case 'ASSESSMENT_DATA_UPLOAD_FAILED':
         Assessment_event.SubTypeId = 4;
+        Assessment_event.Description = "Assessment data upload failed";
         break;
       case 'ASSESSMENT_DATA_UPLOADED':
         Assessment_event.SubTypeId = 5;
+        Assessment_event.Description = "Assessment data uploaded";
         break;
       case 'ASSESSMENT_SUBMITTED':
         Assessment_event.SubTypeId = 7;
