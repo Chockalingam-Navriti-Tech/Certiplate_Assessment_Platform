@@ -377,7 +377,6 @@ export class TheoryAssessmentComponent implements OnInit {
       "keydown",
       (visibility = function () {
         exit_full_screen += 1;
-        console.log(exit_full_screen);
         var key: string = "";
         $(document).keydown(function (e) {
           key = e.key;
@@ -506,7 +505,6 @@ export class TheoryAssessmentComponent implements OnInit {
         });
         if (fullscreen % 2 != 0) {
           exit_full_screen += 1;
-          console.log(exit_full_screen);
           $("#popup").css({
             opacity: 1,
           });
