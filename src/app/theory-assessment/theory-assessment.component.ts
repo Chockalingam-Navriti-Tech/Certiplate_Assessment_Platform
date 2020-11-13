@@ -185,6 +185,41 @@ export class TheoryAssessmentComponent implements OnInit {
       e.preventDefault();
     });
 
+
+    if (
+      parseInt(
+        varCandidateAssessmentData.CandidateAssessmentData.CandidateAttemptCount
+      ) == 1
+    ) {
+      var key: string = "";
+      $(document).keydown(function (e) {
+        key = e.key;
+      });
+      Event_log(
+        "ASSESSMENT_STARTED",
+        varCandidateAssessmentData,
+        sec,
+        index,
+        key
+      );
+    } else if (
+      parseInt(
+        varCandidateAssessmentData.CandidateAssessmentData.CandidateAttemptCount
+      ) > 1
+    ) {
+      var key: string = "";
+      $(document).keydown(function (e) {
+        key = e.key;
+      });
+      Event_log(
+        "ASSESSMENT_CONTINUED",
+        varCandidateAssessmentData,
+        sec,
+        index,
+        key
+      );
+    }
+    
     $(document).ready(function () {
       if (
         varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
@@ -268,9 +303,11 @@ export class TheoryAssessmentComponent implements OnInit {
         document.getElementById(selected).className == "btn btn-warning px-3"
       ) {
         document.getElementById(selected).classList.remove("btn-warning");
-        if (varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.Sections[
-          sec
-        ].Questions[index].CandidateCurrentResponseOption != '-1')
+        if (
+          varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
+            .Sections[sec].Questions[index].CandidateCurrentResponseOption !=
+          "-1"
+        )
           attempted_count -= 1;
         $("#checkbox").prop("checked", false);
         marked_review -= 1;
@@ -891,39 +928,6 @@ export class TheoryAssessmentComponent implements OnInit {
       $("#checkbox").prop("checked", true);
     else $("#checkbox").prop("checked", false);
 
-    if (
-      parseInt(
-        varCandidateAssessmentData.CandidateAssessmentData.CandidateAttemptCount
-      ) == 1
-    ) {
-      var key: string = "";
-      $(document).keydown(function (e) {
-        key = e.key;
-      });
-      Event_log(
-        "ASSESSMENT_STARTED",
-        varCandidateAssessmentData,
-        sec,
-        index,
-        key
-      );
-    } else if (
-      parseInt(
-        varCandidateAssessmentData.CandidateAssessmentData.CandidateAttemptCount
-      ) > 1
-    ) {
-      var key: string = "";
-      $(document).keydown(function (e) {
-        key = e.key;
-      });
-      Event_log(
-        "ASSESSMENT_CONTINUED",
-        varCandidateAssessmentData,
-        sec,
-        index,
-        key
-      );
-    }
     $("#img").css("display", "none");
     $("#img1").css("display", "none");
     $("#img2").css("display", "none");
@@ -1890,11 +1894,7 @@ function Event_log(
       ].QuestionId
     ),
     QuestionIndex: index,
-    CurrentResponse: parseInt(
-      data.CandidateAssessmentData.TheoryAssessment.Sections[sec].Questions[
-        index
-      ].CandidateCurrentResponseOption
-    ),
+    ActualResponse: 0,
     KeyboardKey: key,
     Description: "",
     EventImage: "",
@@ -1940,6 +1940,11 @@ function Event_log(
       break;
     case "OPTION_SELECTED":
       Assessment_event.SubTypeId = 21;
+      Assessment_event.ActualResponse = parseInt(
+        data.CandidateAssessmentData.TheoryAssessment.Sections[sec].Questions[
+          index
+        ].CandidateCurrentResponseOption
+      )+1;
       break;
     case "KEYBOARD_KEY_PRESSED":
       Assessment_event.SubTypeId = 23;

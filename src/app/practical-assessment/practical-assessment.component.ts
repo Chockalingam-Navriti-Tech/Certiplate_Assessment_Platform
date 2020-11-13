@@ -96,6 +96,22 @@ export class PracticalAssessmentComponent implements OnInit {
       varCandidateAssessmentData.CandidateAssessmentData.PracticalAssessment
         .Sections.length;
 
+    if (parseInt(varCandidateAssessmentData.CandidateAssessmentData.CandidateAttemptCount) > 1) {
+      var key: string = "";
+      $(document).keydown(function (e) {
+        key = e.key;
+      });
+      Event_log("ASSESSMENT_CONTINUED", varCandidateAssessmentData, sec, index, key);
+    } else if (
+      parseInt(varCandidateAssessmentData.CandidateAssessmentData.CandidateAttemptCount) == 1
+    ) {
+      var key: string = "";
+      $(document).keydown(function (e) {
+        key = e.key;
+      });
+      Event_log("ASSESSMENT_STARTED", varCandidateAssessmentData, sec, index, key);
+    }
+
     for (let i = 0; i < i_length; i++) {
       $("#card").append(
         '<div class="row justify-content-center">' +
@@ -650,22 +666,6 @@ export class PracticalAssessmentComponent implements OnInit {
       $("#checkbox").prop("checked", true);
     else $("#checkbox").prop("checked", false);
 
-    if (parseInt(data.CandidateAssessmentData.CandidateAttemptCount) > 1) {
-      var key: string = "";
-      $(document).keydown(function (e) {
-        key = e.key;
-      });
-      Event_log("ASSESSMENT_CONTINUED", data, sec, index, key);
-    } else if (
-      parseInt(data.CandidateAssessmentData.CandidateAttemptCount) == 1
-    ) {
-      var key: string = "";
-      $(document).keydown(function (e) {
-        key = e.key;
-      });
-      Event_log("ASSESSMENT_STARTED", data, sec, index, key);
-    }
-
     $(function () {
       $("#img").css("display", "none");
       if (
@@ -942,7 +942,7 @@ export class PracticalAssessmentComponent implements OnInit {
       $("#previous").removeAttr("disabled");
       if (section == "1" && ind == "1")
         $("#previous").attr("disabled", "disabled");
-      if (section == no1 && ind == no2 ) $("#next").attr("disabled", "disabled");
+      if (section == no1 && ind == no2) $("#next").attr("disabled", "disabled");
       count = parseInt(question);
       index = parseInt(ind) - 1;
       sec = parseInt(section) - 1;
@@ -1229,11 +1229,7 @@ function Event_log(
       ].QuestionId
     ),
     QuestionIndex: index,
-    ActualResponse: parseInt(
-      data.CandidateAssessmentData.PracticalAssessment.Sections[sec].Questions[
-        index
-      ].CandidateActualResponseOption
-    ),
+    ActualResponse: 0,
     KeyboardKey: key,
     Description: "",
     EventImage: "",

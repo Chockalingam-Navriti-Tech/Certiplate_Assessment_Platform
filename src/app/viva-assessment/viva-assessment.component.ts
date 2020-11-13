@@ -207,6 +207,41 @@ export class VivaAssessmentComponent implements OnInit {
         }
       );
     });
+
+    if (
+      parseInt(
+        varCandidateAssessmentData.CandidateAssessmentData.CandidateAttemptCount
+      ) > 1
+    ) {
+      var key: string = "";
+      $(document).keydown(function (e) {
+        key = e.key;
+      });
+      Event_log(
+        "ASSESSMENT_CONTINUED",
+        varCandidateAssessmentData,
+        sec,
+        index,
+        key
+      );
+    } else if (
+      parseInt(
+        varCandidateAssessmentData.CandidateAssessmentData.CandidateAttemptCount
+      ) == 1
+    ) {
+      var key: string = "";
+      $(document).keydown(function (e) {
+        key = e.key;
+      });
+      Event_log(
+        "ASSESSMENT_STARTED",
+        varCandidateAssessmentData,
+        sec,
+        index,
+        key
+      );
+    }
+
     varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.AssessmentStatus = 1;
     var minutes = Math.floor(
       this.data.CandidateAssessmentData.QuestionPaperDurationSeconds / 60
@@ -260,9 +295,11 @@ export class VivaAssessmentComponent implements OnInit {
         document.getElementById(selected).className == "btn btn-warning px-3"
       ) {
         document.getElementById(selected).classList.remove("btn-warning");
-        if (varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.Sections[
-          sec
-        ].Questions[index].CandidateCurrentResponseOption != '-1')
+        if (
+          varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment
+            .Sections[sec].Questions[index].CandidateCurrentResponseOption !=
+          "-1"
+        )
           attempted_count -= 1;
         $("#checkbox").prop("checked", false);
         marked_review -= 1;
@@ -877,39 +914,6 @@ export class VivaAssessmentComponent implements OnInit {
       $("#checkbox").prop("checked", true);
     else $("#checkbox").prop("checked", false);
 
-    if (
-      parseInt(
-        varCandidateAssessmentData.CandidateAssessmentData.CandidateAttemptCount
-      ) > 1
-    ) {
-      var key: string = "";
-      $(document).keydown(function (e) {
-        key = e.key;
-      });
-      Event_log(
-        "ASSESSMENT_CONTINUED",
-        varCandidateAssessmentData,
-        sec,
-        index,
-        key
-      );
-    } else if (
-      parseInt(
-        varCandidateAssessmentData.CandidateAssessmentData.CandidateAttemptCount
-      ) == 1
-    ) {
-      var key: string = "";
-      $(document).keydown(function (e) {
-        key = e.key;
-      });
-      Event_log(
-        "ASSESSMENT_STARTED",
-        varCandidateAssessmentData,
-        sec,
-        index,
-        key
-      );
-    }
     $("#img").css("display", "none");
     $("#img1").css("display", "none");
     $("#img2").css("display", "none");
@@ -1853,11 +1857,7 @@ function Event_log(
       ].QuestionId
     ),
     QuestionIndex: index,
-    CurrentResponse: parseInt(
-      data.CandidateAssessmentData.VivaMcqAssessment.Sections[sec].Questions[
-        index
-      ].CandidateCurrentResponseOption
-    ),
+    ActualResponse: 0,
     KeyboardKey: key,
     Description: "",
     Latitude: lat,
@@ -1903,6 +1903,11 @@ function Event_log(
       break;
     case "OPTION_SELECTED":
       Assessment_event.SubTypeId = 21;
+      Assessment_event.ActualResponse =
+        parseInt(
+          data.CandidateAssessmentData.VivaMcqAssessment.Sections[sec]
+            .Questions[index].CandidateCurrentResponseOption
+        ) + 1;
       break;
     case "KEYBOARD_KEY_PRESSED":
       Assessment_event.SubTypeId = 23;
