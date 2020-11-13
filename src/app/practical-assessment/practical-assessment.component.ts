@@ -130,6 +130,20 @@ export class PracticalAssessmentComponent implements OnInit {
       );
     }
 
+    $("#dropdown").change(function () {
+      var key: string = "";
+      $(document).keydown(function (e) {
+        key = e.key;
+      });
+      Event_log(
+        "QUESTION_LANGUAGE_CHANGED",
+        varCandidateAssessmentData,
+        sec,
+        index,
+        key
+      );
+    });
+
     for (let i = 0; i < i_length; i++) {
       $("#card").append(
         '<div class="row justify-content-center">' +
@@ -596,7 +610,6 @@ export class PracticalAssessmentComponent implements OnInit {
 
     $(function () {
       $("#dropdown").change(function () {
-        Event_log("QUESTION_LANGUAGE_CHANGED", data, sec, index, "");
         if (id == 0) {
           option = $("#dropdown option:selected").attr("id");
           if (option == "Hindi") id = 1;
@@ -763,11 +776,6 @@ export class PracticalAssessmentComponent implements OnInit {
 
     $(function () {
       $("#dropdown").change(function () {
-        var key: string = "";
-        $(document).keydown(function (e) {
-          key = e.key;
-        });
-        Event_log("QUESTION_LANGUAGE_CHANGED", data, sec, index, key);
         option = $("#dropdown option:selected").attr("id");
         if (option == "Hindi") id = 1;
         else if (option == "Tamil") id = 2;
@@ -866,11 +874,6 @@ export class PracticalAssessmentComponent implements OnInit {
     }
     $(function () {
       $("#dropdown").change(function () {
-        var key: string = "";
-        $(document).keydown(function (e) {
-          key = e.key;
-        });
-        Event_log("QUESTION_LANGUAGE_CHANGED", data, sec, index, key);
         option = $("#dropdown option:selected").attr("id");
         if (option == "Hindi") id = 1;
         else if (option == "Tamil") id = 2;

@@ -160,6 +160,20 @@ export class VivaAssessmentComponent implements OnInit {
       });
     });
 
+    $("#dropdown").change(function () {
+      var key: string = "";
+      $(document).keydown(function (e) {
+        key = e.key;
+      });
+      Event_log(
+        "QUESTION_LANGUAGE_CHANGED",
+        varCandidateAssessmentData,
+        sec,
+        index,
+        key
+      );
+    });
+
     /*navigator.mediaDevices.getUserMedia(this.constraints).then((stream) => {
         this.elem.nativeElement.querySelector('#myVideo').srcObject = stream;
         this.vdo = this.elem.nativeElement.querySelector('#myVideo');
@@ -724,17 +738,6 @@ export class VivaAssessmentComponent implements OnInit {
 
     $(document).ready(function () {
       $("#dropdown").change(function () {
-        var key: string = "";
-        $(document).keydown(function (e) {
-          key = e.key;
-        });
-        Event_log(
-          "QUESTION_LANGUAGE_CHANGED",
-          varCandidateAssessmentData,
-          sec,
-          index,
-          key
-        );
         if (id == 0) {
           option = $("option:selected").attr("id");
           if (option == "Hindi") id = 1;
@@ -1096,17 +1099,6 @@ export class VivaAssessmentComponent implements OnInit {
 
     $(document).ready(function () {
       $("#dropdown").change(function () {
-        var key: string = "";
-        $(document).keydown(function (e) {
-          key = e.key;
-        });
-        Event_log(
-          "QUESTION_LANGUAGE_CHANGED",
-          varCandidateAssessmentData,
-          sec,
-          index,
-          key
-        );
         option = $("option:selected").attr("id");
         if (option == "Hindi") id = 1;
         else if (option == "Tamil") id = 2;
@@ -1324,17 +1316,6 @@ export class VivaAssessmentComponent implements OnInit {
 
     $(function () {
       $("#dropdown").change(function () {
-        var key: string = "";
-        $(document).keydown(function (e) {
-          key = e.key;
-        });
-        Event_log(
-          "QUESTION_LANGUAGE_CHANGED",
-          varCandidateAssessmentData,
-          sec,
-          index,
-          key
-        );
         option = $("option:selected").attr("id");
         if (option == "Hindi") id = 1;
         else if (option == "Tamil") id = 2;
