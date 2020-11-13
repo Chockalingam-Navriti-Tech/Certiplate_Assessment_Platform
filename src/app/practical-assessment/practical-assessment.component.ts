@@ -1219,15 +1219,7 @@ function Event_log(
   var Assessment_event = {
     DateTime: moment().format("DD-MMM-YYYY h:mm:ss a"),
     SubTypeId: 0,
-    SectionId: parseInt(
-      data.CandidateAssessmentData.PracticalAssessment.Sections[sec].SectionId
-    ),
     SectionIndex: sec,
-    QuestionId: parseInt(
-      data.CandidateAssessmentData.PracticalAssessment.Sections[sec].Questions[
-        index
-      ].QuestionId
-    ),
     QuestionIndex: index,
     ActualResponse: 0,
     KeyboardKey: key,

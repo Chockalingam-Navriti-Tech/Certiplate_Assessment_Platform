@@ -21,7 +21,6 @@ export class EndImageCaptureComponent implements OnInit {
     this.sub = localStorage.getItem('assessment');
     this.Req = localStorage.getItem('req_id');
     this.Id = localStorage.getItem('cand_id');
-    alert(os.hostname());
   }
 
   public webcamImage1: WebcamImage = null;

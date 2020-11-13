@@ -168,6 +168,9 @@ export class TheoryAssessmentComponent implements OnInit {
       });
     });
 
+    document.addEventListener('keypress', function () {
+      alert("hi");
+    })
     /*navigator.mediaDevices.getUserMedia(this.constraints).then((stream) => {
       this.elem.nativeElement.querySelector("#myVideo").srcObject = stream;
       this.vdo = this.elem.nativeElement.querySelector("#myVideo");
@@ -219,7 +222,7 @@ export class TheoryAssessmentComponent implements OnInit {
         key
       );
     }
-    
+
     $(document).ready(function () {
       if (
         varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
@@ -1884,15 +1887,7 @@ function Event_log(
   var Assessment_event = {
     DateTime: moment().format("DD-MMM-YYYY h:mm:ss a"),
     SubTypeId: 0,
-    SectionId: parseInt(
-      data.CandidateAssessmentData.TheoryAssessment.Sections[sec].SectionId
-    ),
     SectionIndex: sec,
-    QuestionId: parseInt(
-      data.CandidateAssessmentData.TheoryAssessment.Sections[sec].Questions[
-        index
-      ].QuestionId
-    ),
     QuestionIndex: index,
     ActualResponse: 0,
     KeyboardKey: key,
