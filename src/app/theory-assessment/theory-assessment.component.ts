@@ -168,9 +168,9 @@ export class TheoryAssessmentComponent implements OnInit {
       });
     });
 
-    document.addEventListener('keypress', function () {
+    /*document.addEventListener('keypress', function () {
       alert("hi");
-    })
+    })*/
     /*navigator.mediaDevices.getUserMedia(this.constraints).then((stream) => {
       this.elem.nativeElement.querySelector("#myVideo").srcObject = stream;
       this.vdo = this.elem.nativeElement.querySelector("#myVideo");
