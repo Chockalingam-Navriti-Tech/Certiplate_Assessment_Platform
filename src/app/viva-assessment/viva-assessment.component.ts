@@ -19,7 +19,6 @@ var quest;
 var fullscreen = 0;
 var full_screen;
 var visibility;
-var tab_switch_count = 0;
 var exit_full_screen = 0;
 var attempted_count = 0;
 var marked_review = 0;
@@ -370,6 +369,7 @@ export class VivaAssessmentComponent implements OnInit {
     document.addEventListener(
       "keydown",
       (visibility = function () {
+        exit_full_screen += 1;
         var key: string = "";
         $(document).keydown(function (e) {
           key = e.key;
@@ -378,23 +378,22 @@ export class VivaAssessmentComponent implements OnInit {
         $("#popup").css({
           opacity: 1,
         });
-        if (tab_switch_count == 3) {
+        if (exit_full_screen == 4) {
           document.getElementById("message").innerHTML =
             "<h1>" +
             "Please make sure that you dont leave this page<br><br>You only have no chances left<br>" +
             "</h1>";
-        } else if (tab_switch_count < 3) {
+        } else if (exit_full_screen < 4) {
           document.getElementById("message").innerHTML =
             "<h1>" +
             "Please make sure that you dont leave this page<br><br>You only have " +
-            (3 - (tab_switch_count + 1)) +
+            (4 - (exit_full_screen)) +
             " chances left<br>" +
             "</h1>";
         }
         $(".fullscreen-container").fadeTo(200, 1);
         $("#ok").click(function () {
-          if (tab_switch_count < 3) {
-            tab_switch_count += 1;
+          if (exit_full_screen < 4) {
             $("#popup").css({
               opacity: 0,
             });
@@ -403,7 +402,7 @@ export class VivaAssessmentComponent implements OnInit {
             if (docElm.requestFullscreen) {
               docElm.requestFullscreen();
             }
-          } else if (tab_switch_count >= 3) {
+          } else if (exit_full_screen >= 4) {
             $("#popup").css({
               opacity: 1,
             });
@@ -411,8 +410,6 @@ export class VivaAssessmentComponent implements OnInit {
               "<h1>" + "You have violated the rules<br>" + "</h1>";
             $(".fullscreen-container").fadeTo(200, 1);
             $("#ok").click(function () {
-              exit_full_screen = 0;
-              tab_switch_count = 0;
               fullscreen = 0;
               route.navigate(["login"]);
             });
@@ -501,26 +498,26 @@ export class VivaAssessmentComponent implements OnInit {
           );
         });
         if (fullscreen % 2 != 0) {
+          exit_full_screen += 1;
           $("#popup").css({
             opacity: 1,
           });
-          if (exit_full_screen == 3) {
+          if (exit_full_screen == 4) {
             document.getElementById("message").innerHTML =
               "<h1>" +
               "You cannot leave Full Screen Mode<br><br>You have no attempts left<br>" +
               "</h1>";
-          } else if (exit_full_screen < 3) {
+          } else if (exit_full_screen < 4) {
             document.getElementById("message").innerHTML =
               "<h1>" +
               "You cannot leave Full Screen Mode<br><br>You only have " +
-              (3 - (exit_full_screen + 1)) +
+              (4- (exit_full_screen)) +
               " chances left<br>" +
               "</h1>";
           }
           $(".fullscreen-container").fadeTo(200, 1);
           $("#ok").click(function () {
-            if (exit_full_screen < 3) {
-              exit_full_screen += 1;
+            if (exit_full_screen < 4) {
               $("#popup").css({
                 opacity: 0,
               });
@@ -531,7 +528,7 @@ export class VivaAssessmentComponent implements OnInit {
                   docElm.requestFullscreen();
                 }
               });
-            } else if (exit_full_screen >= 3) {
+            } else if (exit_full_screen >= 4) {
               $("#popup").css({
                 opacity: 1,
                 display: "block",
@@ -540,8 +537,6 @@ export class VivaAssessmentComponent implements OnInit {
                 "<h1>" + "You have violated the rules<br>" + "</h1>";
               $(".fullscreen-container").fadeTo(200, 1);
               $("#ok").click(function () {
-                exit_full_screen = 0;
-                tab_switch_count = 0;
                 fullscreen = 0;
                 route.navigate(["login"]);
               });
