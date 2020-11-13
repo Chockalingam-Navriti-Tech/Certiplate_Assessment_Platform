@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
           this.username.value + '_' + this.password.value,
           JSON.stringify(data)
         );
-        if (json.CandidateAssessmentAuthentication.Message == 'SUCCESS') {
+        if (json.CandidateAssessmentAuthentication.Message == 'Success') {
           let output = moment().format('DD-MMM-YYYY') as string;
           if (
             output == json.CandidateAssessmentAuthentication.ScheduledStartDate
