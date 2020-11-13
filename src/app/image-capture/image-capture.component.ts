@@ -107,6 +107,7 @@ export class ImageCaptureComponent implements OnInit {
         data.CandidateAssessmentData.TheoryAssessment.AssessmentEvents.push({
           DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
           SubTypeId: 24,
+          Description: "Candidate has captured Start Image",
           Latitude: lat,
           Longitude: long,
         });
@@ -165,6 +166,7 @@ export class ImageCaptureComponent implements OnInit {
         data.CandidateAssessmentData.PracticalAssessment.AssessmentEvents.push({
           DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
           SubTypeId: 24,
+          Description: "Candidate has captured Start Image",
           Latitude: lat,
           Longitude: long,
         });
@@ -216,6 +218,7 @@ export class ImageCaptureComponent implements OnInit {
         data.CandidateAssessmentData.VivaMcqAssessment.AssessmentEvents.push({
           DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
           SubTypeId: 24,
+          Description: "Candidate has captured Start Image",
           Latitude: lat,
           Longitude: long,
         });
