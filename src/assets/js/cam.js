@@ -65,7 +65,7 @@ function onInitFs(fs) {
 
     player.on('startRecord', function() {
         data.CandidateAssessmentData.PracticalAssessment.AssessmentEvents.push({
-            DateTime: "",
+            DateTime: moment().format("DD-MMM-YYYY h:mm:ss a"),
             SubTypeId: 19,
             SectionId: parseInt(
                 data.CandidateAssessmentData.PracticalAssessment.Sections[sec].SectionId
@@ -91,7 +91,7 @@ function onInitFs(fs) {
 
     player.on('finishRecord', function() {
         data.CandidateAssessmentData.PracticalAssessment.AssessmentEvents.push({
-            DateTime: "",
+            DateTime: moment().format("DD-MMM-YYYY h:mm:ss a"),
             SubTypeId: 20,
             SectionId: parseInt(
                 data.CandidateAssessmentData.PracticalAssessment.Sections[sec].SectionId
