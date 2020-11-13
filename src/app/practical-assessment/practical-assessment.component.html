@@ -81,7 +81,8 @@
           <countdown
             style="font-size: 27px; color: white"
             [config]="{
-              leftTime: 600
+              leftTime: LeftTime,
+              notify: time_array
             }"
             (event)="timeup($event)"
           ></countdown>
