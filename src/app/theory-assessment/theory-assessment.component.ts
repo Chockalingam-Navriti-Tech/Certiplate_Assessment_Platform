@@ -305,7 +305,6 @@ export class TheoryAssessmentComponent implements OnInit {
       $(document).keydown(function (e) {
         key = e.key;
       });
-      Event_log("OPTION_SELECTED", varCandidateAssessmentData, sec, index, key);
       var selected = "sec" + (sec + 1) + "_" + (index + 1);
       if (document.getElementById(selected).className != "btn btn-success px-3")
         attempted_count += 1;
@@ -340,8 +339,9 @@ export class TheoryAssessmentComponent implements OnInit {
         varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.Sections[
           sec
         ].Questions[index].CandidateCurrentResponseOption = "3";
-    });
 
+      Event_log("OPTION_SELECTED", varCandidateAssessmentData, sec, index, key);
+    });
     //storing data for every 5 sec
     id3 = setInterval(() => {
       varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.RemainingDurationSeconds = parseInt(
@@ -376,6 +376,9 @@ export class TheoryAssessmentComponent implements OnInit {
     document.addEventListener(
       "keydown",
       (visibility = function () {
+        if (exit_full_screen > 4) {
+          exit_full_screen = 0;
+        }
         exit_full_screen += 1;
         var key: string = "";
         $(document).keydown(function (e) {
@@ -416,6 +419,7 @@ export class TheoryAssessmentComponent implements OnInit {
               "<h1>" + "You have violated the rules<br>" + "</h1>";
             $(".fullscreen-container").fadeTo(200, 1);
             $("#ok").click(function () {
+              exit_full_screen = 0;
               fullscreen = 0;
               route.navigate(["login"]);
             });
@@ -464,6 +468,7 @@ export class TheoryAssessmentComponent implements OnInit {
       "fullscreenchange",
       (full_screen = function (event: any) {
         fullscreen += 1;
+        console.log(exit_full_screen);
         var key: string = "";
         $(document).keydown(function (e) {
           key = e.key;
@@ -504,6 +509,9 @@ export class TheoryAssessmentComponent implements OnInit {
           );
         });
         if (fullscreen % 2 != 0) {
+          if (exit_full_screen > 4) {
+            exit_full_screen = 0;
+          }
           exit_full_screen += 1;
           $("#popup").css({
             opacity: 1,
@@ -543,6 +551,7 @@ export class TheoryAssessmentComponent implements OnInit {
                 "<h1>" + "You have violated the rules<br>" + "</h1>";
               $(".fullscreen-container").fadeTo(200, 1);
               $("#ok").click(function () {
+                exit_full_screen = 0;
                 fullscreen = 0;
                 route.navigate(["login"]);
               });
@@ -1813,7 +1822,7 @@ export class TheoryAssessmentComponent implements OnInit {
     $("body").off();
     document.removeEventListener("fullscreenchange", full_screen);
     document.removeEventListener("contextmenu", id4);
-    document.removeEventListener("visibilitychange", visibility);
+    document.removeEventListener("keydown", visibility);
   }
 }
 
@@ -1908,7 +1917,8 @@ function Event_log(
       break;
     case "QUESTION_MARKED_FOR_REVIEW":
       Assessment_event.SubTypeId = 17;
-      Assessment_event.Description = "Candidate has marked the question for review";
+      Assessment_event.Description =
+        "Candidate has marked the question for review";
       break;
     case "QUESTION_UNMARKED_FOR_REVIEW":
       Assessment_event.SubTypeId = 18;

@@ -299,7 +299,6 @@ export class VivaAssessmentComponent implements OnInit {
       $(document).keydown(function (e) {
         key = e.key;
       });
-      Event_log("OPTION_SELECTED", varCandidateAssessmentData, sec, index, key);
       var selected = "sec" + (sec + 1) + "_" + (index + 1);
       if (document.getElementById(selected).className != "btn btn-success px-3")
         attempted_count += 1;
@@ -334,6 +333,8 @@ export class VivaAssessmentComponent implements OnInit {
         varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.Sections[
           sec
         ].Questions[index].CandidateCurrentResponseOption = "3";
+
+      Event_log("OPTION_SELECTED", varCandidateAssessmentData, sec, index, key);
     });
 
     id3 = setInterval(() => {
@@ -387,7 +388,7 @@ export class VivaAssessmentComponent implements OnInit {
           document.getElementById("message").innerHTML =
             "<h1>" +
             "Unauthorized key pressed<br><br>You only have " +
-            (4 - (exit_full_screen)) +
+            (4 - exit_full_screen) +
             " chances left<br>" +
             "</h1>";
         }
@@ -511,7 +512,7 @@ export class VivaAssessmentComponent implements OnInit {
             document.getElementById("message").innerHTML =
               "<h1>" +
               "You cannot leave Full Screen Mode<br><br>You only have " +
-              (4- (exit_full_screen)) +
+              (4 - exit_full_screen) +
               " chances left<br>" +
               "</h1>";
           }
@@ -1778,7 +1779,7 @@ export class VivaAssessmentComponent implements OnInit {
     $("body").off();
     document.removeEventListener("contextmenu", id4);
     document.removeEventListener("fullscreenchange", full_screen);
-    document.removeEventListener("visibilitychange", visibility);
+    document.removeEventListener("keydown", visibility);
   }
 }
 
@@ -1873,7 +1874,8 @@ function Event_log(
       break;
     case "QUESTION_MARKED_FOR_REVIEW":
       Assessment_event.SubTypeId = 17;
-      Assessment_event.Description = "Candidate has marked the question for review";
+      Assessment_event.Description =
+        "Candidate has marked the question for review";
       break;
     case "QUESTION_UNMARKED_FOR_REVIEW":
       Assessment_event.SubTypeId = 18;

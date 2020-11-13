@@ -1179,7 +1179,7 @@ export class PracticalAssessmentComponent implements OnInit {
     $("body").off();
     document.removeEventListener("contextmenu", id4);
     document.removeEventListener("fullscreenchange", full_screen);
-    document.removeEventListener("visibilitychange", visibility);
+    document.removeEventListener("keydown", visibility);
     document
       .getElementById("video1_1")
       .parentNode.removeChild(document.getElementById("video1_1"));
