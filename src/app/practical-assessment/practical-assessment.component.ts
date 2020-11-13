@@ -581,7 +581,7 @@ export class PracticalAssessmentComponent implements OnInit {
 
     $(function () {
       $("#dropdown").change(function () {
-        Event_log("QUESTION_LANGUAGE_CHANGED", data, sec, index, key);
+        Event_log("QUESTION_LANGUAGE_CHANGED", data, sec, index, "");
         if (id == 0) {
           option = $("#dropdown option:selected").attr("id");
           if (option == "Hindi") id = 1;

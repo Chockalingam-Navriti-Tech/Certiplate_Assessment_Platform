@@ -5,6 +5,7 @@ import { WebcamImage, WebcamInitError } from 'ngx-webcam';
 import { Subject, Observable, Subscription } from 'rxjs';
 import * as moment from 'moment';
 import * as os from 'os';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { getUserLocale } from 'get-user-locale';
 @Component({
   selector: 'app-end-image-capture',
@@ -12,15 +13,15 @@ import { getUserLocale } from 'get-user-locale';
   styleUrls: ['./end-image-capture.component.css'],
 })
 export class EndImageCaptureComponent implements OnInit {
-  constructor(private route: Router) {}
+  constructor(private route: Router,private deviceservice:DeviceDetectorService) {}
   sub: string;
   Req: string;
   Id: string;
-
   ngOnInit(): void {
     this.sub = localStorage.getItem('assessment');
     this.Req = localStorage.getItem('req_id');
     this.Id = localStorage.getItem('cand_id');
+    alert(os.hostname());
   }
 
   public webcamImage1: WebcamImage = null;
@@ -86,8 +87,10 @@ export class EndImageCaptureComponent implements OnInit {
       data.CandidateAssessmentData.TheoryAssessment.CandidateSystemInfo.SystemInfoDateTime = moment().format(
         'DD-MMM-YYYY hh:mm:ss a'
       );
-      data.CandidateAssessmentData.TheoryAssessment.CandidateSystemInfo.OperatingSystem = os.platform();
-      data.CandidateAssessmentData.TheoryAssessment.CandidateSystemInfo.SystemType = os.arch();
+      data.CandidateAssessmentData.TheoryAssessment.CandidateSystemInfo.OperatingSystem = this.deviceservice.os;
+      data.CandidateAssessmentData.TheoryAssessment.CandidateSystemInfo.OperatingSystemVersion = this.deviceservice.os_version;
+      data.CandidateAssessmentData.TheoryAssessment.CandidateSystemInfo.TotalPhysicalMemory = os.totalmem();
+      data.CandidateAssessmentData.TheoryAssessment.CandidateSystemInfo.AvailablePhysicalMemory = os.freemem();
       data.CandidateAssessmentData.TheoryAssessment.CandidateSystemInfo.SystemLocale =
         window.navigator.language;
       data.CandidateAssessmentData.TheoryAssessment.CandidateSystemInfo.Latitude = lat;
