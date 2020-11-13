@@ -299,6 +299,9 @@ export class PracticalAssessmentComponent implements OnInit {
     document.addEventListener(
       "keydown",
       (visibility = function () {
+        if (exit_full_screen > 4) {
+          exit_full_screen = 0;
+        }
         exit_full_screen += 1;
         var key: string = "";
         $(document).keydown(function (e) {
@@ -427,6 +430,9 @@ export class PracticalAssessmentComponent implements OnInit {
           );
         });
         if (fullscreen % 2 != 0) {
+          if (exit_full_screen > 4) {
+            exit_full_screen = 0;
+          }
           exit_full_screen += 1;
           $("#popup").css({
             opacity: 1,
