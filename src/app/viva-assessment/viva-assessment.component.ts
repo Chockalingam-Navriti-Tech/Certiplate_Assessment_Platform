@@ -414,6 +414,7 @@ export class VivaAssessmentComponent implements OnInit {
               "<h1>" + "You have violated the rules<br>" + "</h1>";
             $(".fullscreen-container").fadeTo(200, 1);
             $("#ok").click(function () {
+              exit_full_screen = 0;
               fullscreen = 0;
               route.navigate(["login"]);
             });
@@ -544,6 +545,7 @@ export class VivaAssessmentComponent implements OnInit {
                 "<h1>" + "You have violated the rules<br>" + "</h1>";
               $(".fullscreen-container").fadeTo(200, 1);
               $("#ok").click(function () {
+                exit_full_screen = 0;
                 fullscreen = 0;
                 route.navigate(["login"]);
               });
