@@ -1847,7 +1847,7 @@ function Event_log(
     SubTypeId: 0,
     SectionIndex: sec,
     QuestionIndex: index,
-    ActualResponse: 0,
+    ActualResponse: -1,
     KeyboardKey: key,
     Description: "",
     Latitude: lat,
@@ -1897,7 +1897,7 @@ function Event_log(
         parseInt(
           data.CandidateAssessmentData.VivaMcqAssessment.Sections[sec]
             .Questions[index].CandidateCurrentResponseOption
-        ) + 1;
+        ) ;
       break;
     case "KEYBOARD_KEY_PRESSED":
       Assessment_event.SubTypeId = 23;

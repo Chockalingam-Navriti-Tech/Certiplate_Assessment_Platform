@@ -1236,7 +1236,7 @@ function Event_log(
     SubTypeId: 0,
     SectionIndex: sec,
     QuestionIndex: index,
-    ActualResponse: 0,
+    ActualResponse: -1,
     KeyboardKey: key,
     Description: "",
     EventImage: "",
