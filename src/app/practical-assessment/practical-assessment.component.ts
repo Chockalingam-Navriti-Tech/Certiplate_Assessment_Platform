@@ -316,7 +316,7 @@ export class PracticalAssessmentComponent implements OnInit {
           document.getElementById("message").innerHTML =
             "<h1>" +
             "Please make sure that you dont leave this page<br><br>You only have " +
-            (4 - (exit_full_screen)) +
+            (4 - exit_full_screen) +
             " chances left<br>" +
             "</h1>";
         }
@@ -440,7 +440,7 @@ export class PracticalAssessmentComponent implements OnInit {
             document.getElementById("message").innerHTML =
               "<h1>" +
               "You cannot leave Full Screen Mode<br><br>You only have " +
-              (4 - (exit_full_screen)) +
+              (4 - exit_full_screen) +
               " chances left<br>" +
               "</h1>";
           }
@@ -1233,7 +1233,7 @@ function Event_log(
     SubTypeId: 0,
     SectionIndex: sec,
     QuestionIndex: index,
-    ActualResponse: -1,
+    Response: -1,
     KeyboardKey: key,
     Description: "",
     EventImage: "",
@@ -1243,39 +1243,52 @@ function Event_log(
   switch (events) {
     case "ASSESSMENT_STARTED":
       Assessment_event.SubTypeId = 1;
+      Assessment_event.Description = "Candidate has started the assessment";
       break;
     case "ASSESSMENT_CONTINUED":
       Assessment_event.SubTypeId = 2;
+      Assessment_event.Description = "Candidate has continued the assessment";
       break;
     case "ASSESSMENT_FINISHED":
       Assessment_event.SubTypeId = 3;
+      Assessment_event.Description = "Candidate has finished the assessment";
       break;
     case "ASSESSMENT_DATA_UPLOAD_FAILED":
       Assessment_event.SubTypeId = 4;
+      Assessment_event.Description = "Upload failed";
       break;
     case "ASSESSMENT_DATA_UPLOADED":
       Assessment_event.SubTypeId = 5;
+      Assessment_event.Description = "Upload successful";
       break;
     case "ASSESSMENT_SUBMITTED":
       Assessment_event.SubTypeId = 7;
+      Assessment_event.Description = "Assessment Submitted";
       break;
     case "QUESTION_LINK_CLICKED":
       Assessment_event.SubTypeId = 12;
+      Assessment_event.Description = "Candidate has clicked question link";
       break;
     case "PREVIOUS_BUTTON_CLICKED":
       Assessment_event.SubTypeId = 13;
+      Assessment_event.Description = "Candidate has clicked previous button";
       break;
     case "NEXT_BUTTON_CLICKED":
       Assessment_event.SubTypeId = 14;
+      Assessment_event.Description = "Candidate has clicked next button";
       break;
     case "QUESTION_LANGUAGE_CHANGED":
       Assessment_event.SubTypeId = 15;
+      Assessment_event.Description = "Candidate has changed the language";
       break;
     case "QUESTION_MARKED_FOR_REVIEW":
       Assessment_event.SubTypeId = 17;
+      Assessment_event.Description =
+        "Candidate has marked the question for review";
       break;
     case "QUESTION_UNMARKED_FOR_REVIEW":
       Assessment_event.SubTypeId = 18;
+      Assessment_event.Description = "Candidate has unmarked the review";
       break;
     case "OPTION_SELECTED":
       Assessment_event.SubTypeId = 21;
