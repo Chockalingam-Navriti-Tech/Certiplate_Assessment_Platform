@@ -387,12 +387,12 @@ export class TheoryAssessmentComponent implements OnInit {
         if (exit_full_screen == 4) {
           document.getElementById("message").innerHTML =
             "<h1>" +
-            "Please make sure that you dont leave this page<br><br>You only have no chances left<br>" +
+            "Unauthorized key pressed<br><br>You only have no chances left<br>" +
             "</h1>";
         } else if (exit_full_screen < 4) {
           document.getElementById("message").innerHTML =
             "<h1>" +
-            "Please make sure that you dont leave this page<br><br>You only have " +
+            "Unauthorized key pressed<br><br>You only have " +
             (4 - exit_full_screen) +
             " chances left<br>" +
             "</h1>";
