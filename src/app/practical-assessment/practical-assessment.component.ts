@@ -96,20 +96,38 @@ export class PracticalAssessmentComponent implements OnInit {
       varCandidateAssessmentData.CandidateAssessmentData.PracticalAssessment
         .Sections.length;
 
-    if (parseInt(varCandidateAssessmentData.CandidateAssessmentData.CandidateAttemptCount) > 1) {
-      var key: string = "";
-      $(document).keydown(function (e) {
-        key = e.key;
-      });
-      Event_log("ASSESSMENT_CONTINUED", varCandidateAssessmentData, sec, index, key);
-    } else if (
-      parseInt(varCandidateAssessmentData.CandidateAssessmentData.CandidateAttemptCount) == 1
+    if (
+      parseInt(
+        varCandidateAssessmentData.CandidateAssessmentData.CandidateAttemptCount
+      ) > 1
     ) {
       var key: string = "";
       $(document).keydown(function (e) {
         key = e.key;
       });
-      Event_log("ASSESSMENT_STARTED", varCandidateAssessmentData, sec, index, key);
+      Event_log(
+        "ASSESSMENT_CONTINUED",
+        varCandidateAssessmentData,
+        sec,
+        index,
+        key
+      );
+    } else if (
+      parseInt(
+        varCandidateAssessmentData.CandidateAssessmentData.CandidateAttemptCount
+      ) == 1
+    ) {
+      var key: string = "";
+      $(document).keydown(function (e) {
+        key = e.key;
+      });
+      Event_log(
+        "ASSESSMENT_STARTED",
+        varCandidateAssessmentData,
+        sec,
+        index,
+        key
+      );
     }
 
     for (let i = 0; i < i_length; i++) {
@@ -266,58 +284,55 @@ export class PracticalAssessmentComponent implements OnInit {
 
     //visibility change
     document.addEventListener(
-      "visibilitychange",
+      "keydown",
       (visibility = function () {
         var key: string = "";
         $(document).keydown(function (e) {
           key = e.key;
         });
-
-        if (document.hidden) {
-          $("#popup").css({
-            opacity: 1,
-          });
-          if (tab_switch_count == 3) {
-            document.getElementById("message").innerHTML =
-              "<h1>" +
-              "Please make sure that you dont leave this page<br><br>You only have no chances left<br>" +
-              "</h1>";
-          } else if (tab_switch_count < 3) {
-            document.getElementById("message").innerHTML =
-              "<h1>" +
-              "Please make sure that you dont leave this page<br><br>You only have " +
-              (3 - (tab_switch_count + 1)) +
-              " chances left<br>" +
-              "</h1>";
-          }
-          $(".fullscreen-container").fadeTo(200, 1);
-          $("#ok").click(function () {
-            if (tab_switch_count < 3) {
-              tab_switch_count += 1;
-              $("#popup").css({
-                opacity: 0,
-              });
-              $(".fullscreen-container").fadeOut(200);
-              var docElm = document.documentElement;
-              if (docElm.requestFullscreen) {
-                docElm.requestFullscreen();
-              }
-            } else if (tab_switch_count >= 3) {
-              $("#popup").css({
-                opacity: 1,
-              });
-              document.getElementById("message").innerHTML =
-                "<h1>" + "You have violated the rules<br>" + "</h1>";
-              $(".fullscreen-container").fadeTo(200, 1);
-              $("#ok").click(function () {
-                exit_full_screen = 0;
-                tab_switch_count = 0;
-                fullscreen = 0;
-                route.navigate(["login"]);
-              });
-            }
-          });
+        $("#popup").css({
+          opacity: 1,
+        });
+        if (tab_switch_count == 3) {
+          document.getElementById("message").innerHTML =
+            "<h1>" +
+            "Please make sure that you dont leave this page<br><br>You only have no chances left<br>" +
+            "</h1>";
+        } else if (tab_switch_count < 3) {
+          document.getElementById("message").innerHTML =
+            "<h1>" +
+            "Please make sure that you dont leave this page<br><br>You only have " +
+            (3 - (tab_switch_count + 1)) +
+            " chances left<br>" +
+            "</h1>";
         }
+        $(".fullscreen-container").fadeTo(200, 1);
+        $("#ok").click(function () {
+          if (tab_switch_count < 3) {
+            tab_switch_count += 1;
+            $("#popup").css({
+              opacity: 0,
+            });
+            $(".fullscreen-container").fadeOut(200);
+            var docElm = document.documentElement;
+            if (docElm.requestFullscreen) {
+              docElm.requestFullscreen();
+            }
+          } else if (tab_switch_count >= 3) {
+            $("#popup").css({
+              opacity: 1,
+            });
+            document.getElementById("message").innerHTML =
+              "<h1>" + "You have violated the rules<br>" + "</h1>";
+            $(".fullscreen-container").fadeTo(200, 1);
+            $("#ok").click(function () {
+              exit_full_screen = 0;
+              tab_switch_count = 0;
+              fullscreen = 0;
+              route.navigate(["login"]);
+            });
+          }
+        });
         html2canvas(document.body).then(function (canvas: any) {
           var ScreenshotImage = {
             Filename: "",

@@ -168,9 +168,6 @@ export class TheoryAssessmentComponent implements OnInit {
       });
     });
 
-    /*document.addEventListener('keypress', function () {
-      alert("hi");
-    })*/
     /*navigator.mediaDevices.getUserMedia(this.constraints).then((stream) => {
       this.elem.nativeElement.querySelector("#myVideo").srcObject = stream;
       this.vdo = this.elem.nativeElement.querySelector("#myVideo");
@@ -187,7 +184,6 @@ export class TheoryAssessmentComponent implements OnInit {
     $("body").on("cut copy paste", function (e: any) {
       e.preventDefault();
     });
-
 
     if (
       parseInt(
@@ -364,59 +360,57 @@ export class TheoryAssessmentComponent implements OnInit {
     let lat = localStorage.getItem("lat");
     let long = localStorage.getItem("long");
     //visibility change
+
     document.addEventListener(
-      "visibilitychange",
+      "keydown",
       (visibility = function () {
         var key: string = "";
         $(document).keydown(function (e) {
           key = e.key;
         });
-
-        if (document.hidden) {
-          $("#popup").css({
-            opacity: 1,
-          });
-          if (tab_switch_count == 3) {
-            document.getElementById("message").innerHTML =
-              "<h1>" +
-              "Please make sure that you dont leave this page<br><br>You only have no chances left<br>" +
-              "</h1>";
-          } else if (tab_switch_count < 3) {
-            document.getElementById("message").innerHTML =
-              "<h1>" +
-              "Please make sure that you dont leave this page<br><br>You only have " +
-              (3 - (tab_switch_count + 1)) +
-              " chances left<br>" +
-              "</h1>";
-          }
-          $(".fullscreen-container").fadeTo(200, 1);
-          $("#ok").click(function () {
-            if (tab_switch_count < 3) {
-              tab_switch_count += 1;
-              $("#popup").css({
-                opacity: 0,
-              });
-              $(".fullscreen-container").fadeOut(200);
-              var docElm = document.documentElement;
-              if (docElm.requestFullscreen) {
-                docElm.requestFullscreen();
-              }
-            } else if (tab_switch_count >= 3) {
-              $("#popup").css({
-                opacity: 1,
-              });
-              document.getElementById("message").innerHTML =
-                "<h1>" + "You have violated the rules<br>" + "</h1>";
-              $(".fullscreen-container").fadeTo(200, 1);
-              $("#ok").click(function () {
-                exit_full_screen = 0;
-                tab_switch_count = 0;
-                fullscreen = 0;
-                route.navigate(["login"]);
-              });
-            }
-          });
+        $("#popup").css({
+          opacity: 1,
+        });
+        if (tab_switch_count == 3) {
+          document.getElementById("message").innerHTML =
+            "<h1>" +
+            "Please make sure that you dont leave this page<br><br>You only have no chances left<br>" +
+            "</h1>";
+        } else if (tab_switch_count < 3) {
+          document.getElementById("message").innerHTML =
+            "<h1>" +
+            "Please make sure that you dont leave this page<br><br>You only have " +
+            (3 - (tab_switch_count + 1)) +
+            " chances left<br>" +
+            "</h1>";
         }
+        $(".fullscreen-container").fadeTo(200, 1);
+        $("#ok").click(function () {
+          if (tab_switch_count < 3) {
+            tab_switch_count += 1;
+            $("#popup").css({
+              opacity: 0,
+            });
+            $(".fullscreen-container").fadeOut(200);
+            var docElm = document.documentElement;
+            if (docElm.requestFullscreen) {
+              docElm.requestFullscreen();
+            }
+          } else if (tab_switch_count >= 3) {
+            $("#popup").css({
+              opacity: 1,
+            });
+            document.getElementById("message").innerHTML =
+              "<h1>" + "You have violated the rules<br>" + "</h1>";
+            $(".fullscreen-container").fadeTo(200, 1);
+            $("#ok").click(function () {
+              exit_full_screen = 0;
+              tab_switch_count = 0;
+              fullscreen = 0;
+              route.navigate(["login"]);
+            });
+          }
+        });
         html2canvas(document.body).then(function (canvas: any) {
           var ScreenshotImage = {
             Filename: "",
@@ -1935,11 +1929,12 @@ function Event_log(
       break;
     case "OPTION_SELECTED":
       Assessment_event.SubTypeId = 21;
-      Assessment_event.ActualResponse = parseInt(
-        data.CandidateAssessmentData.TheoryAssessment.Sections[sec].Questions[
-          index
-        ].CandidateCurrentResponseOption
-      )+1;
+      Assessment_event.ActualResponse =
+        parseInt(
+          data.CandidateAssessmentData.TheoryAssessment.Sections[sec].Questions[
+            index
+          ].CandidateCurrentResponseOption
+        ) + 1;
       break;
     case "KEYBOARD_KEY_PRESSED":
       Assessment_event.SubTypeId = 23;
