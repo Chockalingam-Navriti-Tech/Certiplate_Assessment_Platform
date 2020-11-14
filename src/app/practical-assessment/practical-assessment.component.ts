@@ -102,25 +102,6 @@ export class PracticalAssessmentComponent implements OnInit {
     ) {
       attempted_count = 0;
       marked_review = 0;
-      $.each(
-        varCandidateAssessmentData.CandidateAssessmentData.PracticalAssessment
-          .Sections,
-        function (index: number, value) {
-          $.each(
-            varCandidateAssessmentData.CandidateAssessmentData.PracticalAssessment
-              .Sections[index].Questions,
-            function (ind: number, values) {
-              if (
-                varCandidateAssessmentData.CandidateAssessmentData
-                  .PracticalAssessment.Sections[index].Questions[ind]
-                  .CandidateResponseVideoFileName != " "
-              ) {
-                attempted_count += 1;
-              }
-            }
-          );
-        }
-      );
       var key: string = "";
       $(document).keydown(function (e) {
         key = e.key;
@@ -234,7 +215,7 @@ export class PracticalAssessmentComponent implements OnInit {
         datas.CandidateAssessmentData.PracticalAssessment.AssessmentStartDateTime = moment().format(
           "DD-MMM-YYYY h:mm:ss a"
         );
-      $.each(
+      /*$.each(
         datas.CandidateAssessmentData.PracticalAssessment.Sections,
         function (index: number, value) {
           $.each(
@@ -253,7 +234,7 @@ export class PracticalAssessmentComponent implements OnInit {
             }
           );
         }
-      );
+      );*/
     });
     var minutes = Math.floor(3600 / 60);
     var seconds = 3600 - minutes * 60;
