@@ -216,8 +216,29 @@ export class TheoryAssessmentComponent implements OnInit {
     } else if (
       parseInt(
         varCandidateAssessmentData.CandidateAssessmentData.CandidateAttemptCount
-      ) > 1
+      ) < 1
     ) {
+      attempted_count = 0;
+      marked_review = 0;
+      $.each(
+        varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
+          .Sections,
+        function (index: number, value) {
+          $.each(
+            varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
+              .Sections[index].Questions,
+            function (ind: number, values) {
+              if (
+                varCandidateAssessmentData.CandidateAssessmentData
+                  .TheoryAssessment.Sections[index].Questions[ind]
+                  .CandidateCurrentResponseOption != "-1"
+              ) {
+                attempted_count += 1;
+              }
+            }
+          );
+        }
+      );
       var key: string = "";
       $(document).keydown(function (e) {
         key = e.key;

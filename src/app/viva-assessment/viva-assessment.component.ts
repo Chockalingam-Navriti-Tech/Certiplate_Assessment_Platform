@@ -224,8 +224,29 @@ export class VivaAssessmentComponent implements OnInit {
     if (
       parseInt(
         varCandidateAssessmentData.CandidateAssessmentData.CandidateAttemptCount
-      ) > 1
+      ) < 1
     ) {
+      attempted_count = 0;
+      marked_review = 0;
+      $.each(
+        varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment
+          .Sections,
+        function (index: number, value) {
+          $.each(
+            varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment
+              .Sections[index].Questions,
+            function (ind: number, values) {
+              if (
+                varCandidateAssessmentData.CandidateAssessmentData
+                  .VivaMcqAssessment.Sections[index].Questions[ind]
+                  .CandidateCurrentResponseOption != "-1"
+              ) {
+                attempted_count += 1;
+              }
+            }
+          );
+        }
+      );
       var key: string = "";
       $(document).keydown(function (e) {
         key = e.key;

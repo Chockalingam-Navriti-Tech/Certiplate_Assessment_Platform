@@ -98,8 +98,29 @@ export class PracticalAssessmentComponent implements OnInit {
     if (
       parseInt(
         varCandidateAssessmentData.CandidateAssessmentData.CandidateAttemptCount
-      ) > 1
+      ) < 1
     ) {
+      attempted_count = 0;
+      marked_review = 0;
+      $.each(
+        varCandidateAssessmentData.CandidateAssessmentData.PracticalAssessment
+          .Sections,
+        function (index: number, value) {
+          $.each(
+            varCandidateAssessmentData.CandidateAssessmentData.PracticalAssessment
+              .Sections[index].Questions,
+            function (ind: number, values) {
+              if (
+                varCandidateAssessmentData.CandidateAssessmentData
+                  .PracticalAssessment.Sections[index].Questions[ind]
+                  .CandidateResponseVideoFileName != " "
+              ) {
+                attempted_count += 1;
+              }
+            }
+          );
+        }
+      );
       var key: string = "";
       $(document).keydown(function (e) {
         key = e.key;
@@ -202,6 +223,9 @@ export class PracticalAssessmentComponent implements OnInit {
     });
 
     let datas: any = this.data;
+
+    
+
     $(function () {
       if (
         datas.CandidateAssessmentData.PracticalAssessment
