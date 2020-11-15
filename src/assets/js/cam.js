@@ -76,6 +76,7 @@ function onInitFs(fs) {
                     index
                 ].QuestionId
             ),
+            Description: 'Candidate has started capturing the video',
             QuestionIndex: index,
             ActualResponse: parseInt(
                 data.CandidateAssessmentData.PracticalAssessment.Sections[sec].Questions[
@@ -103,6 +104,7 @@ function onInitFs(fs) {
                 ].QuestionId
             ),
             QuestionIndex: index,
+            Description: 'Candidate has stopped capturing the video',
             ActualResponse: parseInt(
                 data.CandidateAssessmentData.PracticalAssessment.Sections[sec].Questions[
                     index
