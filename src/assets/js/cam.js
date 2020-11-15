@@ -78,11 +78,7 @@ function onInitFs(fs) {
             ),
             Description: 'Candidate has started capturing the video',
             QuestionIndex: index,
-            ActualResponse: parseInt(
-                data.CandidateAssessmentData.PracticalAssessment.Sections[sec].Questions[
-                    index
-                ].CandidateActualResponseOption
-            ),
+            ActualResponse: -1,
             KeyboardKey: key,
             Latitude: lat,
             Longitude: long,
@@ -105,11 +101,7 @@ function onInitFs(fs) {
             ),
             QuestionIndex: index,
             Description: 'Candidate has stopped capturing the video',
-            ActualResponse: parseInt(
-                data.CandidateAssessmentData.PracticalAssessment.Sections[sec].Questions[
-                    index
-                ].CandidateActualResponseOption
-            ),
+            ActualResponse: -1,
             KeyboardKey: key,
             Latitude: lat,
             Longitude: long,

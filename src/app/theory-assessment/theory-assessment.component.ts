@@ -167,19 +167,6 @@ export class TheoryAssessmentComponent implements OnInit {
       });
     });
 
-    $("#dropdown").change(function () {
-      var key: string = "";
-      $(document).keydown(function (e) {
-        key = e.key;
-      });
-      Event_log(
-        "QUESTION_LANGUAGE_CHANGED",
-        varCandidateAssessmentData,
-        sec,
-        index,
-        key
-      );
-    });
     /*navigator.mediaDevices.getUserMedia(this.constraints).then((stream) => {
       this.elem.nativeElement.querySelector("#myVideo").srcObject = stream;
       this.vdo = this.elem.nativeElement.querySelector("#myVideo");
@@ -260,6 +247,19 @@ export class TheoryAssessmentComponent implements OnInit {
         varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.AssessmentStartDateTime = moment().format(
           "DD-MMM-YYYY h:mm:ss a"
         );
+      $("#dropdown").change(function () {
+        var key: string = "";
+        $(document).keydown(function (e) {
+          key = e.key;
+        });
+        Event_log(
+          "QUESTION_LANGUAGE_CHANGED",
+          varCandidateAssessmentData,
+          sec,
+          index,
+          key
+        );
+      });
       $.each(
         varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment
           .Sections,

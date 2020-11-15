@@ -159,20 +159,6 @@ export class VivaAssessmentComponent implements OnInit {
       });
     });
 
-    $("#dropdown").change(function () {
-      var key: string = "";
-      $(document).keydown(function (e) {
-        key = e.key;
-      });
-      Event_log(
-        "QUESTION_LANGUAGE_CHANGED",
-        varCandidateAssessmentData,
-        sec,
-        index,
-        key
-      );
-    });
-
     /*navigator.mediaDevices.getUserMedia(this.constraints).then((stream) => {
         this.elem.nativeElement.querySelector('#myVideo').srcObject = stream;
         this.vdo = this.elem.nativeElement.querySelector('#myVideo');
@@ -198,6 +184,19 @@ export class VivaAssessmentComponent implements OnInit {
         varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment.AssessmentStartDateTime = moment().format(
           "DD-MMM-YYYY h:mm:ss a"
         );
+      $("#dropdown").change(function () {
+        var key: string = "";
+        $(document).keydown(function (e) {
+          key = e.key;
+        });
+        Event_log(
+          "QUESTION_LANGUAGE_CHANGED",
+          varCandidateAssessmentData,
+          sec,
+          index,
+          key
+        );
+      });
       $.each(
         varCandidateAssessmentData.CandidateAssessmentData.VivaMcqAssessment
           .Sections,
