@@ -131,20 +131,6 @@ export class PracticalAssessmentComponent implements OnInit {
       );
     }
 
-    $("#dropdown").change(function () {
-      var key: string = "";
-      $(document).keydown(function (e) {
-        key = e.key;
-      });
-      Event_log(
-        "QUESTION_LANGUAGE_CHANGED",
-        varCandidateAssessmentData,
-        sec,
-        index,
-        key
-      );
-    });
-
     for (let i = 0; i < i_length; i++) {
       $("#card").append(
         '<div class="row justify-content-center">' +
@@ -205,8 +191,6 @@ export class PracticalAssessmentComponent implements OnInit {
 
     let datas: any = this.data;
 
-    
-
     $(function () {
       if (
         datas.CandidateAssessmentData.PracticalAssessment
@@ -215,6 +199,19 @@ export class PracticalAssessmentComponent implements OnInit {
         datas.CandidateAssessmentData.PracticalAssessment.AssessmentStartDateTime = moment().format(
           "DD-MMM-YYYY h:mm:ss a"
         );
+      $("#dropdown").change(function () {
+        var key: string = "";
+        $(document).keydown(function (e) {
+          key = e.key;
+        });
+        Event_log(
+          "QUESTION_LANGUAGE_CHANGED",
+          varCandidateAssessmentData,
+          sec,
+          index,
+          key
+        );
+      });
       /*$.each(
         datas.CandidateAssessmentData.PracticalAssessment.Sections,
         function (index: number, value) {
