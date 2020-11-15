@@ -741,6 +741,7 @@ export class PracticalAssessmentComponent implements OnInit {
         key = e.key;
       });
       Event_log("NEXT_BUTTON_CLICKED", data, sec, index, key);
+      cam(this.data, sec, index);
       if (id > 0) {
         document.getElementById("question").innerHTML =
           count +
@@ -829,7 +830,6 @@ export class PracticalAssessmentComponent implements OnInit {
         $("#myModal").css("display", "none");
       };
     });
-    cam(this.data, sec, index);
   }
   previous() {
     var video = "video" + (sec + 1) + "_" + (index + 1);
