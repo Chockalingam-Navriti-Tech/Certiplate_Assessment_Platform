@@ -397,6 +397,20 @@ export class TheoryAssessmentComponent implements OnInit {
     document.addEventListener(
       "keydown",
       (visibility = function () {
+        $.ajax({
+          url: environment.Violation_Api,
+          type: 'POST',
+          dataType: 'json',
+          data: {
+            ApiKey: environment.api_key,
+            CandidateId:varCandidateAssessmentData.CandidateAssessmentData.CandidateId,
+            RequestId:varCandidateAssessmentData.CandidateAssessmentData.AssessmentRequestId,
+            ViolationCode:'APP_SWITCHING'
+          },
+          success: function (data) {
+            console.log(data);
+          }
+        });
         if (exit_full_screen > 4) {
           exit_full_screen = 0;
         }
@@ -530,6 +544,20 @@ export class TheoryAssessmentComponent implements OnInit {
           );
         });
         if (fullscreen % 2 != 0) {
+          $.ajax({
+            url: environment.Violation_Api,
+            type: 'POST',
+            dataType: 'json',
+            data: {
+              ApiKey: environment.api_key,
+              CandidateId:varCandidateAssessmentData.CandidateAssessmentData.CandidateId,
+              RequestId:varCandidateAssessmentData.CandidateAssessmentData.AssessmentRequestId,
+              ViolationCode:'APP_SWITCHING'
+            },
+            success: function (data) {
+              console.log(data);
+            }
+          });
           if (exit_full_screen > 4) {
             exit_full_screen = 0;
           }
