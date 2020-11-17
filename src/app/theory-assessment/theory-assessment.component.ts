@@ -486,9 +486,9 @@ export class TheoryAssessmentComponent implements OnInit {
           Event_log("TAB_SWITCH", data, sec, index, key);
           //ImageArrayContent.ImageArray.push(ImageArrayObj);
           //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
-          varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.ScreenshotImages.push(
+          /*varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.ScreenshotImages.push(
             ScreenshotImage
-          );
+          );*/
           WriteFileToFileSystem(
             fs,
             ImageArrayObj.FileName,
@@ -534,9 +534,9 @@ export class TheoryAssessmentComponent implements OnInit {
           Event_log("EXIT_FULLSCREEN", data, sec, index, key);
           //ImageArrayContent.ImageArray.push(ImageArrayObj);
           //localStorage.setItem('Image_Array', JSON.stringify(ImageArrayContent));
-          varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.ScreenshotImages.push(
+          /*varCandidateAssessmentData.CandidateAssessmentData.TheoryAssessment.ScreenshotImages.push(
             ScreenshotImage
-          );
+          );*/
           WriteFileToFileSystem(
             fs,
             ImageArrayObj.FileName,
