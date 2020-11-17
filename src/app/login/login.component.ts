@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit {
     } else if (this.username && this.password) {
       localStorage.setItem(this.username.value, this.password.value);
       if (/^\d+$/.test(this.username.value) == true) {
+        let element = document.documentElement;
+        if (element.requestFullscreen) element.requestFullscreen();
         this.login();
       } else if (
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(
