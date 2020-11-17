@@ -1,10 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import * as $ from "jquery";
 import { Router } from "@angular/router";
 import { encode } from "punycode";
 import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 import { environment } from "src/environments/environment";
 import * as moment from "moment";
+
+declare var $: any;
+var req, cand;
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -88,8 +90,8 @@ export class LoginComponent implements OnInit {
                   $("#login").css("display", "block");
                   $("#log-in").css("display", "none");
                 } else {
-                  var req: string = this.username.value;
-                  var cand: string = this.password.value;
+                  req = this.username.value;
+                  cand = this.password.value;
                   localStorage.setItem("req_id", this.username.value);
                   localStorage.setItem("cand_id", this.password.value);
                   if (localStorage.getItem(req + "_" + cand + "_data")) {
@@ -120,10 +122,7 @@ export class LoginComponent implements OnInit {
                         data.CandidateAssessmentData.TheoryAssessment
                           .AssessmentStatus == "1"
                       ) {
-                        let element = document.documentElement;
-                        if (element.requestFullscreen)
-                          element.requestFullscreen();
-                        this.route.navigate(["theory-assessment"]);
+                        $("#mymodal").modal("show");
                       } else if (
                         data.CandidateAssessmentData.TheoryAssessment
                           .AssessmentStatus == "2" &&
@@ -218,10 +217,7 @@ export class LoginComponent implements OnInit {
                         data.CandidateAssessmentData.PracticalAssessment
                           .AssessmentStatus == "1"
                       ) {
-                        let element = document.documentElement;
-                        if (element.requestFullscreen)
-                          element.requestFullscreen();
-                        this.route.navigate(["practical-assessment"]);
+                        $("#mymodal").modal("show");
                       } else if (
                         data.CandidateAssessmentData.PracticalAssessment
                           .AssessmentStatus == "2" &&
@@ -288,10 +284,7 @@ export class LoginComponent implements OnInit {
                         data.CandidateAssessmentData.VivaMcqAssessment
                           .AssessmentStatus == "1"
                       ) {
-                        let element = document.documentElement;
-                        if (element.requestFullscreen)
-                          element.requestFullscreen();
-                        this.route.navigate(["viva-assessment"]);
+                        $("#mymodal").modal("show");
                       } else if (
                         data.CandidateAssessmentData.VivaMcqAssessment
                           .AssessmentStatus == "2" &&
@@ -435,5 +428,17 @@ export class LoginComponent implements OnInit {
         $("#log-in").css("display", "none");
       },
     });
+  }
+  clicked() {
+    let element = document.documentElement;
+    if (element.requestFullscreen) element.requestFullscreen();
+    if (localStorage.getItem(req + "_" + cand + "_assessment") == "theory")
+      this.route.navigate(["theory-assessment"]);
+    else if (
+      localStorage.getItem(req + "_" + cand + "_assessment") == "practical"
+    )
+      this.route.navigate(["practical-assessment"]);
+    else if (localStorage.getItem(req + "_" + cand + "_assessment") == "viva")
+      this.route.navigate(["viva-assessment"]);
   }
 }

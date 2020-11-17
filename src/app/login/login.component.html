@@ -152,6 +152,52 @@
         </div>
       </div>
     </div>
+
+    <div
+      class="modal fade right"
+      id="mymodal"
+      style="background: black"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+    >
+      <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+      <div class="modal-dialog modal-half-height modal-right" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title w-100" id="myModalLabel">NOTIFICATION</h2>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div
+            class="modal-body"
+            style="position: relative; top: 35%; left: 15%"
+          >
+            <h2>You are continuing the assessment</h2>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button
+              style="border-radius: 20px"
+              id="ok"
+              type="button"
+              mdbBtn
+              gradient="aqua"
+              data-dismiss="modal"
+              (click)="clicked()"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- JQuery -->
     <script
       type="text/javascript"
