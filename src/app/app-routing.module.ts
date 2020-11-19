@@ -18,10 +18,10 @@ import { LoginComponent } from "./login/login.component";
 import { AssessmentDetailComponent } from "./assessment-detail/assessment-detail.component";
 import { NgModule, Component } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import { AuthGuard } from './auth/auth.guard';
 import { ProctorCountViewsComponent } from "./proctor-count-views/proctor-count-views.component";
-
 export const routes: Routes = [
-  { path: "login", component: LoginComponent },
+  { path: "login", component: LoginComponent},
   { path: "assessment-details", component: AssessmentDetailComponent },
   { path: "general-instructions", component: GeneralInstructionsComponent },
   { path: "theory-instructions", component: TheoryInstructionsComponent },
@@ -36,12 +36,13 @@ export const routes: Routes = [
   { path: "feedback-viva", component: FeedbackVivaComponent },
   { path: "submit-response", component: SubmitResponseComponent },
   { path: "viva-assessment", component: VivaAssessmentComponent },
-  { path: "proctor-count-views", component: ProctorCountViewsComponent },
-  { path: "changepassword", component: ChangePasswordComponent },
-  { path: "proctor-attributes", component: ProctorAttributesComponent },
+  { path: "proctor-count-views", component: ProctorCountViewsComponent,canActivate:[AuthGuard] },
+  { path: "changepassword", component: ChangePasswordComponent,canActivate:[AuthGuard] },
+  { path: "proctor-attributes", component: ProctorAttributesComponent,canActivate:[AuthGuard] },
   {
     path: "password_changed_successfully",
     component: ChangePasswordSuccessComponent,
+    canActivate:[AuthGuard]
   },
   { path: "", redirectTo: "/login", pathMatch: "full" },
 ];

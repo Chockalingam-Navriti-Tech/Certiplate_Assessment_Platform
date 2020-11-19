@@ -25,7 +25,7 @@ export class ProctorCountViewsComponent implements OnInit {
       var table = $("#myTable").DataTable({
         lengthMenu: [10, 15, 25, 50, 100],
         pageLength: 10,
-        scrollY: "49vh",
+        scrollY: "35vh",
         serverSide: false,
         scrollX: true,
         scrollCollapse: true,
@@ -298,7 +298,7 @@ export class ProctorCountViewsComponent implements OnInit {
         else sessionStorage.setItem("LanguageId", index2.toString());
       });
     });
-    const burger: any = document.querySelector(".burger");
+    /*const burger: any = document.querySelector(".burger");
     const nav: any = document.querySelector(".nav-links");
     const nav_items = document.querySelectorAll(".nav-links li");
 
@@ -314,6 +314,6 @@ export class ProctorCountViewsComponent implements OnInit {
         }
       });
       burger.classList.toggle("toggle");
-    });
+    });*/
   }
 }

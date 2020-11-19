@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,700,900');
+#logo {
+    position: absolute;
+    top: 9px;
+}
+
+@media all and (min-width: 992px) {
+    .top .nav-item .dropdown-menu {
+        width: 100%;
+        text-align: center;
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        transition: .3s;
+        margin-top: 0;
+    }
+    .top .nav-item:hover .nav-link {
+        color: rgb(77, 74, 74);
+    }
+    .top .dropdown-menu.fade-down {
+        top: 80%;
+        transform: rotateX(-75deg);
+        transform-origin: 0% 0%;
+    }
+    .top .dropdown-menu.fade-up {
+        top: 180%;
+    }
+    .top .nav-item:hover .dropdown-menu {
+        transition: .3s;
+        color: #000000;
+        opacity: 1;
+        visibility: visible;
+        top: 100%;
+    }
+    .top .nav-item .dropdown-menu .dropdown-item:hover {
+        border: 2px solid #fff;
+        background-color: #000000;
+        border-radius: 15px;
+    }
+}
+
+.top {
+    font-family: 'poppins';
+    margin-top: 3px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 0px;
+}

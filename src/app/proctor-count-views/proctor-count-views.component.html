@@ -7,7 +7,9 @@
   </head>
   <body>
     <section>
-      <div class="nav">
+      <app-header></app-header>
+      <app-navbar></app-navbar>
+      <!--div class="nav">
         <div class="logo">
           <img src="/assets/images/logo.png" />
         </div>
@@ -28,7 +30,7 @@
           <a class="dropdown-item" [routerLink]="['/login']">Update Profile</a>
           <a class="dropdown-item" [routerLink]="['/login']">Log Out</a>
         </div>
-        <!--ul class="nav-links">
+        <ul class="nav-links">
           <li>
             <a [routerLink]="['/changepassword']">Change Password</a>
           </li>
@@ -38,14 +40,14 @@
           <li>
             <a [routerLink]="['/login']">Log Out</a>
           </li>
-        </ul-->
+        </ul>
         <div class="burger">
           <div class="line1"></div>
           <div class="line2"></div>
           <div class="line3"></div>
         </div>
-      </div>
-
+      </div-->
+      <div class="borderline"></div>
       <div class="heading">
         <h1>Proctor Count Views</h1>
       </div>
@@ -81,110 +83,24 @@
               <th>Distinct Total Count</th>
             </tr>
           </thead>
-          <!--tbody>
-            <tr *ngFor="let data of userData">
-              <td>
-                <b>{{ data.StateName }}</b>
-              </td>
-              <td>
-                <a
-                  ><b>{{ data.EnglishCount }}</b></a
-                >
-              </td>
-              <td>
-                <a
-                  ><b>{{ data.HindiCount }}</b></a
-                >
-              </td>
-              <td>
-                <a
-                  ><b>{{ data.TamilCount }}</b></a
-                >
-              </td>
-              <td>
-                <a
-                  ><b>{{ data.TeluguCount }}</b></a
-                >
-              </td>
-              <td>
-                <a
-                  ><b>{{ data.KannadaCount }}</b></a
-                >
-              </td>
-              <td>
-                <a
-                  ><b>{{ data.GujaratiCount }}</b></a
-                >
-              </td>
-              <td>
-                <a
-                  ><b>{{ data.OriyaCount }}</b></a
-                >
-              </td>
-              <td>
-                <a
-                  ><b>{{ data.AssameseCount }}</b></a
-                >
-              </td>
-              <td>
-                <a
-                  ><b>{{ data.UrduCount }}</b></a
-                >
-              </td>
-              <td>
-                <a
-                  ><b>{{ data.MarathiCount }}</b></a
-                >
-              </td>
-              <td>
-                <a
-                  ><b>{{ data.MalayalamCount }}</b></a
-                >
-              </td>
-              <td>
-                <a
-                  ><b>{{ data.BengaliCount }}</b></a
-                >
-              </td>
-              <td>
-                <a
-                  ><b>{{ data.PunjabiCount }}</b></a
-                >
-              </td>
-              <td>
-                <a
-                  ><b>{{ data.ManipuriCount }}</b></a
-                >
-              </td>
-              <td>
-                <a
-                  ><b>{{ data.TotalCount }}</b></a
-                >
-              </td>
-              <td>
-                <a
-                  ><b>{{ data.DistinctTotalCount }}</b></a
-                >
-              </td>
-            </tr>
-          </tbody-->
         </table>
       </div>
-      <div
+      <!--div
         class="modal-footer mx-5 pt-2 mb-1 justify-content-center fixed-bottom"
         style="font-size: 16px"
       >
-        <p style="color: rgb(255, 255, 255)" class="d-flex">
+        <p style="color: black" class="d-flex">
           <b>© 2020 Copyright :</b>
           <a
-            style="color: rgb(240, 234, 234); padding: 0px 6px"
+            style="color: black; padding: 0px 6px"
             href="https://navriti.com/"
             class="ml-1"
             target="_blank"
             ><b> Navriti Technologies Pvt Ltd. </b></a
           >
         </p>
-      </div>
+      </div-->
+      <app-footers></app-footers>
     </section>
 
     <script src="man.js" async defer></script>

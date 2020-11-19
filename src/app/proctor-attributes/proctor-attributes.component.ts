@@ -20,7 +20,7 @@ export class ProctorAttributesComponent implements OnInit {
     var table = $("#myTable").DataTable({
       lengthMenu: [10, 15, 25, 50, 100],
       pageLength: 10,
-      scrollY: "49vh",
+      scrollY: "40vh",
       serverSide: false,
       scrollX: true,
       scrollCollapse: true,
@@ -94,25 +94,5 @@ export class ProctorAttributesComponent implements OnInit {
         );
         sessionStorage.setItem("LanguageId", index2.toString());
       });*/
-    const burger: any = document.querySelector(".burger");
-    const nav: any = document.querySelector(".nav-links");
-    const nav_items = document.querySelectorAll(".nav-links li");
-
-    burger.addEventListener("click", () => {
-      nav.classList.toggle("nav-active");
-      nav_items.forEach((link: any, index) => {
-        if (link.style.animation) link.style.animation = "";
-        else {
-          link.style.animation = `navlinkdesign 0.5s ease forwards ${
-            index / 7 + 0.4
-          }s`;
-          nav.style.transition = `transform 0.5s ease-in`;
-        }
-      });
-      burger.classList.toggle("toggle");
-    });
-  }
-  back_button_clicked() {
-    this.route.navigate(["proctor-count-views"]);
   }
 }

@@ -98,7 +98,7 @@ export class PracticalAssessmentComponent implements OnInit {
     if (
       parseInt(
         varCandidateAssessmentData.CandidateAssessmentData.CandidateAttemptCount
-      ) < 1
+      ) > 1
     ) {
       attempted_count = 0;
       marked_review = 0;

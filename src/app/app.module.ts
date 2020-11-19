@@ -45,9 +45,12 @@ import { ProctorCountViewsComponent } from './proctor-count-views/proctor-count-
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ChangePasswordSuccessComponent } from './change-password-success/change-password-success.component';
 import { ProctorAttributesComponent } from './proctor-attributes/proctor-attributes.component';
+import { HeaderComponent } from './header/header.component';
+import { FootersComponent } from './footers/footers.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
-  declarations: [AppComponent, routingComponents, NavBarComponent, FooterComponent, TheoryInstructionsComponent, PracticalInstructionsComponent, VivaInstructionsComponent, ImageCaptureComponent, TheoryAssessmentComponent, EndImageCaptureComponent, FeedbackTheoryComponent, FeedbackPracticalComponent, FeedbackVivaComponent, PracticalAssessmentComponent, SubmitResponseComponent, VivaAssessmentComponent, ProctorCountViewsComponent, ChangePasswordComponent, ChangePasswordSuccessComponent, ProctorAttributesComponent],
+  declarations: [AppComponent, routingComponents, NavBarComponent, FooterComponent, TheoryInstructionsComponent, PracticalInstructionsComponent, VivaInstructionsComponent, ImageCaptureComponent, TheoryAssessmentComponent, EndImageCaptureComponent, FeedbackTheoryComponent, FeedbackPracticalComponent, FeedbackVivaComponent, PracticalAssessmentComponent, SubmitResponseComponent, VivaAssessmentComponent, ProctorCountViewsComponent, ChangePasswordComponent, ChangePasswordSuccessComponent, ProctorAttributesComponent, HeaderComponent, FootersComponent, NavbarComponent],
   imports: [
     WebcamModule,
     MatInputModule,

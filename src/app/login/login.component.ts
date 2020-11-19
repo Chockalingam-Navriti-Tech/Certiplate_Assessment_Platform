@@ -408,10 +408,10 @@ export class LoginComponent implements OnInit {
           json.AuthenticationResponseData.UserId
         );
         sessionStorage.setItem("password", this.password.value);
-        /*sessionStorage.setItem(
+        sessionStorage.setItem(
           'SessionId',
           json.AuthenticationResponseData.SessionId
-        );*/
+        );
         if (
           json.AuthenticationResponseData.Message ==
           "User authentication success"

@@ -8,13 +8,20 @@ html {
     font-family: 'Poppins', sans-serif;
 }
 
+.borderline {
+    border-bottom: 1px solid white;
+    left: 3%;
+    right: 3%;
+    position: absolute;
+}
+
 .container {
     padding: 4px 10px;
     position: absolute;
-    top: 19vh;
-    left: 12.5%;
+    top: 25vh;
+    left: 10%;
     font-size: 16px;
-    width: 75%;
+    width: 85%;
     background-color: white;
     border-radius: 10px;
     font-family: 'Poppins', sans-serif;
@@ -60,21 +67,22 @@ html {
 section {
     height: 100vh;
     color: #fff;
-    background: linear-gradient(-45deg, rgb(2, 47, 68), rgb(165, 18, 62), rgb(52, 13, 144));
-    background-size: 400% 400%;
-    position: relative;
-    animation: change 3s ease-in infinite;
+    background-image: url("/assets/images/test.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 h1 {
     font-size: 1rem;
-    border: 3px solid #fff;
+    background-color: black;
+    opacity: 0.8;
     padding: 1rem 1rem;
     letter-spacing: 2px;
     text-transform: uppercase;
     text-align: center;
     position: absolute;
-    top: 13.5vh;
+    top: 19vh;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -215,7 +223,7 @@ h1 {
 .spinner-border {
     position: absolute;
     z-index: 999;
-    top: 37.5vh;
+    top: 43.5vh;
     left: 48%;
 }
 
