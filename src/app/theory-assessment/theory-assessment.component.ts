@@ -1916,7 +1916,7 @@ function Event_log(
     SubTypeId: 0,
     SectionIndex: sec,
     QuestionIndex: index,
-    ActualResponse: -1,
+    Response: -1,
     KeyboardKey: key,
     Description: "",
     EventImage: "",
@@ -1975,7 +1975,7 @@ function Event_log(
       break;
     case "OPTION_SELECTED":
       Assessment_event.SubTypeId = 21;
-      Assessment_event.ActualResponse = parseInt(
+      Assessment_event.Response = parseInt(
         data.CandidateAssessmentData.TheoryAssessment.Sections[sec].Questions[
           index
         ].CandidateCurrentResponseOption
