@@ -111,6 +111,13 @@ export class ImageCaptureComponent implements OnInit {
           Latitude: lat,
           Longitude: long,
         });
+        data.CandidateAssessmentData.TheoryAssessment.AssessmentEvents.push({
+          DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
+          SubTypeId: 24,
+          Description: "Candidate has captured Identity Image",
+          Latitude: lat,
+          Longitude: long,
+        });
         localStorage.setItem(
           Req + '_' + Id + '_' + 'data',
           JSON.stringify(data)
@@ -170,6 +177,13 @@ export class ImageCaptureComponent implements OnInit {
           Latitude: lat,
           Longitude: long,
         });
+        data.CandidateAssessmentData.PracticalAssessment.AssessmentEvents.push({
+          DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
+          SubTypeId: 24,
+          Description: "Candidate has captured Identity Image",
+          Latitude: lat,
+          Longitude: long,
+        });
         localStorage.setItem(
           Req + '_' + Id + '_' + 'data',
           JSON.stringify(data)
@@ -219,6 +233,13 @@ export class ImageCaptureComponent implements OnInit {
           DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
           SubTypeId: 24,
           Description: "Candidate has captured Start Image",
+          Latitude: lat,
+          Longitude: long,
+        });
+        data.CandidateAssessmentData.VivaMcqAssessment.AssessmentEvents.push({
+          DateTime: moment().format('DD-MMM-YYYY h:mm:ss a'),
+          SubTypeId: 24,
+          Description: "Candidate has captured Identity Image",
           Latitude: lat,
           Longitude: long,
         });
