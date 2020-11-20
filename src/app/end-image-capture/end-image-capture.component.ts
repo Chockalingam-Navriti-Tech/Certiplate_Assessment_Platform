@@ -131,8 +131,10 @@ export class EndImageCaptureComponent implements OnInit {
       data.CandidateAssessmentData.PracticalAssessment.CandidateSystemInfo.SystemInfoDateTime = moment().format(
         'DD-MMM-YYYY hh:mm:ss a'
       );
-      data.CandidateAssessmentData.PracticalAssessment.CandidateSystemInfo.OperatingSystem = os.platform();
-      data.CandidateAssessmentData.PracticalAssessment.CandidateSystemInfo.SystemType = os.arch();
+      data.CandidateAssessmentData.PracticalAssessment.CandidateSystemInfo.OperatingSystem = this.deviceservice.os;
+      data.CandidateAssessmentData.PracticalAssessment.CandidateSystemInfo.OperatingSystemVersion = this.deviceservice.os_version;
+      data.CandidateAssessmentData.PracticalAssessment.CandidateSystemInfo.TotalPhysicalMemory = os.totalmem();
+      data.CandidateAssessmentData.PracticalAssessment.CandidateSystemInfo.AvailablePhysicalMemory = os.freemem();
       data.CandidateAssessmentData.PracticalAssessment.CandidateSystemInfo.SystemLocale =
         window.navigator.language;
       data.CandidateAssessmentData.PracticalAssessment.CandidateSystemInfo.Latitude = lat;
@@ -171,8 +173,10 @@ export class EndImageCaptureComponent implements OnInit {
       data.CandidateAssessmentData.VivaMcqAssessment.CandidateSystemInfo.SystemInfoDateTime = moment().format(
         'DD-MMM-YYYY hh:mm:ss a'
       );
-      data.CandidateAssessmentData.VivaMcqAssessment.CandidateSystemInfo.OperatingSystem = os.platform();
-      data.CandidateAssessmentData.VivaMcqAssessment.CandidateSystemInfo.SystemType = os.arch();
+      data.CandidateAssessmentData.VivaMcqAssessment.CandidateSystemInfo.OperatingSystem = this.deviceservice.os;
+      data.CandidateAssessmentData.VivaMcqAssessment.CandidateSystemInfo.OperatingSystemVersion = this.deviceservice.os_version;
+      data.CandidateAssessmentData.VivaMcqAssessment.CandidateSystemInfo.TotalPhysicalMemory = os.totalmem();
+      data.CandidateAssessmentData.VivaMcqAssessment.CandidateSystemInfo.AvailablePhysicalMemory = os.freemem();
       data.CandidateAssessmentData.VivaMcqAssessment.CandidateSystemInfo.SystemLocale =
         window.navigator.language;
       data.CandidateAssessmentData.VivaMcqAssessment.CandidateSystemInfo.Latitude = lat;
