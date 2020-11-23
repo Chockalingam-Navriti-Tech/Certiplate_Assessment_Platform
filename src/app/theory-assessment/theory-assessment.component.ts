@@ -9,6 +9,7 @@ import { CountdownComponent } from "ngx-countdown";
 import * as moment from "moment";
 
 var localstream: any;
+var flag = 0;
 var option, route: any;
 var id = 0;
 var count: number;
@@ -399,17 +400,20 @@ export class TheoryAssessmentComponent implements OnInit {
       (visibility = function () {
         $.ajax({
           url: environment.Violation_Api,
-          type: 'POST',
-          dataType: 'json',
+          type: "POST",
+          dataType: "json",
           data: {
             ApiKey: environment.api_key,
-            CandidateId:varCandidateAssessmentData.CandidateAssessmentData.CandidateId,
-            RequestId:varCandidateAssessmentData.CandidateAssessmentData.AssessmentRequestId,
-            ViolationCode:'APP_SWITCHING'
+            CandidateId:
+              varCandidateAssessmentData.CandidateAssessmentData.CandidateId,
+            RequestId:
+              varCandidateAssessmentData.CandidateAssessmentData
+                .AssessmentRequestId,
+            ViolationCode: "APP_SWITCHING",
           },
           success: function (data) {
             console.log(data);
-          }
+          },
         });
         if (exit_full_screen > 4) {
           exit_full_screen = 0;
@@ -546,17 +550,20 @@ export class TheoryAssessmentComponent implements OnInit {
         if (fullscreen % 2 != 0) {
           $.ajax({
             url: environment.Violation_Api,
-            type: 'POST',
-            dataType: 'json',
+            type: "POST",
+            dataType: "json",
             data: {
               ApiKey: environment.api_key,
-              CandidateId:varCandidateAssessmentData.CandidateAssessmentData.CandidateId,
-              RequestId:varCandidateAssessmentData.CandidateAssessmentData.AssessmentRequestId,
-              ViolationCode:'APP_SWITCHING'
+              CandidateId:
+                varCandidateAssessmentData.CandidateAssessmentData.CandidateId,
+              RequestId:
+                varCandidateAssessmentData.CandidateAssessmentData
+                  .AssessmentRequestId,
+              ViolationCode: "APP_SWITCHING",
             },
             success: function (data) {
               console.log(data);
-            }
+            },
           });
           if (exit_full_screen > 4) {
             exit_full_screen = 0;
@@ -647,7 +654,6 @@ export class TheoryAssessmentComponent implements OnInit {
       });
     }, 30000);
     //let classify = this.classifyImage;
-
     //snapshot for every 30 sec
     navigator.getUserMedia(
       constraints,
@@ -699,10 +705,12 @@ export class TheoryAssessmentComponent implements OnInit {
         }, 30000);
       },
       function (err) {
-        alert("there was an error: " + err);
-        route.navigate(["login"]);
+        flag = 1;
       }
     );
+    if (flag == 1) {
+      this.route.navigate(['login']);
+    }
   }
 
   initial() {
