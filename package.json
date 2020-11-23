@@ -35,6 +35,7 @@
     "@types/chart.js": "^2.9.24",
     "@types/datatables.net-fixedcolumns": "^3.3.0",
     "@types/dom-mediacapture-record": "^1.0.7",
+    "@types/file-saver": "^2.0.1",
     "@types/html2canvas": "0.0.35",
     "@types/recordrtc": "^5.6.2",
     "@types/video.js": "^7.3.11",
@@ -46,7 +47,7 @@
     "angular-notify": "^1.2.0",
     "animate.css": "^4.1.0",
     "bootstrap": "^4.5.3",
-    "chart.js": "^2.5.0",
+    "chart.js": "^2.9.4",
     "computer-name": "^0.1.0",
     "datatables-fixedcolumns": "^3.1.0",
     "datatables.net": "^1.10.22",
@@ -56,6 +57,7 @@
     "datatables.net-fixedcolumns-dt": "^3.3.2",
     "datatables.net-responsive": "^2.2.6",
     "datauri": "^3.0.0",
+    "file-saver": "^2.0.5",
     "firebase": "^7.13.1",
     "fs": "0.0.1-security",
     "get-user-locale": "^1.4.0",
@@ -86,6 +88,7 @@
     "webcam.js": "^1.0.1",
     "webcamjs": "^1.0.26",
     "webrtc-adapter": "^7.7.0",
+    "xlsx": "^0.16.9",
     "zone.js": "~0.10.3"
   },
   "devDependencies": {

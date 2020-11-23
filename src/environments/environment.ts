@@ -41,8 +41,10 @@ export const environment = {
   Submit_Responsedata_URL:
     "https://uap-demo-api.certiplate.com/json/asynconeway/SubmitCandidateAssessmentDataRequest",
   Proctor_Count_Views_URL:
-    "https://uap-demo-api.certiplate.com/json/asynconeway/GetStateAndLanguagewiseProctorCountDataRequest",
+    "https://uap-demo-api.certiplate.com/json/asynconeway/GetStatewiseProctorCountDataRequest",
   Proctor_Count_Views_Api_Key: "ddcd795c-1051-4bc6-8b31-c5b60b68544c",
+  Proctor_Statewise_Count_URL:
+    'https://uap-demo-api.certiplate.com/json/asynconeway/GetLanguagewiseProctorCountDataRequest',
   Proctor_Attributes_URL:
     "https://uap-demo-api.certiplate.com/json/asynconeway/GetStateAndLanguagewiseProctorDetailedDataRequest",
   Proctor_Attributes_Api_Key: "ddcd795c-1051-4bc6-8b31-c5b60b68544c",

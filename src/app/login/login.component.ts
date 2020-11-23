@@ -407,6 +407,7 @@ export class LoginComponent implements OnInit {
           "UserId",
           json.AuthenticationResponseData.UserId
         );
+        sessionStorage.setItem('UserRoleId', json.AuthenticationResponseData.UserRoleId);
         sessionStorage.setItem("password", this.password.value);
         sessionStorage.setItem(
           'SessionId',
