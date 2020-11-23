@@ -1,0 +1,108 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <section>
+      <app-header></app-header>
+      <app-navbar></app-navbar>
+      <!--div class="nav">
+        <div class="logo">
+          <img src="/assets/images/logo.png" />
+        </div>
+        <button
+          class="btn dropdown-toggle mr-4 shadow-lg"
+          type="button"
+          id="drop"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          {{ UserId }}
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" [routerLink]="['/changepassword']"
+            >Change Password</a
+          >
+          <a class="dropdown-item" [routerLink]="['/login']">Update Profile</a>
+          <a class="dropdown-item" [routerLink]="['/login']">Log Out</a>
+        </div>
+        <ul class="nav-links">
+          <li>
+            <a [routerLink]="['/changepassword']">Change Password</a>
+          </li>
+          <li>
+            <a [routerLink]="['/login']">Update Profile</a>
+          </li>
+          <li>
+            <a [routerLink]="['/login']">Log Out</a>
+          </li>
+        </ul>
+        <div class="burger">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
+        </div>
+      </div-->
+      <div class="borderline"></div>
+      <div class="heading">
+        <h1>Proctor Count Views</h1>
+      </div>
+
+      <div
+        class="spinner-border text-primary"
+        id="image"
+        style="display: none"
+      ></div>
+      <div class="container">
+        <table
+          class="mdl-data-table stripe hover cell-border order-column display"
+          id="myTable"
+        >
+          <thead>
+            <tr>
+              <th>State Name</th>
+              <th>English</th>
+              <th>Hindi</th>
+              <th>Tamil</th>
+              <th>Telugu</th>
+              <th>Kannada</th>
+              <th>Gujarati</th>
+              <th>Oriya</th>
+              <th>Assamese</th>
+              <th>Urdu</th>
+              <th>Marathi</th>
+              <th>Malayalam</th>
+              <th>Bengali</th>
+              <th>Punjabi</th>
+              <th>Manipuri</th>
+              <th>Total Count</th>
+              <th>Distinct Total Count</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <!--div
+        class="modal-footer mx-5 pt-2 mb-1 justify-content-center fixed-bottom"
+        style="font-size: 16px"
+      >
+        <p style="color: black" class="d-flex">
+          <b>© 2020 Copyright :</b>
+          <a
+            style="color: black; padding: 0px 6px"
+            href="https://navriti.com/"
+            class="ml-1"
+            target="_blank"
+            ><b> Navriti Technologies Pvt Ltd. </b></a
+          >
+        </p>
+      </div-->
+      <app-footers></app-footers>
+    </section>
+
+    <script src="man.js" async defer></script>
+  </body>
+</html>

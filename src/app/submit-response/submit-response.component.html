@@ -1,0 +1,131 @@
+<app-nav-bar></app-nav-bar>
+<div class="text-center">
+  <h1
+    class="animated heartBeat"
+    style="font-size: 28px; position: fixed; top: 15%; left: 42%"
+  >
+    SUBMIT ASSESSMENT
+  </h1>
+  <div
+    class="card"
+    style="position: fixed; top: 20%; left: 26%; width: 50%; height: 45%"
+  >
+    <div
+      class="card-body align-items-center d-flex justify-content-center"
+      style="position: fixed; left: 35%; top: 38%"
+    >
+      <h2 class="card-title" style="margin: 3px; color: black">
+        <b>Response Data Upload:</b>
+      </h2>
+      <br />
+      <a id="submit" class="btn btn-primary" (click)="clicked()"
+        >Submit Response</a
+      >
+      <div
+        id="load"
+        style="display: none; size: 15px; position: fixed; left: 54%"
+        class="spinner-border text-primary"
+      ></div>
+      <h2
+        id="progress"
+        style="
+          display: none;
+          size: 15px;
+          position: fixed;
+          left: 57%;
+          margin: 2px;
+        "
+      >
+        In progress...
+      </h2>
+      <i
+        id="done"
+        style="display: none; color: green; position: fixed; left: 55%"
+        class="fa fa-check fa-lg"
+      >
+        Done</i
+      >
+    </div>
+  </div>
+  <div style="position: fixed; top: 33.5%; left: 36.5%">
+    <h2 style="margin: 3px; color: black">
+      <b>Response File Upload :</b>
+    </h2>
+    <a
+      style="position: fixed; top: 33%; left: 51.4%"
+      id="submits"
+      class="btn btn-secondary"
+      (click)="clicked_file_upload()"
+      >Submit Response</a
+    >
+    <div
+      id="loads"
+      style="display: none; size: 15px; position: fixed; top: 33.5%; left: 54%"
+      class="spinner-border text-primary"
+    ></div>
+    <h2
+      id="progresses"
+      style="
+        display: none;
+        size: 15px;
+        position: fixed;
+        left: 57%;
+        top: 33.5%;
+        margin: 2px;
+      "
+    >
+      In progress...
+    </h2>
+    <i
+      id="dones"
+      style="
+        display: none;
+        color: green;
+        position: fixed;
+        top: 34.5%;
+        left: 55%;
+      "
+      class="fa fa-check fa-lg"
+    >
+      Done</i
+    >
+  </div>
+
+  <div style="position: fixed; top: 55%; left: 41%">
+    <a
+      id="btn"
+      class="btn aqua-gradient animated swing"
+      style="display: none"
+      (click)="assessment()"
+      >Back to Assessment Details Page</a
+    >
+    <a
+      id="success"
+      class="btn aqua-gradient animated swing"
+      style="display: none"
+      (click)="finished()"
+      >Successfully Completed</a
+    >
+  </div>
+  <div
+    id="div"
+    class="text-center justify-content-center"
+    style="
+      display: none;
+      background-color: red;
+      position: fixed;
+      top: 20%;
+      left: 26%;
+      width: 50%;
+      height: 4%;
+      font-size: 25px;
+      color: white;
+      size: 30px;
+    "
+  >
+    <h2 id="warning"></h2>
+  </div>
+</div>
+<form style="display: none" id="frmImages"></form>
+
+<app-footer></app-footer>

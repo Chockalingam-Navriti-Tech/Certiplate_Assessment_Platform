@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <!-- MDB icon -->
+    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Material Design Bootstrap -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <mdb-navbar
+      SideClass="navbar navbar-expand-lg navbar-dark bg-success"
+      [containerInside]="false"
+    >
+      <img
+        class="animated flip"
+        style="position: absolute"
+        src="/assets/images/logo.png"
+      />
+      <div
+        id="info1"
+        style="
+          left: 13%;
+          width: 20%;
+          position: relative;
+          font-size: 0.25 rem;
+          padding: 0.5 em;
+          color: black;
+        "
+      ></div>
+      <div
+        id="info2"
+        style="
+          left: 38%;
+          width: 30%;
+          position: absolute;
+          font-size: 0.25 rem;
+          padding: 0.5 em;
+          margin-bottom: 5;
+          color: black;
+        "
+      ></div>
+      <div
+        id="info3"
+        style="
+          left: 70%;
+          width: 20%;
+          position: absolute;
+          font-size: 0.25 rem;
+          padding: 0.5 em;
+          color: black;
+        "
+      ></div>
+      <div style="left: 91%; position: absolute">
+        <b>
+          <countdown
+            style="font-size: 27px; color: white"
+            [config]="{
+              leftTime: LeftTime,
+              notify: time_array
+            }"
+            (event)="timeup($event)"
+          ></countdown>
+        </b>
+      </div>
+    </mdb-navbar>
+    <div
+      style="
+        top: 8%;
+        left: 3%;
+        position: relative;
+        display: block;
+        width: 600px;
+      "
+    >
+      <h1><b>QUESTION</b></h1>
+      <br />
+      <b><div id="question"></div></b><br />
+      <img src="" style="display: none; height: 150px; width: 150px" id="img" />
+    </div>
+
+    <div
+      id="myModal"
+      class="modal"
+      style="
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.9);
+      "
+    >
+      <span class="close">&times;</span>
+
+      <!-- Modal Content (The Image) -->
+      <img
+        class="modal-content animated rotateIn"
+        style="margin: auto; display: block; height: auto; width: auto"
+        id="img01"
+      />
+    </div>
+
+    <div
+      style="
+        top: 9%;
+        left: 3%;
+        position: relative;
+        display: block;
+        width: 600px;
+      "
+      id="vid"
+    ></div>
+    <form style="display: none" id="frmImages"></form>
+    <form style="display: none" id="frmVideos"></form>
+    <video style="display: none" id="video" autoplay muted></video>
+    <canvas style="display: none" id="canvas" width="640" height="480"></canvas>
+    <div style="top: 17%; left: 40%; position: absolute">
+      <select name="drop" id="dropdown" style="size: 20px">
+        <option id="English">English</option>
+        <option style="display: none" id="Hindi">Hindi</option>
+        <option style="display: none" id="Tamil">Tamil</option>
+        <option style="display: none" id="Kannada">Kannada</option>
+        <option style="display: none" id="Telugu">Telugu</option>
+        <option style="display: none" id="Malayalam">Malayalam</option>
+        <option style="display: none" id="Gujarati">Gujarati</option>
+        <option style="display: none" id="Marathi">Marathi</option>
+        <option style="display: none" id="Bengali">Bengali</option>
+        <option style="display: none" id="Punjabi">Punjabi</option>
+        <option style="display: none" id="Urdu">Urdu</option>
+        <option style="display: none" id="Manipuri">Manipuri</option>
+        <option style="display: none" id="Oriya">Oriya</option>
+        <option style="display: none" id="Assamese">Assamese</option>
+      </select>
+    </div>
+    <div
+      style="
+        top: 15.5%;
+        left: 70%;
+        position: absolute;
+        width: 25%;
+        height: 450px;
+        overflow-y: auto;
+        line-height: 5 em;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+      "
+      class="card col-md-12 mb-4 text-center"
+    >
+      <div class="card-body" id="card">
+        <h4 class="card-title"><a>All Sections</a></h4>
+      </div>
+      <br />
+    </div>
+
+    <div
+      class="card"
+      style="top: 20%; left: 27%; position: relative; width: 45%"
+    >
+      <div class="card-body">
+        <div class="col-sm-14">
+          <table>
+            <tr>
+              <td>
+                <h2
+                  style="font-size: 18px; margin-top: 11px"
+                  class="card-title"
+                >
+                  <b>Question Link Legends:</b>
+                </h2>
+              </td>
+              <td>
+                <label
+                  class="btn btn-danger"
+                  style="
+                    background-color: #c42737;
+                    width: 180px;
+                    cursor: default;
+                  "
+                  >Not Answered</label
+                >
+              </td>
+              <td>
+                <label
+                  class="btn btn-success"
+                  style="
+                    background-attachment: #298d74;
+                    width: 180px;
+                    cursor: default;
+                  "
+                  >Answered</label
+                >
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div
+      class="card"
+      style="top: 21%; position: relative; background-color: green; width: 100%"
+    >
+      <div class="card-body">
+        <button
+          id="previous"
+          mdbtn
+          class="btn btn-primary"
+          (click)="previous()"
+          disabled
+        >
+          Previous
+        </button>
+        <button id="next" mdbtn class="btn btn-secondary" (click)="next()">
+          Next
+        </button>
+        <button
+          type="button"
+          id="submit_reponse_btn"
+          class="btn btn-primary"
+          (click)="submit()"
+          style="left: 85%; position: absolute"
+          data-toggle="modal"
+          data-target="#fullHeightModalRight"
+        >
+          Finish Assessment
+        </button>
+      </div>
+    </div>
+    <!-- Half Height Modal Right -->
+    <div
+      class="modal fade left"
+      id="fullHeightModalRight"
+      style="background: black"
+      tabindex="-1"
+      role="dialog"
+      data-backdrop="static"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+    >
+      <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+      <div class="modal-dialog modal-half-height modal-left" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title w-100" id="myModalLabel">SUBMISSION</h2>
+          </div>
+          <div
+            class="modal-body"
+            id="1"
+            style="position: relative; top: 35%; left: 15%"
+          ></div>
+          <div class="modal-footer justify-content-center">
+            <h2>Do you really want to finish the assessment?</h2>
+            <div>
+              <button
+                style="border-radius: 20px"
+                id="yes"
+                type="button"
+                mdbBtn
+                gradient="purple"
+                data-dismiss="modal"
+                (click)="yes()"
+              >
+                Yes
+              </button>
+              <button
+                style="border-radius: 20px"
+                id="no"
+                type="button"
+                mdbBtn
+                gradient="aqua"
+                data-dismiss="modal"
+              >
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="centerContainer" style="display: none">
+      <div>
+        <div class="row">
+          <div class="col-sm-12">
+            <mat-card class="videoCard mat-elevation-z9">
+              <video
+                autoplay
+                muted
+                loop
+                id="myVideo"
+                style="position:fixed,bottom:0;right:0;min-width:0%;min-height:0%;display:none"
+              ></video>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Half Height Modal Right -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    ></script>
+    <!-- Bootstrap tooltips -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"
+    ></script>
+    <!-- Bootstrap core JavaScript -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"
+    ></script>
+    <!-- MDB core JavaScript -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"
+    ></script>
+  </body>
+  <div class="fullscreen-container">
+    <div
+      class="alert"
+      id="popup"
+      style="opacity:0;position:absolute;top:23%;left:29%;background:black;border:1px solid #b3b3b3;width:600px;text-align:center;padding 40px;box-shadow:0px 50px 50px rgba(0,0,0,0.6)"
+    >
+      <br />
+      <i
+        class="fas fa-exclamation"
+        style="
+          font-size: 60px;
+          color: orange;
+          border: 5px solid orange;
+          padding: 20px 40px;
+          border-radius: 50%;
+        "
+      ></i
+      ><br /><br />
+      <div style="color: white" id="message"></div>
+      <br />
+      <button class="btn btn-danger" id="ok">OK</button><br /><br />
+    </div>
+  </div>
+</html>

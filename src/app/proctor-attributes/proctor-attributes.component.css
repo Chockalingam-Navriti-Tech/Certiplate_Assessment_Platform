@@ -1,0 +1,238 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Poppins', sans-serif;
+}
+
+.borderline {
+    border-bottom: 1px solid white;
+    left: 3%;
+    right: 3%;
+    position: absolute;
+}
+
+.container {
+    padding: 4px 10px;
+    position: absolute;
+    top: 25vh;
+    left: 10%;
+    font-size: 16px;
+    width: 85%;
+    background-color: white;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.mdl-data-table tbody tr td {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+#drop {
+    color: #fff;
+    letter-spacing: 2px;
+    padding: 10px 5px;
+    border-radius: 2px;
+    position: absolute;
+    width: 25%;
+    left: 70vw;
+    top: 2vh;
+}
+
+.dropdown-menu {
+    width: 25%;
+    height: 27vh;
+    background-color: black;
+    border-radius: 10px;
+}
+
+.dropdown-menu a {
+    font-size: 16px;
+    letter-spacing: 2px;
+    padding: 13px 30px;
+    color: rgb(255, 255, 255);
+}
+
+.dropdown-menu a:hover {
+    border: 3px solid #fff;
+    background-color: black;
+    padding: 10px 12px;
+    border-radius: 50px;
+}
+
+section {
+    height: 100vh;
+    color: #fff;
+    background-image: url("/assets/images/test.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1 {
+    font-size: 1rem;
+    background-color: black;
+    opacity: 0.8;
+    padding: 1rem 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    position: absolute;
+    top: 19vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes change {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.nav {
+    display: flex;
+    font-size: 2rem;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+}
+
+.logo {
+    color: rgb(243, 239, 239);
+    letter-spacing: 3px;
+    position: absolute;
+    left: 25px;
+}
+
+.nav-links {
+    opacity: 1;
+    display: flex;
+    justify-content: space-around;
+    width: 45%;
+    position: absolute;
+    right: 10px;
+}
+
+.nav-links li {
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: rgb(255, 255, 255);
+}
+
+.nav-links a:hover {
+    border: 3px solid #fff;
+    /*background-color: rgb(16, 32, 175);*/
+    padding: 10px 12px;
+    border-radius: 50px;
+}
+
+.burger div {
+    width: 25px;
+    height: 2px;
+    background-color: white;
+    margin: 5px;
+    display: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+}
+
+@media screen and (max-width:1024px) {
+    .nav-links {
+        display: flex;
+        justify-content: space-around;
+        width: 50%;
+    }
+}
+
+
+/*@media screen and (max-width:874px) {
+    body {
+        overflow-x: hidden;
+    }
+    .nav-links {
+        position: absolute;
+        right: 0px;
+        height: 92vh;
+        top: 8vh;
+        background-color: black;
+        opacity: 1;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+        transform: translateX(100%);
+    }
+    .nav-links li {
+        opacity: 0;
+    }
+    .burger {
+        position: fixed;
+        right: 8%;
+    }
+    .burger div {
+        display: block;
+    }
+}*/
+
+.nav-active {
+    transform: translateX(0%);
+}
+
+@keyframes navlinkdesign {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 5px);
+}
+
+.toggle .line2 {
+    opacity: 0;
+}
+
+.toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -5px);
+}
+
+.modal-footer {
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 2px;
+}
+
+.spinner-border {
+    position: absolute;
+    z-index: 999;
+    top: 43.5vh;
+    left: 48%;
+}
+
+th {
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+}
+
+th:first-child {
+    border-left: 1px solid #dddddd;
+}

@@ -1,0 +1,55 @@
+<div class="logo ml-5 mt-3" id="logo">
+  <a href="https://navriti.com/"><img src="assets/images/logo.png" /></a>
+</div>
+
+<div class="top">
+  <ul class="nav navbar-right mr-5 mt-3">
+    <li
+      style="background-color: rgba(0, 0, 0, 0.8)"
+      class="nav-item dropdown mt-0 mr-3"
+    >
+      <a
+        style="font-size: 15px; color: rgb(202, 195, 195); cursor: pointer"
+        class="nav-link"
+        (click)="back_function()"
+        >Back</a
+      >
+    </li>
+    <li style="background-color: rgba(0, 0, 0, 0.8)" class="nav-item dropdown">
+      <a
+        style="font-size: 15px; color: rgb(202, 195, 195)"
+        class="nav-link dropdown-toggle"
+        href="#"
+        data-toggle="dropdown"
+      >
+        {{ username }} (assessor)</a
+      >
+      <ul style="background-color: black" class="dropdown-menu fade-up">
+        <li>
+          <a
+            style="color: white; padding: 15px"
+            class="dropdown-item"
+            routerLink="/changepassword"
+            >Change Password</a
+          >
+        </li>
+        <li>
+          <a
+            style="color: white; padding: 15px"
+            class="dropdown-item"
+            routerLink="/changepassword"
+            >Update Profile</a
+          >
+        </li>
+        <li>
+          <a
+            style="color: white; cursor: pointer; padding: 15px"
+            class="dropdown-item"
+            (click)="clear()"
+            >Logout</a
+          >
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

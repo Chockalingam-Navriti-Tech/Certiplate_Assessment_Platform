@@ -1,0 +1,84 @@
+<app-nav-bar></app-nav-bar>
+
+<button
+  style="position: absolute; top: 20%; left: 78%; border-radius: 20px"
+  mdbBtn
+  id="btn1"
+  class="btn purple-gradient actionBtn"
+  (click)="triggerSnapshot('btn1')"
+>
+  Take Face Image Snapshot
+</button>
+<button
+  style="position: absolute; top: 30%; left: 79%; border-radius: 20px"
+  mdbBtn
+  id="btn2"
+  class="btn purple-gradient actionBtn"
+  (click)="triggerSnapshot('btn2')"
+>
+  Take ID Image Snapshot
+</button>
+
+<webcam
+  style="position: absolute; top: 11%; left: 35%"
+  id="webcam"
+  [height]="400"
+  [width]="400"
+  (initError)="handleInitError($event)"
+  [trigger]="triggerObservable"
+  (imageCapture)="handleImage1($event)"
+></webcam>
+
+<h1
+  class="animated rubberBand"
+  style="position: absolute; top: 50%; left: 29%"
+  *ngIf="webcamImage1"
+>
+  FACE IMAGE
+</h1>
+<div
+  style="position: absolute; top: 55%; left: 20%"
+  class="snapshot"
+  *ngIf="webcamImage1"
+>
+  <img
+    id="face_image"
+    [src]="webcamImage1.imageAsDataUrl"
+    style="width: 60%; heigth: 60%; border: 5px solid black"
+  />
+</div>
+<h1
+  class="animated rubberBand"
+  style="position: absolute; top: 50%; left: 58%"
+  *ngIf="webcamImage2"
+>
+  ID Card IMAGE
+</h1>
+<div
+  style="position: absolute; top: 55%; left: 50%"
+  class="snapshot1"
+  *ngIf="webcamImage2"
+>
+  <img
+    id="id_image"
+    [src]="webcamImage2.imageAsDataUrl"
+    style="width: 60%; heigth: 60%; border: 5px solid black"
+  />
+</div>
+<button
+  style="position: absolute; top: 80%; left: 80%; border-radius: 20px"
+  mdbBtn
+  id="submit_button"
+  class="btn blue-gradient animated swing actionBtn"
+  *ngIf="webcamImage1 && webcamImage2"
+  (click)="clicked()"
+>
+  Submit and Proceed
+</button>
+<div
+  class="spinner-border text-primary mb-3"
+  style="display: none; position: absolute; top: 82.5%; left: 86%"
+  id="move-in"
+></div>
+<form style="display: none" id="frmImages"></form>
+<app-footer></app-footer>

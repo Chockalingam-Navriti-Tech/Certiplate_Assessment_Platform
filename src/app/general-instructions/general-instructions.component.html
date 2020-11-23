@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <!-- Material Design Bootstrap -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <app-nav-bar></app-nav-bar>
+    <div
+      style="top: 10%; left: 41%; position: fixed"
+      class="animated heartBeat"
+    >
+      <h1>GENERAL INSTRUCTIONS</h1>
+    </div>
+    <div
+      class="shadow-lg"
+      style="
+        top: 18%;
+        left: 13%;
+        width: 75%;
+        height: 65%;
+        position: absolute;
+        overflow-y: auto;
+      "
+    >
+      <table class="table" id="tablecontent"></table>
+    </div>
+
+    <div style="top: 10%; left: 75%; position: absolute">
+      <select id="dropdown" style="size: 20px">
+        <option id="English">English</option>
+        <option style="display: none" id="Hindi">Hindi</option>
+        <option style="display: none" id="Tamil">Tamil</option>
+        <option style="display: none" id="Kannada">Kannada</option>
+        <option style="display: none" id="Telugu">Telugu</option>
+        <option style="display: none" id="Malayalam">Malayalam</option>
+        <option style="display: none" id="Gujarati">Gujarati</option>
+        <option style="display: none" id="Marathi">Marathi</option>
+        <option style="display: none" id="Bengali">Bengali</option>
+        <option style="display: none" id="Punjabi">Punjabi</option>
+        <option style="display: none" id="Urdu">Urdu</option>
+        <option style="display: none" id="Manipuri">Manipuri</option>
+        <option style="display: none" id="Oriya">Oriya</option>
+        <option style="display: none" id="Assamese">Assamese</option>
+      </select>
+    </div>
+
+    <div class="form-check" style="top: 91%; left: 1%; position: fixed">
+      <input type="checkbox" class="form-check-input" id="materialchecked" />
+      <label class="form-check-label" for="materialUnchecked"
+        ><b>I have read and understood all of the above instructions</b></label
+      >
+    </div>
+    <div style="top: 87%; left: 90%; position: fixed">
+      <button
+        type="button"
+        mdbBtn
+        id="submit_button"
+        class="btn btn-primary animated rubberBand"
+        mdbWavesEffect
+        disabled
+        (click)="clicked()"
+      >
+        Next
+      </button>
+    </div>
+    <app-footer></app-footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"
+    ></script>
+    <!-- MDB core JavaScript -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"
+    ></script>
+  </body>
+</html>
