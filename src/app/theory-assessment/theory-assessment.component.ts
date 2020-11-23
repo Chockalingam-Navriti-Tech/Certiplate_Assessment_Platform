@@ -9,7 +9,6 @@ import { CountdownComponent } from "ngx-countdown";
 import * as moment from "moment";
 
 var localstream: any;
-var flag = 0;
 var option, route: any;
 var id = 0;
 var count: number;
@@ -705,12 +704,10 @@ export class TheoryAssessmentComponent implements OnInit {
         }, 30000);
       },
       function (err) {
-        flag = 1;
+        alert("there was an error: " + err);
+        route.navigate(["login"]);
       }
     );
-    if (flag == 1) {
-      this.route.navigate(['login']);
-    }
   }
 
   initial() {
