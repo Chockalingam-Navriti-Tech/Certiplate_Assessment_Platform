@@ -6,85 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
-    <section>
-      <app-header></app-header>
-      <app-navbar></app-navbar>
-      <!--div class="nav">
-        <div class="logo">
-          <img src="/assets/images/logo.png" />
+    <app-header></app-header>
+    <app-navbar></app-navbar>
+    <div class="borderline"></div>
+    <div class="container-fluid banner">
+      <div class="row">
+        <div class="toggle2">
+          <canvas id="myChart" width="750" height="400"></canvas>
         </div>
-        <button
-          class="btn dropdown-toggle mr-4 shadow-lg"
-          type="button"
-          id="drop"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          {{ UserId }}
-        </button>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" [routerLink]="['/changepassword']"
-            >Change Password</a
+        <div class="toggle1 mt-5 pt-3" style="display: none; margin-top: 5vh">
+          <div class="form" style="margin-left: 27%">
+            <form class="mt-2 ml-5 mb-2">
+              <input
+                type="button"
+                class="mr-3"
+                (click)="scrolldown()"
+                value="Languagewise Distribution"
+              />
+              <input
+                type="button"
+                (click)="download_file()"
+                value="Download Data"
+              />
+            </form>
+          </div>
+          <div
+            class="spinner-border text-primary"
+            id="image"
+            style="display: none"
+          ></div>
+          <table
+            class="mdl-data-table stripe hover cell-border order-column display"
+            id="myTable"
           >
-          <a class="dropdown-item" [routerLink]="['/login']">Update Profile</a>
-          <a class="dropdown-item" (click)="back_button_clicked()">Back</a>
-          <a class="dropdown-item" [routerLink]="['/login']">Log Out</a>
+            <thead>
+              <tr>
+                <th>Facilitator Id</th>
+                <th>Facilitator Name</th>
+                <th>Facilitator Email</th>
+                <th>Facilitator Phone</th>
+                <th>Facilitator Alternate Phone</th>
+                <th>Date Of Upload</th>
+                <th>District</th>
+                <th>State</th>
+                <th>Aadhaar Number</th>
+                <th>Pan Number</th>
+                <th>Proctor Status</th>
+                <th>Certificate File Name</th>
+                <th>Certificate Expiry Date</th>
+                <th>Languages Known</th>
+                <th>Source</th>
+                <th>Sourced By User Name</th>
+                <th>Bank Account Number</th>
+                <th>Bank Name</th>
+                <th>IFSC Code</th>
+                <th>Cancelled Cheque File Name</th>
+                <th>MoU File Name</th>
+                <th>Facilitator Image File Name</th>
+                <th>Facilitator Resume File Name</th>
+                <th>Education Certificate File Name</th>
+                <th>Experience Certificate File Name</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+          </table>
         </div>
-        <div class="burger">
-          <div class="line1"></div>
-          <div class="line2"></div>
-          <div class="line3"></div>
-        </div>
-      </div-->
-      <div class="borderline"></div>
-      <div class="heading">
-        <h1>Proctor Attributes</h1>
       </div>
-
-      <div
-        class="spinner-border text-primary"
-        id="image"
-        style="display: none"
-      ></div>
-      <div class="container">
-        <table
-          class="mdl-data-table stripe hover cell-border order-column display"
-          id="myTable"
-        >
-          <thead>
-            <tr>
-              <th>Facilitator Id</th>
-              <th>Facilitator Name</th>
-              <th>Facilitator Email</th>
-              <th>Facilitator Phone</th>
-              <th>Facilitator Alternate Phone</th>
-              <th>Date Of Upload</th>
-              <th>District</th>
-              <th>State</th>
-              <th>Aadhaar Number</th>
-              <th>Pan Number</th>
-              <th>Proctor Status</th>
-              <th>Certificate File Name</th>
-              <th>Certificate Expiry Date</th>
-              <th>Languages Known</th>
-              <th>Source</th>
-              <th>Sourced By User Name</th>
-              <th>Bank Account Number</th>
-              <th>Bank Name</th>
-              <th>IFSC Code</th>
-              <th>Cancelled Cheque File Name</th>
-              <th>MoU File Name</th>
-              <th>Facilitator Image File Name</th>
-              <th>Facilitator Resume File Name</th>
-              <th>Education Certificate File Name</th>
-              <th>Experience Certificate File Name</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-      <!--div
+    </div>
+    <!--div
         class="modal-footer mx-5 pt-2 mb-1 justify-content-center fixed-bottom"
         style="font-size: 16px"
       >
@@ -99,8 +88,6 @@
           >
         </p>
       </div-->
-      <app-footers></app-footers>
-    </section>
 
     <script src="man.js" async defer></script>
   </body>

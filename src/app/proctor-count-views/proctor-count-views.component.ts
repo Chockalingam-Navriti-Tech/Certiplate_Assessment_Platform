@@ -49,7 +49,7 @@ export class ProctorCountViewsComponent implements OnInit {
             UserId: localStorage.getItem("UserId"),
             UserRoleId: localStorage.getItem("UserRoleId"),
           },
-          dataSrc: "StateAndLanguagewiseProctorCountData.ProctorCountData",
+          dataSrc: "StatewiseProctorCountData.ProctorCountData",
           beforeSend: function () {
             $("#image").show();
           },
@@ -60,6 +60,20 @@ export class ProctorCountViewsComponent implements OnInit {
         columns: [
           { data: "StateName" },
           {
+            data: "ProctorCount",
+            render: function (data: any, type: any, row: any, meta: any) {
+              if (row.ProctorCount > 0) {
+                var a =
+                  '<a style="text-decoration:none" _ngcontent-kci-c162="" ng-reflect-router-link="/proctor-attributes" href="/proctor-attributes">' +
+                  row.ProctorCount +
+                  `</button>`;
+                return a;
+              } else {
+                return data;
+              }
+            }
+          }
+          /*{
             data: "EnglishCount",
             render: function (data: any, type: any, row: any, meta: any) {
               if (row.EnglishCount > 0) {
@@ -282,20 +296,17 @@ export class ProctorCountViewsComponent implements OnInit {
                 return data;
               }
             },
-          },
+          },*/
         ],
       });
       $("#myTable").on("click", "tbody tr td", function () {
-        var index1 = table.row(this).index();
-        var index2 = table.column(this).index();
+        var index = table.row(this).index();
         sessionStorage.setItem(
           "StateId",
-          json_data.StateAndLanguagewiseProctorCountData.ProctorCountData[
-            index1
+          json_data.StatewiseProctorCountData.ProctorCountData[
+            index
           ].StateId
         );
-        if (index2 > 14) sessionStorage.setItem("LanguageId", "0");
-        else sessionStorage.setItem("LanguageId", index2.toString());
       });
     });
     /*const burger: any = document.querySelector(".burger");
