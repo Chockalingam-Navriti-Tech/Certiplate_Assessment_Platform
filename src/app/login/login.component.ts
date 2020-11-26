@@ -420,7 +420,8 @@ export class LoginComponent implements OnInit {
           json.AuthenticationResponseData.Message ==
           "User authentication success"
         ) {
-          this.route.navigate(["proctor-count-views"]);
+          if (parseInt(json.AuthenticationResponseData.UserRoleId) == 12)
+            this.route.navigate(["proctor-count-views"]);
         } else {
           document.getElementById("warning").innerHTML =
             "<b><h2>" + json.AuthenticationResponseData.Message + "</h2></b>";

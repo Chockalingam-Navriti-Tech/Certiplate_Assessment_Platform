@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
   }
 
   back_function() {
-    this._location.back();
+    this.route.navigate(['proctor-count-views']);
   }
 
   clear() {

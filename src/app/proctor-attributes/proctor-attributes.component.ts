@@ -159,7 +159,7 @@ export class ProctorAttributesComponent implements OnInit {
         responsive: true,
         title: {
           display: true,
-          text: " Languagewise Proctor Distribution",
+          text: "Languagewise Proctor Distribution",
           fontColor: "white",
           fontSize: 18,
         },
@@ -190,7 +190,7 @@ export class ProctorAttributesComponent implements OnInit {
       destroy: true,
       lengthMenu: [10, 15, 25, 50, 100],
       pageLength: 10,
-      scrollY: "30vh",
+      scrollY: "42vh",
       serverSide: false,
       scrollX: true,
       scrollCollapse: true,
