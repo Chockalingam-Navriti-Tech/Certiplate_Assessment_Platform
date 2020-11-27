@@ -252,7 +252,7 @@ export class PracticalAssessmentComponent implements OnInit {
       this.data.CandidateAssessmentData.PracticalAssessment.Sections.length +
       "</b>";
     document.getElementById("info3").innerHTML =
-      "<b>Job : " +
+      "<b>Job Role : " +
       this.data.CandidateAssessmentData.QualificationPackName +
       "</b>" +
       "<br/>" +

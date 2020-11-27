@@ -306,7 +306,7 @@ export class TheoryAssessmentComponent implements OnInit {
       this.data.CandidateAssessmentData.TheoryAssessment.Sections.length +
       "</b>";
     document.getElementById("info3").innerHTML =
-      "<b>Job : " +
+      "<b>Job Role : " +
       this.data.CandidateAssessmentData.QualificationPackName +
       "</b>" +
       "<br/>" +

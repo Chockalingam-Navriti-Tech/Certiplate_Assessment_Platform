@@ -14,27 +14,54 @@ var json_data: any;
   styleUrls: ["./proctor-count-views.component.css"],
 })
 export class ProctorCountViewsComponent implements OnInit {
-  constructor() {}
+  constructor(private route: Router) {}
   dtOptions: any = {};
   userData: any;
   UserId: any;
+  totalCount: any;
   ngOnInit(): void {
     this.UserId = sessionStorage.getItem("req_id");
     sessionStorage.setItem("previous_page", "proctor-count-views");
+    const that = this;
+    $.ajax({
+      url: environment.Proctor_Count_Views_URL,
+      type: "POST",
+      dataType: "json",
+      data: {
+        apiKey: environment.Proctor_Count_Views_Api_Key,
+        UserId: localStorage.getItem("UserId"),
+        UserRoleId: localStorage.getItem("UserRoleId"),
+      },
+      success: function (data: any) {
+        that.totalCount = 0;
+        data = data.StatewiseProctorCountData.ProctorCountData;
+        for (var i = 0; i < data.length; i++) {
+          that.totalCount += parseInt(data[i].ProctorCount);
+        }
+        that.Render_DataTable();
+      },
+      error: function (err: any) {
+        alert("Error :" + err);
+      },
+    });
+  }
+  Render_DataTable() {
     $(function () {
       var table = $("#myTable").DataTable({
         lengthMenu: [10, 15, 25, 50, 100],
         pageLength: 10,
-        scrollY: "35vh",
+        scrollY: "32vh",
         serverSide: false,
         scrollX: true,
         scrollCollapse: true,
         responsive: true,
-        order: [1, "asc"],
         initComplete: function (settings, json) {
           json_data = json;
         },
         columnDefs: [
+          { width: "10%", targets: 0 },
+          { width: "60%", targets: 1 },
+          { width: "30%", targets: 2 },
           {
             targets: ["_all"],
             className: "mdc-data-table__cell",
@@ -100,6 +127,7 @@ export class ProctorCountViewsComponent implements OnInit {
             });
         })
         .draw();
+      table.columns.adjust().draw();
       $("#myTable").on("click", "tbody tr td", function () {
         var index = table.row(this).index();
         sessionStorage.setItem(
@@ -108,5 +136,10 @@ export class ProctorCountViewsComponent implements OnInit {
         );
       });
     });
+  }
+
+  clicked_total() {
+    sessionStorage.setItem("StateId", "-1");
+    this.route.navigate(["proctor-attributes"]);
   }
 }

@@ -24,10 +24,6 @@ export class HeaderComponent implements OnInit {
     this.username = sessionStorage.getItem("req_id");
   }
 
-  back_function() {
-    this.route.navigate(['proctor-count-views']);
-  }
-
   clear() {
     $.ajax({
       url: environment.URL_logout_authentication,

@@ -13,7 +13,11 @@
       <div class="heading">
         <h1>Proctor Count Views</h1>
       </div>
-
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active">Proctor Count Views</li>
+        </ol>
+      </nav>
       <div
         class="spinner-border text-primary"
         id="image"
@@ -31,6 +35,14 @@
               <th>Proctor Count</th>
             </tr>
           </thead>
+          <tfoot>
+            <tr>
+              <th colspan="2" style="text-align: right">TOTAL :</th>
+              <th>
+                <a (click)="clicked_total()">{{ totalCount }}</a>
+              </th>
+            </tr>
+          </tfoot>
         </table>
       </div>
       <app-footers></app-footers>
