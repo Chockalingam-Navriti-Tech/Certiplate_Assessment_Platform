@@ -3,7 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import html2canvas from "html2canvas";
 import * as mobileNet from "@tensorflow-models/mobilenet";
-import * as blazeface from "@tensorflow-models/blazeface";
+//import * as blazeface from "@tensorflow-models/blazeface";
 import * as cocoSsd from "@tensorflow-models/coco-ssd";
 var snapstream = require("snapstream");
 import { CountdownComponent } from "ngx-countdown";
