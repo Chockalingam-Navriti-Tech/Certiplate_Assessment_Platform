@@ -20,7 +20,7 @@ html {
     opacity: 0.9;
     border-radius: 6px;
     margin: 0 auto;
-    margin-top: 7%;
+    margin-top: 4%;
     margin-bottom: 5%;
 }
 
@@ -38,7 +38,7 @@ button {
 
 .toggle1 {
     width: 1200px;
-    padding: 4px 10px;
+    padding: 2px 10px;
     margin: 0 auto;
     margin-bottom: 10%;
     background-color: #fff;
@@ -48,6 +48,21 @@ button {
 .toggle1 form {
     margin-left: auto;
     margin-right: auto;
+}
+
+nav {
+    background-color: black;
+    opacity: 0.7;
+    margin-top: 1%;
+    margin-left: 70%;
+    margin-right: 5%;
+}
+
+nav ol li {
+    color: black;
+    font-weight: 550;
+    font-family: 'Poppins', sans-serif;
+    padding: 2px;
 }
 
 input[type=button] {
@@ -258,7 +273,7 @@ body {
 .spinner-border {
     position: absolute;
     z-index: 999;
-    top: 49.7vh;
+    top: 52.5vh;
     left: 48%;
 }
 

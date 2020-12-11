@@ -9,49 +9,15 @@
     <section>
       <app-header></app-header>
       <app-navbar></app-navbar>
-      <!--div class="nav">
-        <div class="logo">
-          <img src="/assets/images/logo.png" />
-        </div>
-        <button
-          class="btn dropdown-toggle mr-4 shadow-lg"
-          type="button"
-          id="drop"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          {{ UserId }}
-        </button>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" [routerLink]="['/changepassword']"
-            >Change Password</a
-          >
-          <a class="dropdown-item" [routerLink]="['/login']">Update Profile</a>
-          <a class="dropdown-item" [routerLink]="['/login']">Log Out</a>
-        </div>
-        <ul class="nav-links">
-          <li>
-            <a [routerLink]="['/changepassword']">Change Password</a>
-          </li>
-          <li>
-            <a [routerLink]="['/login']">Update Profile</a>
-          </li>
-          <li>
-            <a [routerLink]="['/login']">Log Out</a>
-          </li>
-        </ul>
-        <div class="burger">
-          <div class="line1"></div>
-          <div class="line2"></div>
-          <div class="line3"></div>
-        </div>
-      </div-->
       <div class="borderline"></div>
       <div class="heading">
         <h1>Proctor Count Views</h1>
       </div>
-
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active">Proctor Count Views</li>
+        </ol>
+      </nav>
       <div
         class="spinner-border text-primary"
         id="image"
@@ -64,27 +30,21 @@
         >
           <thead>
             <tr>
+              <th>Serial Number</th>
               <th>State Name</th>
               <th>Proctor Count</th>
             </tr>
           </thead>
+          <tfoot>
+            <tr>
+              <th colspan="2" style="text-align: right">TOTAL :</th>
+              <th>
+                <a (click)="clicked_total()">{{ totalCount }}</a>
+              </th>
+            </tr>
+          </tfoot>
         </table>
       </div>
-      <!--div
-        class="modal-footer mx-5 pt-2 mb-1 justify-content-center fixed-bottom"
-        style="font-size: 16px"
-      >
-        <p style="color: black" class="d-flex">
-          <b>© 2020 Copyright :</b>
-          <a
-            style="color: black; padding: 0px 6px"
-            href="https://navriti.com/"
-            class="ml-1"
-            target="_blank"
-            ><b> Navriti Technologies Pvt Ltd. </b></a
-          >
-        </p>
-      </div-->
       <app-footers></app-footers>
     </section>
 

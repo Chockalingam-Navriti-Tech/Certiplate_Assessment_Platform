@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import html2canvas from "html2canvas";
 import * as mobileNet from "@tensorflow-models/mobilenet";
+//import * as blazeface from "@tensorflow-models/blazeface";
 import * as cocoSsd from "@tensorflow-models/coco-ssd";
 var snapstream = require("snapstream");
 import { CountdownComponent } from "ngx-countdown";
@@ -81,27 +82,19 @@ export class TheoryAssessmentComponent implements OnInit {
   }
 
   /*async classifyImage(video: any) {
-    const modelPromise = await cocoSsd.load();
-    if (
-      this.elem.nativeElement.querySelector("#myVideo").play() !== undefined
-    ) {
-      this.elem.nativeElement
-        .querySelector("#myVideo")
-        .play()
-        .then(async (_) => {
-          const model = await mobileNet.load();
-          this.classifications = await model.classify(video);
-          modelPromise.detect(video).then(async (predict) => {
-            console.log(predict);
-            requestAnimationFrame(() => {
-              this.classifyImage.apply(this);
-            });
-          });
-        })
-        .catch((err: any) => {
-          console.warn(err);
-        });
+    const model = await blazeface.load();
+    const returnTensors = false;
+    const predictions = await model.estimateFaces(this.vdo, returnTensors);
+    console.log(predictions);
+    if (predictions.length > 1) {
+      alert("Multiple Faces detected");
     }
+    else if (predictions.length == 0) {
+      alert("Please make sure that you are infront of the webcam");
+    }
+    requestAnimationFrame(() => {
+      this.classifyImage.apply(this);
+    });
   }*/
 
   ngOnInit(): void {
@@ -306,7 +299,7 @@ export class TheoryAssessmentComponent implements OnInit {
       this.data.CandidateAssessmentData.TheoryAssessment.Sections.length +
       "</b>";
     document.getElementById("info3").innerHTML =
-      "<b>Job : " +
+      "<b>Job Role : " +
       this.data.CandidateAssessmentData.QualificationPackName +
       "</b>" +
       "<br/>" +
@@ -399,17 +392,20 @@ export class TheoryAssessmentComponent implements OnInit {
       (visibility = function () {
         $.ajax({
           url: environment.Violation_Api,
-          type: 'POST',
-          dataType: 'json',
+          type: "POST",
+          dataType: "json",
           data: {
             ApiKey: environment.api_key,
-            CandidateId:varCandidateAssessmentData.CandidateAssessmentData.CandidateId,
-            RequestId:varCandidateAssessmentData.CandidateAssessmentData.AssessmentRequestId,
-            ViolationCode:'APP_SWITCHING'
+            CandidateId:
+              varCandidateAssessmentData.CandidateAssessmentData.CandidateId,
+            RequestId:
+              varCandidateAssessmentData.CandidateAssessmentData
+                .AssessmentRequestId,
+            ViolationCode: "APP_SWITCHING",
           },
           success: function (data) {
             console.log(data);
-          }
+          },
         });
         if (exit_full_screen > 4) {
           exit_full_screen = 0;
@@ -546,17 +542,20 @@ export class TheoryAssessmentComponent implements OnInit {
         if (fullscreen % 2 != 0) {
           $.ajax({
             url: environment.Violation_Api,
-            type: 'POST',
-            dataType: 'json',
+            type: "POST",
+            dataType: "json",
             data: {
               ApiKey: environment.api_key,
-              CandidateId:varCandidateAssessmentData.CandidateAssessmentData.CandidateId,
-              RequestId:varCandidateAssessmentData.CandidateAssessmentData.AssessmentRequestId,
-              ViolationCode:'APP_SWITCHING'
+              CandidateId:
+                varCandidateAssessmentData.CandidateAssessmentData.CandidateId,
+              RequestId:
+                varCandidateAssessmentData.CandidateAssessmentData
+                  .AssessmentRequestId,
+              ViolationCode: "APP_SWITCHING",
             },
             success: function (data) {
               console.log(data);
-            }
+            },
           });
           if (exit_full_screen > 4) {
             exit_full_screen = 0;
@@ -647,7 +646,6 @@ export class TheoryAssessmentComponent implements OnInit {
       });
     }, 30000);
     //let classify = this.classifyImage;
-
     //snapshot for every 30 sec
     navigator.getUserMedia(
       constraints,

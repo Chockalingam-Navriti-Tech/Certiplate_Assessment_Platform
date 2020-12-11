@@ -16,12 +16,12 @@ html {
 }
 
 .container {
-    padding: 4px 58px;
+    padding: 15px 97px;
     position: absolute;
     top: 25vh;
-    left: 37%;
+    left: 10%;
     font-size: 16px;
-    width: 25%;
+    width: 85%;
     background-color: #fff;
     border-radius: 10px;
     font-family: 'Poppins', sans-serif;
@@ -30,6 +30,12 @@ html {
 .mdl-data-table tbody tr td {
     text-decoration: none;
     color: rgb(0, 0, 0);
+}
+
+.mdl-data-table tfoot tr th a {
+    text-decoration: dashed;
+    color: rgb(23, 133, 235);
+    cursor: pointer;
 }
 
 #drop {
@@ -62,6 +68,21 @@ html {
     background-color: black;
     padding: 10px 12px;
     border-radius: 50px;
+}
+
+nav {
+    background-color: black;
+    opacity: 0.7;
+    margin-top: 1%;
+    margin-left: 70%;
+    margin-right: 5%;
+}
+
+nav ol li {
+    color: black;
+    font-weight: 550;
+    font-family: 'Poppins', sans-serif;
+    padding: 2px;
 }
 
 section {
@@ -232,7 +253,7 @@ h1 {
 .spinner-border {
     position: absolute;
     z-index: 999;
-    top: 45.5vh;
+    top: 41.5vh;
     left: 48%;
 }
 

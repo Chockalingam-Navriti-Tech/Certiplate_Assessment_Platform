@@ -9,19 +9,27 @@
     <app-header></app-header>
     <app-navbar></app-navbar>
     <div class="borderline"></div>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a routerLink="/proctor-count-views">Proctor Count Views</a>
+        </li>
+        <li class="breadcrumb-item active">Proctor Attributes</li>
+      </ol>
+    </nav>
     <div class="container-fluid banner">
       <div class="row">
         <div class="toggle2">
-          <canvas id="myChart" width="750" height="400"></canvas>
+          <canvas id="myChart" width="600" height="400"></canvas>
         </div>
-        <div class="toggle1 mt-5 pt-3" style="display: none; margin-top: 5vh">
+        <div class="toggle1" style="display: none; margin-top: 5vh">
           <div class="form" style="margin-left: 27%">
             <form class="mt-2 ml-5 mb-2">
               <input
                 type="button"
                 class="mr-3"
                 (click)="scrolldown()"
-                value="Languagewise Distribution"
+                value="Proctor Distribution"
               />
               <input
                 type="button"
@@ -41,16 +49,17 @@
           >
             <thead>
               <tr>
-                <th>Facilitator Id</th>
-                <th>Facilitator Name</th>
-                <th>Facilitator Email</th>
-                <th>Facilitator Phone</th>
-                <th>Facilitator Alternate Phone</th>
+                <th>Serial Number</th>
+                <th>Proctor Id</th>
+                <th>Proctor Name</th>
+                <th>Proctor Email</th>
+                <th>Proctor Phone</th>
+                <th>Proctor Alternate Phone</th>
                 <th>Date Of Upload</th>
                 <th>District</th>
                 <th>State</th>
                 <th>Aadhaar Number</th>
-                <th>Pan Number</th>
+                <th>PAN Number</th>
                 <th>Proctor Status</th>
                 <th>Certificate File Name</th>
                 <th>Certificate Expiry Date</th>
@@ -62,8 +71,8 @@
                 <th>IFSC Code</th>
                 <th>Cancelled Cheque File Name</th>
                 <th>MoU File Name</th>
-                <th>Facilitator Image File Name</th>
-                <th>Facilitator Resume File Name</th>
+                <th>Proctor Image File Name</th>
+                <th>Proctor Resume File Name</th>
                 <th>Education Certificate File Name</th>
                 <th>Experience Certificate File Name</th>
                 <th>Status</th>
@@ -73,22 +82,7 @@
         </div>
       </div>
     </div>
-    <!--div
-        class="modal-footer mx-5 pt-2 mb-1 justify-content-center fixed-bottom"
-        style="font-size: 16px"
-      >
-        <p style="color: rgb(255, 255, 255)" class="d-flex">
-          <b>© 2020 Copyright :</b>
-          <a
-            style="color: rgb(240, 234, 234); padding: 0px 6px"
-            href="https://navriti.com/"
-            class="ml-1"
-            target="_blank"
-            ><b> Navriti Technologies Pvt Ltd. </b></a
-          >
-        </p>
-      </div-->
-
+    <app-footers></app-footers>
     <script src="man.js" async defer></script>
   </body>
 </html>

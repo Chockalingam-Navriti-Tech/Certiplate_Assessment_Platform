@@ -14,27 +14,54 @@ var json_data: any;
   styleUrls: ["./proctor-count-views.component.css"],
 })
 export class ProctorCountViewsComponent implements OnInit {
-  constructor() {}
+  constructor(private route: Router) {}
   dtOptions: any = {};
   userData: any;
   UserId: any;
+  totalCount: any;
   ngOnInit(): void {
     this.UserId = sessionStorage.getItem("req_id");
     sessionStorage.setItem("previous_page", "proctor-count-views");
+    const that = this;
+    $.ajax({
+      url: environment.Proctor_Count_Views_URL,
+      type: "POST",
+      dataType: "json",
+      data: {
+        apiKey: environment.Proctor_Count_Views_Api_Key,
+        UserId: localStorage.getItem("UserId"),
+        UserRoleId: localStorage.getItem("UserRoleId"),
+      },
+      success: function (data: any) {
+        that.totalCount = 0;
+        data = data.StatewiseProctorCountData.ProctorCountData;
+        for (var i = 0; i < data.length; i++) {
+          that.totalCount += parseInt(data[i].ProctorCount);
+        }
+        that.Render_DataTable();
+      },
+      error: function (err: any) {
+        alert("Error :" + err);
+      },
+    });
+  }
+  Render_DataTable() {
     $(function () {
       var table = $("#myTable").DataTable({
         lengthMenu: [10, 15, 25, 50, 100],
         pageLength: 10,
-        scrollY: "35vh",
+        scrollY: "32vh",
         serverSide: false,
         scrollX: true,
         scrollCollapse: true,
         responsive: true,
-        order: [1, "asc"],
         initComplete: function (settings, json) {
           json_data = json;
         },
         columnDefs: [
+          { width: "10%", targets: 0 },
+          { width: "60%", targets: 1 },
+          { width: "30%", targets: 2 },
           {
             targets: ["_all"],
             className: "mdc-data-table__cell",
@@ -58,6 +85,7 @@ export class ProctorCountViewsComponent implements OnInit {
           },
         },
         columns: [
+          { data: "StateId" },
           { data: "StateName" },
           {
             data: "ProctorCount",
@@ -71,8 +99,8 @@ export class ProctorCountViewsComponent implements OnInit {
               } else {
                 return data;
               }
-            }
-          }
+            },
+          },
           /*{
             data: "EnglishCount",
             render: function (data: any, type: any, row: any, meta: any) {
@@ -86,245 +114,32 @@ export class ProctorCountViewsComponent implements OnInit {
                 return data;
               }
             },
-          },
-          {
-            data: "HindiCount",
-            render: function (data: any, type: any, row: any, meta: any) {
-              if (row.HindiCount > 0) {
-                var a =
-                  '<a style="text-decoration:none" _ngcontent-kci-c162="" ng-reflect-router-link="/proctor-attributes" href="/proctor-attributes">' +
-                  row.HindiCount +
-                  "</a>";
-                return a;
-              } else {
-                return data;
-              }
-            },
-          },
-          {
-            data: "TamilCount",
-            render: function (data: any, type: any, row: any, meta: any) {
-              if (row.TamilCount > 0) {
-                var a =
-                  '<a style="text-decoration:none" _ngcontent-kci-c162="" ng-reflect-router-link="/proctor-attributes" href="/proctor-attributes">' +
-                  row.TamilCount +
-                  "</a>";
-                return a;
-              } else {
-                return data;
-              }
-            },
-          },
-          {
-            data: "TeluguCount",
-            render: function (data: any, type: any, row: any, meta: any) {
-              if (row.TeluguCount > 0) {
-                var a =
-                  '<a style="text-decoration:none" _ngcontent-kci-c162="" ng-reflect-router-link="/proctor-attributes" href="/proctor-attributes">' +
-                  row.TeluguCount +
-                  "</a>";
-                return a;
-              } else {
-                return data;
-              }
-            },
-          },
-          {
-            data: "KannadaCount",
-            render: function (data: any, type: any, row: any, meta: any) {
-              if (row.KannadaCount > 0) {
-                var a =
-                  '<a style="text-decoration:none" _ngcontent-kci-c162="" ng-reflect-router-link="/proctor-attributes" href="/proctor-attributes">' +
-                  row.KannadaCount +
-                  "</a>";
-                return a;
-              } else {
-                return data;
-              }
-            },
-          },
-          {
-            data: "GujaratiCount",
-            render: function (data: any, type: any, row: any, meta: any) {
-              if (row.GujaratiCount > 0) {
-                var a =
-                  '<a style="text-decoration:none" _ngcontent-kci-c162="" ng-reflect-router-link="/proctor-attributes" href="/proctor-attributes">' +
-                  row.GujaratiCount +
-                  "</a>";
-                return a;
-              } else {
-                return data;
-              }
-            },
-          },
-          {
-            data: "OriyaCount",
-            render: function (data: any, type: any, row: any, meta: any) {
-              if (row.OriyaCount > 0) {
-                var a =
-                  '<a style="text-decoration:none" _ngcontent-kci-c162="" ng-reflect-router-link="/proctor-attributes" href="/proctor-attributes">' +
-                  row.OriyaCount +
-                  "</a>";
-                return a;
-              } else {
-                return data;
-              }
-            },
-          },
-          {
-            data: "AssameseCount",
-            render: function (data: any, type: any, row: any, meta: any) {
-              if (row.AssameseCount > 0) {
-                var a =
-                  '<a style="text-decoration:none" _ngcontent-kci-c162="" ng-reflect-router-link="/proctor-attributes" href="/proctor-attributes">' +
-                  row.AssameseCount +
-                  "</a>";
-                return a;
-              } else {
-                return data;
-              }
-            },
-          },
-          {
-            data: "UrduCount",
-            render: function (data: any, type: any, row: any, meta: any) {
-              if (row.UrduCount > 0) {
-                var a =
-                  '<a style="text-decoration:none" _ngcontent-kci-c162="" ng-reflect-router-link="/proctor-attributes" href="/proctor-attributes">' +
-                  row.UrduCount +
-                  "</a>";
-                return a;
-              } else {
-                return data;
-              }
-            },
-          },
-          {
-            data: "MarathiCount",
-            render: function (data: any, type: any, row: any, meta: any) {
-              if (row.MarathiCount > 0) {
-                var a =
-                  '<a style="text-decoration:none" _ngcontent-kci-c162="" ng-reflect-router-link="/proctor-attributes" href="/proctor-attributes">' +
-                  row.MarathiCount +
-                  "</a>";
-                return a;
-              } else {
-                return data;
-              }
-            },
-          },
-          {
-            data: "MalayalamCount",
-            render: function (data: any, type: any, row: any, meta: any) {
-              if (row.MalayalamCount > 0) {
-                var a =
-                  '<a style="text-decoration:none" _ngcontent-kci-c162="" ng-reflect-router-link="/proctor-attributes" href="/proctor-attributes">' +
-                  row.MalayalamCount +
-                  "</a>";
-                return a;
-              } else {
-                return data;
-              }
-            },
-          },
-          {
-            data: "BengaliCount",
-            render: function (data: any, type: any, row: any, meta: any) {
-              if (row.BengaliCount > 0) {
-                var a =
-                  '<a style="text-decoration:none" _ngcontent-kci-c162="" ng-reflect-router-link="/proctor-attributes" href="/proctor-attributes">' +
-                  row.BengaliCount +
-                  "</a>";
-                return a;
-              } else {
-                return data;
-              }
-            },
-          },
-          {
-            data: "PunjabiCount",
-            render: function (data: any, type: any, row: any, meta: any) {
-              if (row.PunjabiCount > 0) {
-                var a =
-                  '<a style="text-decoration:none" _ngcontent-kci-c162="" ng-reflect-router-link="/proctor-attributes" href="/proctor-attributes">' +
-                  row.PunjabiCount +
-                  "</a>";
-                return a;
-              } else {
-                return data;
-              }
-            },
-          },
-          {
-            data: "ManipuriCount",
-            render: function (data: any, type: any, row: any, meta: any) {
-              if (row.ManipuriCount > 0) {
-                var a =
-                  '<a style="text-decoration:none" _ngcontent-kci-c162="" ng-reflect-router-link="/proctor-attributes" href="/proctor-attributes">' +
-                  row.ManipuriCount +
-                  "</a>";
-                return a;
-              } else {
-                return data;
-              }
-            },
-          },
-          {
-            data: "TotalCount",
-            render: function (data: any, type: any, row: any, meta: any) {
-              if (row.TotalCount > 0) {
-                var a =
-                  '<a style="text-decoration:none" _ngcontent-kci-c162="" ng-reflect-router-link="/proctor-attributes" href="/proctor-attributes">' +
-                  row.TotalCount +
-                  "</a>";
-                return a;
-              } else {
-                return data;
-              }
-            },
-          },
-          {
-            data: "DistinctTotalCount",
-            render: function (data: any, type: any, row: any, meta: any) {
-              if (row.DistinctTotalCount > 0) {
-                var a =
-                  '<a style="text-decoration:none" _ngcontent-kci-c162="" ng-reflect-router-link="/proctor-attributes" href="/proctor-attributes">' +
-                  row.DistinctTotalCount +
-                  "</a>";
-                return a;
-              } else {
-                return data;
-              }
-            },
-          },*/
+          }*/
         ],
       });
+      table
+        .on("order.dt search.dt", function () {
+          table
+            .column(0, { search: "applied", order: "applied" })
+            .nodes()
+            .each(function (cell: any, i: any) {
+              cell.innerHTML = i + 1;
+            });
+        })
+        .draw();
+      table.columns.adjust().draw();
       $("#myTable").on("click", "tbody tr td", function () {
         var index = table.row(this).index();
         sessionStorage.setItem(
           "StateId",
-          json_data.StatewiseProctorCountData.ProctorCountData[
-            index
-          ].StateId
+          json_data.StatewiseProctorCountData.ProctorCountData[index].StateId
         );
       });
     });
-    /*const burger: any = document.querySelector(".burger");
-    const nav: any = document.querySelector(".nav-links");
-    const nav_items = document.querySelectorAll(".nav-links li");
+  }
 
-    burger.addEventListener("click", () => {
-      nav.classList.toggle("nav-active");
-      nav_items.forEach((link: any, index) => {
-        if (link.style.animation) link.style.animation = "";
-        else {
-          link.style.animation = `navlinkdesign 0.5s ease forwards ${
-            index / 7 + 0.4
-          }s`;
-          nav.style.transition = `transform 0.5s ease-in`;
-        }
-      });
-      burger.classList.toggle("toggle");
-    });*/
+  clicked_total() {
+    sessionStorage.setItem("StateId", "-1");
+    this.route.navigate(["proctor-attributes"]);
   }
 }

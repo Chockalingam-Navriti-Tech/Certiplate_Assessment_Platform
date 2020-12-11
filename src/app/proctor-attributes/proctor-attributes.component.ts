@@ -159,7 +159,7 @@ export class ProctorAttributesComponent implements OnInit {
         responsive: true,
         title: {
           display: true,
-          text: " Languagewise Proctor Distribution",
+          text: "Proctor Distribution",
           fontColor: "white",
           fontSize: 18,
         },
@@ -181,7 +181,7 @@ export class ProctorAttributesComponent implements OnInit {
   }
 
   scrolldown() {
-    $(".toggle1").css("display", "none").slideDown("slow");
+    $(".toggle1").css("display", "none");
     $(".toggle2").show("slow");
   }
 
@@ -195,7 +195,7 @@ export class ProctorAttributesComponent implements OnInit {
       scrollX: true,
       scrollCollapse: true,
       responsive: true,
-      order: [1, "asc"],
+      order: [2, "asc"],
       initComplete: function (settings, json) {
         json_data = json;
       },
@@ -226,6 +226,7 @@ export class ProctorAttributesComponent implements OnInit {
       },
       columns: [
         { data: "FacilitatorId" },
+        { data: "FacilitatorId" },
         { data: "FacilitatorName" },
         { data: "FacilitatorEmail" },
         { data: "FacilitatorPhone" },
@@ -253,6 +254,17 @@ export class ProctorAttributesComponent implements OnInit {
         { data: "Status" },
       ],
     });
+
+    table
+      .on("order.dt search.dt", function () {
+        table
+          .column(0, { search: "applied", order: "applied" })
+          .nodes()
+          .each(function (cell: any, i: any) {
+            cell.innerHTML = i + 1;
+          });
+      })
+      .draw();
 
     $.ajax({
       url: environment.Proctor_Attributes_URL,

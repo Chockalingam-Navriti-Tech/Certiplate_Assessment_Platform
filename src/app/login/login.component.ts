@@ -407,17 +407,21 @@ export class LoginComponent implements OnInit {
           "UserId",
           json.AuthenticationResponseData.UserId
         );
-        sessionStorage.setItem('UserRoleId', json.AuthenticationResponseData.UserRoleId);
+        sessionStorage.setItem(
+          "UserRoleId",
+          json.AuthenticationResponseData.UserRoleId
+        );
         sessionStorage.setItem("password", this.password.value);
         sessionStorage.setItem(
-          'SessionId',
+          "SessionId",
           json.AuthenticationResponseData.SessionId
         );
         if (
           json.AuthenticationResponseData.Message ==
           "User authentication success"
         ) {
-          this.route.navigate(["proctor-count-views"]);
+          if (parseInt(json.AuthenticationResponseData.UserRoleId) == 12)
+            this.route.navigate(["proctor-count-views"]);
         } else {
           document.getElementById("warning").innerHTML =
             "<b><h2>" + json.AuthenticationResponseData.Message + "</h2></b>";
